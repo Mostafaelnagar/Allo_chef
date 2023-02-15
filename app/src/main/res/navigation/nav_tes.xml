@@ -7,6 +7,6 @@
 
     <dialog
         android:id="@+id/tesDialog"
-        android:name="app.te.architecture.presentation.base.custom_views.TesDialog"
+        android:name="app.te.alo_chef.presentation.base.custom_views.TesDialog"
         tools:layout="@layout/layout_tes" />
 </navigation>

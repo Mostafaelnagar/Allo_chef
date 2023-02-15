@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="uiState"
+            type="app.te.alo_chef.presentation.home.ui_state.MealsUiState" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/loadingProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:progressTint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/cat_image"
+                app:layout_constraintEnd_toEndOf="@+id/cat_image"
+                app:layout_constraintStart_toStartOf="@id/cat_image"
+                app:layout_constraintTop_toTopOf="@+id/cat_image" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cat_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/splash"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{uiState.homeMealsData.image}"
+                app:progressBar="@{loadingProgress}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/vip"
+                android:drawableStart="@drawable/ic_crown"
+                android:drawablePadding="@dimen/_4sdp"
+                android:padding="@dimen/_8sdp"
+                android:text="@string/menuVip"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cat_image" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_home_title"
+                style="@style/TextMediumFont"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{uiState.homeMealsData.name}"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cat_image"
+                tools:text="Chilled Aussie Beaf Sos Mince" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_home_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{uiState.homeMealsData.lable}"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/colorPrimaryDark"
+                android:visibility="@{uiState.labelVisibility()}"
+                app:layout_constraintStart_toStartOf="@+id/tv_home_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_title"
+                tools:text="Minus" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_home_weight"
+                style="@style/TextMediumFont"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:text="@{uiState.point(context)}"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/colordark"
+                android:visibility="@{uiState.pointsVisibility()}"
+                app:layout_constraintEnd_toStartOf="@id/tv_home_old_price"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_old_price"
+                tools:text="500 gm" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_home_old_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:background="@drawable/rotate"
+                android:text="@{uiState.priceBefore(context)}"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/colordark"
+                android:visibility="@{uiState.priceBeforeVisibility()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_title"
+                tools:text="300 EGP" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_home_new_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:text="@{uiState.priceAfter(context)}"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/colordark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_old_price"
+                tools:text="200 EGP" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                app:backgroundTint="@color/vip"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="0dp"
+                android:onClick="@{()-> uiState.btnClick()}"
+                android:text="@string/add_cart"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/white"
+                app:icon="@drawable/ic_commerce"
+                app:iconGravity="textStart"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_new_price" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

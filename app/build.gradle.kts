@@ -103,10 +103,10 @@ android {
         isEnabled = true
     }
     lint {
-        isCheckReleaseBuilds = false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
-        isAbortOnError = false
+//        isCheckReleaseBuilds = false
+//        // Or, if you prefer, you can continue to check for errors in release builds,
+//        // but continue the build even when errors are found:
+//        isAbortOnError = false
     }
     buildFeatures {
         viewBinding = true
@@ -201,6 +201,11 @@ dependencies {
     implementation(Libraries.exoplayer_smooth_streaming)
     //Pin code
     implementation(Libraries.pin_code)
+    //badge
+    implementation(Libraries.badge)
+    //sSCustomBottomNavigation
+    implementation(Libraries.sSCustomBottomNavigation)
+
     //AdvancedWebView
     implementation(Libraries.AdvancedWebView)
 

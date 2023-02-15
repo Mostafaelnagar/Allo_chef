@@ -7,7 +7,7 @@
 
         <variable
             name="uiState"
-            type="app.te.architecture.presentation.home.ui_state.HomeUiState" />
+            type="app.te.alo_chef.presentation.home.ui_state.MealsUiState" />
 
     </data>
 
@@ -37,7 +37,7 @@
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/ic_cover"
-                tools:listitem="@layout/item_product_category" />
+                 />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rc_latest_items"

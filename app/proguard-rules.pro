@@ -44,13 +44,13 @@
 -keep public class com.google.android.material.bottomnavigation.* { *; }
 
 # To prevent obfusticating model classes
--keep class app.te.architecture.domain.videos_articles.entity.request.* { *; }
--keep class app.te.architecture.domain.auth.entity.model.* { *; }
--keep class app.te.architecture.domain.auth.entity.model.subscriptions.* { *; }
--keep class app.te.architecture.domain.auth.entity.model.payments.* { *; }
--keep class app.te.architecture.domain.auth.entity.model.payments.payment_result.* { *; }
--keep class app.te.architecture.domain.auth.entity.model.disounts.* { *; }
--keep class app.te.architecture.domain.auth.entity.request.* { *; }
+-keep class app.te.alo_chef.domain.videos_articles.entity.request.* { *; }
+-keep class app.te.alo_chef.domain.auth.entity.model.* { *; }
+-keep class app.te.alo_chef.domain.auth.entity.model.subscriptions.* { *; }
+-keep class app.te.alo_chef.domain.auth.entity.model.payments.* { *; }
+-keep class app.te.alo_chef.domain.auth.entity.model.payments.payment_result.* { *; }
+-keep class app.te.alo_chef.domain.auth.entity.model.disounts.* { *; }
+-keep class app.te.alo_chef.domain.auth.entity.request.* { *; }
 
 ## Localization Helper
 -keep class com.zeugmasolutions.localehelper.* { *; }

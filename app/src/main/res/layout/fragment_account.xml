@@ -6,11 +6,11 @@
 
         <variable
             name="uiState"
-            type="app.te.architecture.presentation.account.AccountUiState" />
+            type="app.te.alo_chef.presentation.account.AccountUiState" />
 
         <variable
             name="eventListener"
-            type="app.te.architecture.presentation.account.AccountEventListener" />
+            type="app.te.alo_chef.presentation.account.AccountEventListener" />
     </data>
 
 

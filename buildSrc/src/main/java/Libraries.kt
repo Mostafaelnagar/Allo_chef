@@ -35,7 +35,7 @@ object Libraries {
     const val datastore_core = "androidx.datastore:datastore-core:${Versions.datastore_core}"
     const val datastore_protobuf =
         "com.google.protobuf:protobuf-javalite:${Versions.datastore_protobuf}"
-const val datastore_protoc =
+    const val datastore_protoc =
         "com.google.protobuf:protoc:${Versions.datastore_protoc}"
 
     // Networking
@@ -88,10 +88,13 @@ const val datastore_protoc =
     const val firebase_messaging = "com.google.firebase:firebase-messaging-ktx"
     const val hms_push = "com.huawei.hms:push:${Versions.hms_push}"
     const val hms_core = "com.huawei.agconnect:agconnect-core:${Versions.hms_core}"
-    const val hms_remote_config = "com.huawei.agconnect:agconnect-remoteconfig:${Versions.hms_remote_config}"
+    const val hms_remote_config =
+        "com.huawei.agconnect:agconnect-remoteconfig:${Versions.hms_remote_config}"
 
     //pin code
     const val pin_code = "io.github.chaosleung:pinview:${Versions.pin_code}"
+    const val badge = "io.github.nikartm:image-support:${Versions.badge}"
+    const val sSCustomBottomNavigation = "com.github.simformsolutions:SSCustomBottomNavigation:${Versions.sSCustomBottomNavigation}"
 
     const val AdvancedWebView =
         "com.github.delight-im:Android-AdvancedWebView:${Versions.AdvancedWebView}"

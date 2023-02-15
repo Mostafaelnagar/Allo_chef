@@ -9,11 +9,11 @@
 
         <variable
             name="eventListener"
-            type="app.te.architecture.presentation.base.events.BaseEventListener" />
+            type="app.te.alo_chef.presentation.base.events.BaseEventListener" />
 
         <variable
             name="uiState"
-            type="app.te.architecture.presentation.settings.ui_state.AboutDataUiState" />
+            type="app.te.alo_chef.presentation.settings.ui_state.AboutDataUiState" />
 
     </data>
 

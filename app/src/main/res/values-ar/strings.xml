@@ -21,7 +21,7 @@
     <string name="phone_hint">رقم الهاتف</string>
     <string name="password">كلمة المرور</string>
     <string name="login_as_guest">تسجيل كزائر؟</string>
-    <string name="forgot_header"> الرجاء إدخال رقم هاتفك المحمول إلى\nتلقي رمز التحقق.</string>
+    <string name="forgot_header"> نسيت كلمة المرور</string>
 
     <!-- Sign Up -->
     <string name="sign_up">إنشاء حساب</string>
@@ -47,7 +47,7 @@
     <string name="country_hint">اختر الدولة</string>
     <string name="login_btn">تسجيل الدخول</string>
     <string name="new_account">التسجيل</string>
-    <string name="create_an_account">انشئ حساب ؟</string>
+    <string name="create_an_account">ليس لديك حساب؟</string>
 
     <string name="log_out_hint">هل انت متأكد من أنك تريد تسجيل الخروج؟</string>
     <string name="favorite">المفضلة</string>
@@ -76,7 +76,7 @@
     <string name="enter_password_to_create">أدخل  كلمه المرور لانشاء\n واحده جديده</string>
     <string name="already_have_account">لديك حساب بالفعل ؟</string>
     <string name="forget_password_title">نسيت كلمة المرور</string>
-    <string name="home_search_hint">ابحث عن المنتجات هنا…</string>
+    <string name="home_search_hint">بحث عن منتج</string>
     <string name="all_categories">جميع الفئات</string>
     <string name="menu"> القائمة</string>
     <string name="view_all">مشاهدة الكل</string>
@@ -85,5 +85,36 @@
     <string name="quick_view">نظره سريعه</string>
     <string name="latest_items">الاحدث</string>
     <string name="search">Search</string>
+
+    <string name="email"> البريد الالكترونى</string>
+
+    <string name="login_header_number">أهلا و سهلا</string>
+    <string name="login_header">تسجيل الدخول للمتابعة</string>
+    <string name="login_social">تسجيل الدخول باستخدام وسائل التواصل الاجتماعي</string>
+    <string name="forget_body">من فضلك إدخل عنوان بريدك الإلكتروني او رقم الجوال للحصول على رمز التحقق</string>
+    <string name="confirm_header_text">سيتم إرسال كود التأكيد على  بريدك الالكترونى قم بإدخال كود التفعيل</string>
+    <string name="tv_confirm_code_text">ألم تصلك أي كود؟</string>
+    <string name="register_login">سجل الان</string>
+    <string name="sign_up_header">إنه لمن دواعي سروري رؤيتك</string>
+    <string name="name_hint">من فضلك قم بكتابة اسمك</string>
+    <string name="gender">النوع</string>
+    <string name="male">ذكر</string>
+    <string name="female">انثى</string>
+    <string name="agree_to">أوافق على Allo</string>
+    <string name="have_account"> لديك حساب بالفعل ؟ <font fgcolor='#C61027'>سجل الدخول الان</font></string>
+    <string name="terms_accepted">يرجى الموافقة على الشروط والاحكام</string>
+    <string name="change_header">كلمة مرور جديدة</string>
+    <string name="change_header_text">من فضللك قم بكتابة كلمة مرور جديدة مع التأكد من عدم علم اي شخص بها</string>
+    <string name="ask_preimum">الأشتراكات</string>
+    <string name="fri">جمعة</string>
+    <string name="point">نقطة</string>
+    <string name="coin">ج.م</string>
+    <string name="add_cart">أضف إلى السلة</string>
+    <string name="subscribe">إشترك الان</string>
+    <string name="meals_calendar">عرض وجباتي</string>
+    <string name="menuMore">المزيد</string>
+    <string name="vip_title">طبخات تم طلبها سابقا</string>
+    <string name="vip_warning">لايوجد لديك طبخات سابقة</string>
+    <string name="try_login">حاول تسجيل الدخول</string>
 
 </resources>

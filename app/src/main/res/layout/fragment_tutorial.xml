@@ -6,7 +6,7 @@
 
     <variable
       name="viewModel"
-      type="app.te.architecture.presentation.intro.tutorial.TutorialViewModel" />
+      type="app.te.alo_chef.presentation.intro.tutorial.TutorialViewModel" />
   </data>
 
   <LinearLayout

@@ -4,15 +4,15 @@
 
     <data>
 
-        <import type="app.te.architecture.presentation.base.utils.Constants" />
+        <import type="app.te.alo_chef.presentation.base.utils.Constants" />
 
         <variable
             name="eventListener"
-            type="app.te.architecture.presentation.profile.ProfileEventListener" />
+            type="app.te.alo_chef.presentation.profile.ProfileEventListener" />
 
         <variable
             name="request"
-            type="app.te.architecture.domain.profile.entity.UpdateProfileRequest" />
+            type="app.te.alo_chef.domain.profile.entity.UpdateProfileRequest" />
     </data>
 
     <androidx.core.widget.NestedScrollView

@@ -8,7 +8,7 @@
 
     <variable
       name="eventListener"
-      type="app.te.architecture.presentation.base.events.BaseEventListener" />
+      type="app.te.alo_chef.presentation.base.events.BaseEventListener" />
   </data>
 
   <androidx.core.widget.NestedScrollView

@@ -6,7 +6,7 @@
 
         <variable
             name="eventListener"
-            type="app.te.architecture.presentation.more.MoreEventListener" />
+            type="app.te.alo_chef.presentation.more.MoreEventListener" />
     </data>
 
 

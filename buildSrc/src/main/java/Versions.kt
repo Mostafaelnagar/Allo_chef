@@ -1,11 +1,8 @@
 object Versions {
-  const val gradleVersion = "7.0.4"
+  const val gradleVersion = "7.2.2"
   const val appGalleryConnect = "1.7.1.300"
   const val kotlin = "1.6.10"
   const val ktLint = "10.2.0"
-
-  // Java Inject
-  const val javaInject = "1"
 
   // Support
   const val appcompat = "1.5.1"
@@ -28,7 +25,6 @@ object Versions {
   const val datastore_protobuf = "3.21.8"
   const val datastore_protoc = "3.21.8"
   const val classPath_protobuf = "0.8.18"
-  const val grpcVersion = "1.24.0"
 
   // Networking
   const val retrofit = "2.9.0"
@@ -37,7 +33,7 @@ object Versions {
   const val chuckLogging = "3.5.2"
 
   // UI
-  const val materialDesign = "1.7.0-alpha01"
+  const val materialDesign = "1.7.0"
   const val androidNavigation = "2.5.2"
   const val loadingAnimations = "5.2.0"
   const val alerter = "7.2.4"
@@ -69,14 +65,11 @@ object Versions {
   const val google_services = "4.3.10"
   const val google_secret = "2.0.0"
 
-  //ted bottom picker
-  const val ted_bottom_picker = "2.0.1"
-
   //Pin View
   const val pin_code = "1.4.4"
+  const val badge = "2.0.0"
+  const val sSCustomBottomNavigation = "3.4"
 
-  //smarteist
-  const val smarteist = "1.4.0"
   const val AdvancedWebView = "v3.2.1"
 
 }

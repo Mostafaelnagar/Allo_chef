@@ -1,6 +1,6 @@
 object Config {
     object AppConfig {
-        const val appId = "app.te.architecture"
+        const val appId = "app.te.alo_chef"
         const val compileSdkVersion = 33
         const val minSdkVersion = 23
         const val versionCode = 8

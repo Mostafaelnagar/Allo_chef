@@ -6,11 +6,11 @@
 
     <variable
       name="uiState"
-      type="app.te.architecture.presentation.contactus.ContactUsUiState" />
+      type="app.te.alo_chef.presentation.contactus.ContactUsUiState" />
 
     <variable
       name="eventListener"
-      type="app.te.architecture.presentation.contactus.ContactUsEventListeners" />
+      type="app.te.alo_chef.presentation.contactus.ContactUsEventListeners" />
   </data>
 
 

@@ -7,7 +7,7 @@
 
     <variable
       name="uiState"
-      type="app.te.architecture.domain.settings.models.Teams" />
+      type="app.te.alo_chef.domain.settings.models.Teams" />
 
   </data>
 

@@ -1,4 +1,4 @@
-rootProject.name = "AppArchitecture"
+rootProject.name = "AlloChef"
 
 // Include all the existent modules in the project
 rootDir
