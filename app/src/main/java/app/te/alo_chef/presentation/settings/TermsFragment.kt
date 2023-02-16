@@ -13,14 +13,13 @@ import app.te.alo_chef.presentation.base.events.BaseEventListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TermsFragment : BaseFragment<FragmentTermsBinding>(), BaseEventListener {
+class TermsFragment : BaseFragment<FragmentTermsBinding>() {
 
   private val viewModel: SettingsViewModel by viewModels()
 
   override
   fun getLayoutId() = R.layout.fragment_terms
   override fun setBindingVariables() {
-    binding.eventListener = this
     viewModel.pages("terms")
   }
 
@@ -51,8 +50,4 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(), BaseEventListener {
 
   }
 
-
-  override fun back() {
-    backToPreviousScreen()
-  }
 }

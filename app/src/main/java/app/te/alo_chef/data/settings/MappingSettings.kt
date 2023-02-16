@@ -5,7 +5,8 @@ import app.te.alo_chef.presentation.settings.ui_state.AboutDataUiState
 
 fun AboutData.mapToUiState(): AboutDataUiState {
   return AboutDataUiState(
-    title = this.title,
+    body = this.body,
+    name = this.name,
     image = this.image
   )
 }

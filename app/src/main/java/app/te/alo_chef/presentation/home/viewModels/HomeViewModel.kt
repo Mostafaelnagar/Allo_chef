@@ -4,10 +4,7 @@ import androidx.lifecycle.viewModelScope
 import app.te.alo_chef.data.home.data_source.dto.HomeData
 import app.te.alo_chef.data.home.data_source.dto.MealsData
 import app.te.alo_chef.domain.general.use_case.GeneralUseCases
-import app.te.alo_chef.domain.home.use_case.ChangeLikeUseCase
-import app.te.alo_chef.domain.home.use_case.FilterByDateUseCase
-import app.te.alo_chef.domain.home.use_case.HomeUseCase
-import app.te.alo_chef.domain.home.use_case.VipMealsUseCase
+import app.te.alo_chef.domain.home.use_case.*
 import app.te.alo_chef.domain.intro.entity.MealRequest
 import app.te.alo_chef.domain.utils.BaseResponse
 import app.te.alo_chef.domain.utils.Resource
@@ -24,9 +21,10 @@ class HomeViewModel @Inject constructor(
     private val filterByDateUseCase: FilterByDateUseCase,
     private val changeLikeUseCase: ChangeLikeUseCase,
     private val vipMealsUseCase: VipMealsUseCase,
+    private val favoritesMealsUseCase: FavoritesMealsUseCase,
+    private val searchMealsUseCase: SearchMealsUseCase,
     private val generalUseCases: GeneralUseCases,
 ) : BaseViewModel() {
-
     private val _homeResponse =
         MutableStateFlow<Resource<BaseResponse<HomeData>>>(Resource.Default)
     val homeResponse = _homeResponse
@@ -34,9 +32,8 @@ class HomeViewModel @Inject constructor(
     private val _filterResponse =
         MutableStateFlow<Resource<BaseResponse<List<MealsData>>>>(Resource.Default)
     val filterResponse = _filterResponse
-
+    val isLogged = MutableStateFlow(false)
     var dayDate: String = ""
-    var isLogged: Boolean = false
 
     fun getHomeData(date: String) {
         viewModelScope.launch {
@@ -59,10 +56,17 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun getFavoritesMeals() {
+        viewModelScope.launch {
+            _filterResponse.value = Resource.Loading
+            _filterResponse.value = favoritesMealsUseCase.invoke(Dispatchers.IO)
+        }
+    }
+
     fun checkUserLogged() {
         viewModelScope.launch {
             generalUseCases.checkLoggedInUserUseCase.invoke().collectLatest {
-                isLogged = it.id != 0
+                isLogged.value = it.id != 0
             }
         }
     }
@@ -70,6 +74,13 @@ class HomeViewModel @Inject constructor(
     fun changeLike(mealId: Int) {
         viewModelScope.launch {
             changeLikeUseCase.changeLike(MealRequest(mealId), Dispatchers.IO)
+        }
+    }
+
+    fun searchMeals(searchKey: String) {
+        viewModelScope.launch {
+            _filterResponse.value = Resource.Loading
+            _filterResponse.value = searchMealsUseCase.invoke(searchKey, Dispatchers.IO)
         }
     }
 

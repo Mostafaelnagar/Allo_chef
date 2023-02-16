@@ -40,6 +40,10 @@
     <string name="about">عن التطبيق</string>
     <string name="terms">الشروط والأحكام</string>
     <string name="contact_us">إتصل بنا</string>
+    <string name="support">الدعم الفنى</string>
+    <string name="share">مشاركة التطبيق</string>
+    <string name="rate">قيم التطبيق</string>
+
     <!--  Suggestions-->
     <string name="first_name">الاسم الاول</string>
     <string name="last_name">الكنية</string>
@@ -53,7 +57,7 @@
     <string name="favorite">المفضلة</string>
     <string name="subscribe_account">اشترك الآن</string>
     <string name="change_language">تغيير اللغة</string>
-    <string name="about_80">عن 80 فكرة</string>
+    <string name="about_80">عن <font fgcolor='#FD5A1F'>أ</font>لو شيف</string>
     <string name="team">فريق العمل</string>
     <string name="version_name">النسخة</string>
     <string name="ar">اللغة العربية</string>
@@ -116,5 +120,18 @@
     <string name="vip_title">طبخات تم طلبها سابقا</string>
     <string name="vip_warning">لايوجد لديك طبخات سابقة</string>
     <string name="try_login">حاول تسجيل الدخول</string>
+    <string name="empty_favorites">أين المفضل\n <font fgcolor='#8A98A3'>بمجرد أن تفضل وجبة ، سيظهر هنا</font></string>
+    <string name="my_account"> حسابي</string>
+    <string name="tv_wallet">المحفظة</string>
+    <string name="my_orders">طلباتى</string>
+    <string name="my_location">عنوايني</string>
+    <string name="my_favorites">المفضلة</string>
+    <string name="subscriptions">الاشتراكات</string>
+    <string name="account_settings">الاعدادات</string>
+    <string name="message_hint">الرسالة</string>
+    <string name="market_details">التفاصيل</string>
+    <string name="ingredients">المكونات</string>
+    <string name="methods">الطريقة</string>
+    <string name="tv_similar">وجبات اليوم الأخرى</string>
 
 </resources>

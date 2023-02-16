@@ -42,8 +42,12 @@
     <string name="confirm">Verify Phone</string>
     <!--  Side Menu-->
     <string name="about">About the app</string>
-    <string name="terms">Terms and Conditions</string>
+    <string name="terms">Terms of use</string>
     <string name="contact_us">Contact us</string>
+    <string name="support">Customer support</string>
+    <string name="share">Share</string>
+    <string name="rate">Rate app</string>
+
     <!--  Suggestions-->
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
@@ -58,7 +62,7 @@
     <string name="favorite">Favorite</string>
     <string name="subscribe_account">Subscribe now</string>
     <string name="change_language">Change language</string>
-    <string name="about_80">About 80 Fekra</string>
+    <string name="about_80">About <font fgcolor='#FD5A1F'>A</font>llo Chef</string>
     <string name="team">Team</string>
     <string name="version_name">Version</string>
     <string name="ar">اللغة العربية</string>
@@ -123,5 +127,18 @@
     <string name="vip_title">Previous meals</string>
     <string name="vip_warning">You don\'t have previous meals</string>
     <string name="try_login">Try to login</string>
+    <string name="empty_favorites">Where is the Love?\n<font fgcolor='#8A98A3'>Once you favourite a meal, it will appear here.</font></string>
+    <string name="my_account">My Account</string>
+    <string name="tv_wallet">Wallet</string>
+    <string name="my_orders">My Orders</string>
+    <string name="my_location">My Location</string>
+    <string name="my_favorites">My Favourites</string>
+    <string name="subscriptions">subscriptions</string>
+    <string name="account_settings">Settings</string>
+    <string name="message_hint">Message</string>
+    <string name="market_details">Details</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="methods">Method</string>
+    <string name="tv_similar">other Day meals</string>
 
 </resources>

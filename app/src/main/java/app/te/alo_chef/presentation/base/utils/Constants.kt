@@ -14,5 +14,6 @@ object Constants {
     const val FACE_BOOK = "FACE_BOOK"
     const val GOOGLE_SIGN_IN = "GOOGLE_SIGN_IN"
     const val ADD_TO_CART_KEY = 1
+    const val SUPPORT = "https://tawk.to/chat/61297a10649e0a0a5cd3529a/1fe509kgj"
 
 }

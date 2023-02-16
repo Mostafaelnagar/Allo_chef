@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="event"
+            type="app.te.alo_chef.presentation.home.eventListener.HomeEventListener" />
+    </data>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/input_home_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_6sdp"
+                    android:background="@drawable/corner_view_white"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawablePadding="@dimen/_8sdp"
+                    android:focusable="false"
+                    android:onClick="@{()->event.openSearch()}"
+                    android:hint="@string/home_search_hint"
+                    android:padding="@dimen/_8sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/ic_cart"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_title" />
+
+                <ru.nikartm.support.ImageBadgeView
+                    android:id="@+id/ib_grocery_frag"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:elevation="5dp"
+                    android:padding="2dp"
+                    app:ibv_badgeColor="@color/white"
+                    app:ibv_badgeLimitValue="false"
+                    app:ibv_badgePosition="center"
+                    app:ibv_badgeTextColor="@color/colorPrimaryDark"
+                    app:ibv_badgeTextSize="@dimen/_8ssp"
+                    app:ibv_badgeTextStyle="bold"
+                    app:ibv_badgeValue="10"
+                    app:ibv_fixedBadgeRadius="8dp"
+                    app:ibv_showCounter="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ibv_badgeColor="@color/white" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:src="@drawable/ic_cart"
+                    app:layout_constraintBottom_toBottomOf="@id/home_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/home_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/home_title"
+                    style="@style/TextMediumFont"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginBottom="@dimen/_35sdp"
+                    android:gravity="center"
+                    android:text="@string/favorite"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toStartOf="@id/ic_cart"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_home_search"
+                app:spanCount="2"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_product" />
+
+            <include
+                android:id="@+id/layout_try_to_login"
+                layout="@layout/layout_try_to_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:event="@{event}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_home_search" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

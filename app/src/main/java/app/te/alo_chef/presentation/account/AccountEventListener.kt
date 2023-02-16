@@ -1,9 +1,11 @@
 package app.te.alo_chef.presentation.account
 
 interface AccountEventListener {
-  fun openProfile()
-  fun openFavorite()
-  fun openSubscribe()
-  fun openChangeLanguage()
-  fun logout()
+    fun openWallet()
+    fun openMyOrders()
+    fun openMyLocations()
+    fun openProfile()
+    fun openFavorite()
+    fun openSubscribe()
+    fun logout()
 }

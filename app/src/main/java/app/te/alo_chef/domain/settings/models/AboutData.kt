@@ -5,14 +5,14 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 data class AboutData(
-  @SerializedName("title")
-  val title: String = "",
+  @SerializedName("body")
+  val body: String = "",
 
   @SerializedName("image")
   val image: String = "",
 
-  @SerializedName("id")
-  val id: Int = 0,
+  @SerializedName("name")
+  val name: String = "",
 
 
   )

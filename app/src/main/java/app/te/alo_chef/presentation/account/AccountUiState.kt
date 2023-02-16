@@ -10,7 +10,11 @@ import com.structure.base_mvvm.User
 
 class AccountUiState : BaseUiState() {
     @Bindable
-    var updateSubscribeVisibility: Int = View.GONE
+    var accessAccount: Boolean = false
+        set(value) {
+            notifyPropertyChanged(BR.accessAccount)
+            field = value
+        }
 
     @Bindable
     var updateProfileVisibility: Int = View.GONE
@@ -22,11 +26,7 @@ class AccountUiState : BaseUiState() {
     }
 
     private fun updateSubscribeVisibility() {
-//        updateSubscribeVisibility = if (user.subscriber == 0 && user.name.isNotEmpty())
-//            View.VISIBLE
-//        else
-//            View.GONE
-        notifyPropertyChanged(BR.updateSubscribeVisibility)
+        accessAccount = user.id != 0 && user.name.isNotEmpty()
     }
 
     private fun updateProfileVisibility() {

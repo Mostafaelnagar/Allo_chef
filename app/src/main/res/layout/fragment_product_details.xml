@@ -11,43 +11,490 @@
 
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white_smoke">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@color/white_smoke"
+            app:layout_constraintBottom_toTopOf="@+id/btn_add_cart"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/ic_cover"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_200sdp"
-                android:padding="@dimen/_6sdp"
-                android:src="@color/black"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                android:layout_height="wrap_content">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rc_product_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_8sdp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/ic_cover"
-                 />
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager2"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_200sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rc_latest_items"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_4sdp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/rc_product_category"
-                tools:listitem="@layout/item_product" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:src="@drawable/ic_cart"
+                    app:layout_constraintEnd_toEndOf="@id/viewPager2"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+                <ru.nikartm.support.ImageBadgeView
+                    android:id="@+id/ib_grocery_frag"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:elevation="5dp"
+                    android:padding="2dp"
+                    app:ibv_badgeColor="@color/white"
+                    app:ibv_badgeLimitValue="false"
+                    app:ibv_badgePosition="center"
+                    app:ibv_badgeTextColor="@color/colorPrimaryDark"
+                    app:ibv_badgeTextSize="@dimen/_8ssp"
+                    app:ibv_badgeTextStyle="bold"
+                    app:ibv_badgeValue="10"
+                    app:ibv_fixedBadgeRadius="8dp"
+                    app:ibv_showCounter="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/viewPager2"
+                    tools:ibv_badgeColor="@color/white" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:src="@drawable/ic_cart"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/viewPager2" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:src="@drawable/ic_arrow_back"
+                    app:layout_constraintStart_toStartOf="@id/viewPager2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_180sdp"
+                    android:background="@drawable/corner_view_overlay"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_home_title"
+                        style="@style/TextMediumFont"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colordark"
+                        app:layout_constraintEnd_toStartOf="@+id/ic_more_share"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Paradise Hyderabadi Biryani" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_home_price"
+                        style="@style/TextMediumFont"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_18sdp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="EGP 300" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ic_favorite"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_18sdp"
+                        android:src="@drawable/ic_favorite_border"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_home_title" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/ic_more_share"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/badge_white"
+                        android:src="@drawable/ic_more_share"
+                        app:layout_constraintEnd_toStartOf="@id/ic_favorite"
+                        app:layout_constraintTop_toBottomOf="@id/tv_home_title" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_home_weight"
+                        style="@style/TextRegularFont"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/medium_color"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ic_more_share"
+                        tools:text="550 gm" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_home_persons"
+                        style="@style/TextRegularFont"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:drawableStart="@drawable/ic_audience"
+                        android:drawablePadding="@dimen/_4sdp"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/medium_color"
+                        app:layout_constraintStart_toEndOf="@id/tv_home_weight"
+                        app:layout_constraintTop_toBottomOf="@id/ic_more_share"
+                        tools:text="550 gm" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_home_points"
+                        style="@style/TextRegularFont"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:drawableStart="@drawable/ic_points"
+                        android:drawablePadding="@dimen/_4sdp"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/medium_color"
+                        app:layout_constraintStart_toEndOf="@id/tv_home_persons"
+                        app:layout_constraintTop_toBottomOf="@id/ic_more_share"
+                        tools:text="30 points" />
+
+                    <androidx.constraintlayout.widget.Barrier
+                        android:id="@+id/br1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:barrierDirection="bottom"
+                        app:constraint_referenced_ids="tv_home_persons,tv_home_points,tv_home_weight" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_rate_count"
+                        style="@style/TextRegularFont"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_rates_count"
+                        android:drawablePadding="@dimen/_4sdp"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colordark"
+                        tools:text="4.7\nRating" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_favo_count"
+                        style="@style/TextRegularFont"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_favo_num"
+                        android:drawablePadding="@dimen/_4sdp"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colordark"
+                        tools:text="200\nFavourite" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_images_count"
+                        style="@style/TextRegularFont"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_photos"
+                        android:drawablePadding="@dimen/_4sdp"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colordark"
+                        tools:text="200\nPhoto" />
+
+                    <androidx.constraintlayout.helper.widget.Flow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        app:constraint_referenced_ids="tv_rate_count,tv_favo_count,tv_images_count"
+                        app:flow_horizontalGap="@dimen/_6sdp"
+                        app:flow_horizontalStyle="spread_inside"
+                        app:flow_wrapMode="chain"
+                        app:layout_constraintTop_toBottomOf="@id/br1" />
+
+                    <androidx.constraintlayout.widget.Barrier
+                        android:id="@+id/br2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:barrierDirection="bottom"
+                        app:constraint_referenced_ids="tv_images_count,tv_rate_count,tv_favo_count" />
+
+                    <View
+                        android:id="@+id/v1"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:background="@color/overlayBackground"
+                        app:layout_constraintTop_toBottomOf="@id/br2" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_details"
+                        style="@style/TextRegularFont"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:text="@string/market_details"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/colordark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/v1" />
+
+                    <View
+                        android:id="@+id/v2"
+                        android:layout_width="0dp"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:background="@color/colorPrimaryDark"
+                        app:layout_constraintEnd_toEndOf="@id/tv_details"
+                        app:layout_constraintStart_toStartOf="@id/tv_details"
+                        app:layout_constraintTop_toBottomOf="@id/tv_details" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_details_data"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/medium_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/v2"
+                        tools:text="The name biryani itself brings water in your mouth. It’s a one-pot meat that can fill your stomach itself and it doesn’t need any side dish" />
+
+                    <View
+                        android:id="@+id/v3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:background="@color/overlayBackground"
+                        app:layout_constraintTop_toBottomOf="@id/tv_details_data" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_ingredients"
+                        style="@style/TextMediumFont"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:text="@string/ingredients"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/colordark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/v3" />
+
+                    <View
+                        android:id="@+id/v4"
+                        android:layout_width="0dp"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:background="@color/colorPrimaryDark"
+                        app:layout_constraintEnd_toEndOf="@id/tv_ingredients"
+                        app:layout_constraintStart_toStartOf="@id/tv_ingredients"
+                        app:layout_constraintTop_toBottomOf="@id/tv_ingredients" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rc_ingredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@id/v4"
+                        app:spanCount="2" />
+
+                    <View
+                        android:id="@+id/v6"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:background="@color/overlayBackground"
+                        app:layout_constraintTop_toBottomOf="@id/rc_ingredients" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_methods"
+                        style="@style/TextMediumFont"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:text="@string/methods"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/colordark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/v6" />
+
+                    <View
+                        android:id="@+id/v5"
+                        android:layout_width="0dp"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:background="@color/colorPrimaryDark"
+                        app:layout_constraintEnd_toEndOf="@id/tv_methods"
+                        app:layout_constraintStart_toStartOf="@id/tv_methods"
+                        app:layout_constraintTop_toBottomOf="@id/tv_methods" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_methods_data"
+                        style="@style/TextRegularFont"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/medium_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/v5"
+                        tools:text="The name biryani itself brings water in your mouth. It’s a one-pot meat that can fill your stomach itself and it doesn’t need any side dish" />
+
+                    <View
+                        android:id="@+id/v7"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:background="@color/overlayBackground"
+                        app:layout_constraintTop_toBottomOf="@id/tv_methods_data" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_similar"
+                        style="@style/TextMediumFont"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:text="@string/tv_similar"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/colordark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/v7" />
+
+                    <View
+                        android:id="@+id/v8"
+                        android:layout_width="0dp"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:background="@color/colorPrimaryDark"
+                        app:layout_constraintEnd_toEndOf="@id/tv_similar"
+                        app:layout_constraintStart_toStartOf="@id/tv_similar"
+                        app:layout_constraintTop_toBottomOf="@id/tv_similar" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rc_similar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@id/v8"
+                        app:spanCount="2"
+                        tools:listitem="@layout/item_product" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_add_cart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/add_cart"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            app:icon="@drawable/ic_commerce"
+            app:iconGravity="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/add" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/badge"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:src="@drawable/ic_remove_circle"
+            app:layout_constraintBottom_toBottomOf="@id/btn_add_cart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btn_add_cart" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/count"
+            style="@style/TextMediumFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/remove"
+            app:layout_constraintStart_toEndOf="@id/remove"
+            app:layout_constraintTop_toTopOf="@id/remove" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:src="@drawable/ic_add_circle"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/badge"
+            app:layout_constraintBottom_toBottomOf="@id/btn_add_cart"
+            app:layout_constraintStart_toEndOf="@id/count"
+            app:layout_constraintTop_toTopOf="@id/btn_add_cart" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

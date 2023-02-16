@@ -28,7 +28,6 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(), AccountEventList
         lifecycleScope.launchWhenResumed {
             accountViewModel.userData.collect {
                 binding.uiState = it
-
             }
         }
     }
@@ -55,29 +54,48 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(), AccountEventList
     }
 
     private fun openLogInScreen() {
-//        requireActivity().openActivityAndClearStack(AuthActivity::class.java)
-        findNavController().popBackStack(R.id.home_fragment, inclusive = false)
+        openIntentActivity(AuthActivity::class.java, R.id.logInFragment)
+    }
 
+    override fun openWallet() {
+        if (binding.uiState?.accessAccount == true)
+        else
+            openLogInScreen()
+    }
+
+    override fun openMyOrders() {
+        if (binding.uiState?.accessAccount == true)
+        else
+            openLogInScreen()
+    }
+
+    override fun openMyLocations() {
+        if (binding.uiState?.accessAccount == true)
+        else
+            openLogInScreen()
     }
 
     override fun openProfile() {
-        navigateSafe(AccountFragmentDirections.actionAccountFragmentToProfileFragment())
+        if (binding.uiState?.accessAccount == true)
+            navigateSafe(AccountFragmentDirections.actionAccountFragmentToProfileFragment())
+        else
+            openLogInScreen()
     }
 
     override fun openFavorite() {
-
+        if (binding.uiState?.accessAccount == true)
+        else
+            openLogInScreen()
     }
 
     override fun openSubscribe() {
-
-    }
-
-    override fun openChangeLanguage() {
-        navigateSafe(AccountFragmentDirections.actionAccountFragmentToLanguageFragment())
+        if (binding.uiState?.accessAccount == true)
+        else
+            openLogInScreen()
     }
 
     override fun logout() {
-        if (binding.uiState?.user?.name?.isNotEmpty() == true)
+        if (binding.uiState?.accessAccount == true)
             showLogOutPopUp()
         else {
             openIntentActivity(AuthActivity::class.java, R.id.logInFragment)

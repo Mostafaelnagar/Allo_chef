@@ -37,14 +37,19 @@ class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
 
     override fun setUpViews() {
         viewModel.checkUserLogged()
-        if (viewModel.isLogged)
-            viewModel.getVipMeals()
-        else
-            checkEmptyLayout()
+
     }
 
     override
     fun setupObservers() {
+        lifecycleScope.launchWhenResumed {
+            viewModel.isLogged.collect { isLogged ->
+                if (isLogged)
+                    viewModel.getFavoritesMeals()
+                else
+                    checkEmptyLayout(isLogged)
+            }
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 launch {
@@ -73,7 +78,7 @@ class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
 
     private fun updateMeals(mealsDataList: List<MealsData>) {
         if (mealsDataList.isEmpty())
-            checkEmptyLayout()
+            checkEmptyLayout(true)
         else
             vipMealsAdapter.differ.submitList(mealsDataList.map { meal ->
                 MealsUiState(
@@ -83,16 +88,16 @@ class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
             })
     }
 
-    private fun checkEmptyLayout() {
+    private fun checkEmptyLayout(isLogged: Boolean) {
         binding.layoutTryToLogin.container.show()
         binding.layoutTryToLogin.tvVipWarning.show()
         binding.layoutTryToLogin.tvVipWarning.text = getString(R.string.vip_warning)
-        if (!viewModel.isLogged)
+        if (!isLogged)
             binding.layoutTryToLogin.tryLogin.show()
     }
 
     override fun openProductDetails(productId: Int) {
-
+        navigateSafe(VipFragmentDirections.actionVipFragmentToProductDetailsFragment(productId))
     }
 
     override fun changeLike(mealId: Int) {
@@ -107,5 +112,9 @@ class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
 
     override fun tryLogin() {
         openIntentActivity(AuthActivity::class.java, R.id.logInFragment)
+    }
+
+    override fun openSearch() {
+        navigateSafe(VipFragmentDirections.actionVipFragmentToSearchFragment())
     }
 }

@@ -10,4 +10,5 @@ interface HomeEventListener :BaseEventListener {
     fun addToCart(homeMealsData: MealsData, addToCart: Int)
     fun openFilter(){return}
     fun openSubscriptions(){return}
+    fun openSearch(){return}
 }

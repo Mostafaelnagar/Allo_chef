@@ -20,32 +20,41 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
-            app:cardCornerRadius="@dimen/_4sdp"
-            app:cardUseCompatPadding="true">
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ic_about"
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="@dimen/_150sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:src="@drawable/logo"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_250sdp"
+                android:src="@drawable/ic_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:loadImage="@{uiState.image}" />
+                app:loadImage="@{uiState.image}"
+                tools:tint="@color/colorPrimaryDark" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="@string/about_80"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ic_about" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextRegularFont"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
-                android:text="@{uiState.title}"
+                android:text="@{uiState.body}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ic_about"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"
                 tools:layout_editor_absoluteX="13dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

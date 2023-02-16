@@ -50,6 +50,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
 
     override
     fun setupObservers() {
+        lifecycleScope.launchWhenResumed {
+            viewModel.filterResponse.collect {
+                when (it) {
+                    Resource.Loading -> {
+                        hideKeyboard()
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        hideLoading()
+                        updateMeals(it.value.data)
+                    }
+                    is Resource.Failure -> {
+                        hideLoading()
+                        handleApiError(it)
+                    }
+                    else -> {}
+                }
+            }
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
 
@@ -65,25 +84,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
                                 viewModel.dayDate = it.value.data.day_date
                                 updateDays(it.value.data.homeDaysDataList)
                                 updateMeals(it.value.data.mealsDataList)
-                            }
-                            is Resource.Failure -> {
-                                hideLoading()
-                                handleApiError(it)
-                            }
-                            else -> {}
-                        }
-                    }
-                }
-                launch {
-                    viewModel.filterResponse.collect {
-                        when (it) {
-                            Resource.Loading -> {
-                                hideKeyboard()
-                                showLoading()
-                            }
-                            is Resource.Success -> {
-                                hideLoading()
-                                updateMeals(it.value.data)
                             }
                             is Resource.Failure -> {
                                 hideLoading()
@@ -120,18 +120,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
     }
 
     override fun openProductDetails(productId: Int) {
-
+        navigateSafe(HomeFragmentDirections.actionHomeFragmentToProductDetailsFragment(productId))
     }
 
     override fun changeLike(mealId: Int) {
-        if (viewModel.isLogged)
+        if (viewModel.isLogged.value)
             viewModel.changeLike(mealId)
         else
             openIntentActivity(AuthActivity::class.java, R.id.logInFragment)
     }
 
     override fun addToCart(homeMealsData: MealsData, addToCart: Int) {
-        if (viewModel.isLogged) {
+        if (viewModel.isLogged.value) {
             if (addToCart == Constants.ADD_TO_CART_KEY)
                 viewModel.addToCart(homeMealsData)
             else
