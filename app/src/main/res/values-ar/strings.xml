@@ -52,6 +52,7 @@
     <string name="login_btn">تسجيل الدخول</string>
     <string name="new_account">التسجيل</string>
     <string name="create_an_account">ليس لديك حساب؟</string>
+    <string name="photo">صورة</string>
 
     <string name="log_out_hint">هل انت متأكد من أنك تريد تسجيل الخروج؟</string>
     <string name="favorite">المفضلة</string>
@@ -133,5 +134,23 @@
     <string name="ingredients">المكونات</string>
     <string name="methods">الطريقة</string>
     <string name="tv_similar">وجبات اليوم الأخرى</string>
+    <string name="gm"> <font fgcolor='#2B2A2A'>جم</font></string>
+    <string name="persons">أشخاص</string>
+    <string name="ratings">تقييمات</string>
+    <string name="package_name">اسم الباقة</string>
+    <string name="expire_date">تاريخ انتهاء الباقة</string>
+    <string name="old_points">النقاط القديمة :</string>
+    <string name="new_points">النقاط الجديدة :</string>
+    <string name="old_wallet">المحفظة القديمة :</string>
+    <string name="new_wallet">المحفظة الجديدة :</string>
+    <string name="transaction">التعاملات</string>
+    <string name="tv_track">تتبع الطلب</string>
+    <string name="delivered">تم التوصيل</string>
+    <string name="on_way">في الطريق</string>
+    <string name="order_received">تم إستلام الطلب</string>
+    <string name="empty_orders">لم يتم حفظ أي طلبات\nبمجرد طلب المنتج ، سيظهر هنا</string>
+    <string name="order_history">الطلبات السابقة</string>
+    <string name="days">يوم</string>
+    <string name="tv_subscription">باقات <font fgcolor='#FD5A1F'>ألو</font> شيف</string>
 
 </resources>

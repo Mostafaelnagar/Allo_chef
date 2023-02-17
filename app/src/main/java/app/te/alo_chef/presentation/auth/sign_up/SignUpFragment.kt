@@ -32,6 +32,8 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(), RegisterEventListe
         binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) openPrivacy()
         }
+        viewModel.updateFireBaseToken(requireActivity())
+
     }
 
     override

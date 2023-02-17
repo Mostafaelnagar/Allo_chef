@@ -36,10 +36,6 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>(), HomeEventLis
 
     }
 
-    override fun setUpViews() {
-        viewModel.checkUserLogged()
-    }
-
     override
     fun setupObservers() {
         lifecycleScope.launchWhenResumed {
@@ -97,10 +93,10 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>(), HomeEventLis
             binding.layoutTryToLogin.tryLogin.show()
     }
 
-    override fun openProductDetails(productId: Int) {
+    override fun openProductDetails(productId: Int,publishDate:String) {
         navigateSafe(
             FavoritesFragmentDirections.actionFavoriteFragmentToProductDetailsFragment(
-                productId
+                productId,publishDate
             )
         )
     }

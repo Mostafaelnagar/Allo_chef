@@ -99,5 +99,6 @@ object Libraries {
     const val AdvancedWebView =
         "com.github.delight-im:Android-AdvancedWebView:${Versions.AdvancedWebView}"
 
+    const val cardSlider = "com.github.IslamKhSh:CardSlider:${Versions.cardSlider}"
     const val appsweep_key = "gs_appsweep_IDv9AgD_JEkqGn8O46tmbwExhDdTZLCJlBYj1kaq"
 }

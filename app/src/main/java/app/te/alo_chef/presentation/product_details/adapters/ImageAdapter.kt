@@ -7,9 +7,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import app.te.alo_chef.R
+import app.te.alo_chef.data.meal_details.dto.MealImages
 import app.te.alo_chef.databinding.ItemSliderImageBinding
 
-class ImageAdapter(private val imageList: ArrayList<String>, private val viewPager2: ViewPager2) :
+class ImageAdapter(
+    private val imageList: ArrayList<MealImages>,
+    private val viewPager2: ViewPager2
+) :
     RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
 
@@ -20,7 +24,7 @@ class ImageAdapter(private val imageList: ArrayList<String>, private val viewPag
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.setModel(imageList[position])
+        holder.setModel(imageList[position].image)
         if (position == imageList.size - 1) {
             viewPager2.post(runnable)
         }
@@ -34,6 +38,7 @@ class ImageAdapter(private val imageList: ArrayList<String>, private val viewPag
         imageList.addAll(imageList)
         notifyDataSetChanged()
     }
+
     override fun onViewAttachedToWindow(holder: ImageAdapter.ViewHolder) {
         super.onViewAttachedToWindow(holder)
         holder.bind()

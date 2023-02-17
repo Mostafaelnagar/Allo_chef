@@ -35,11 +35,6 @@ class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
 
     }
 
-    override fun setUpViews() {
-        viewModel.checkUserLogged()
-
-    }
-
     override
     fun setupObservers() {
         lifecycleScope.launchWhenResumed {
@@ -96,8 +91,13 @@ class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
             binding.layoutTryToLogin.tryLogin.show()
     }
 
-    override fun openProductDetails(productId: Int) {
-        navigateSafe(VipFragmentDirections.actionVipFragmentToProductDetailsFragment(productId))
+    override fun openProductDetails(productId: Int, publishDate: String) {
+        navigateSafe(
+            VipFragmentDirections.actionVipFragmentToProductDetailsFragment(
+                productId,
+                publishDate
+            )
+        )
     }
 
     override fun changeLike(mealId: Int) {

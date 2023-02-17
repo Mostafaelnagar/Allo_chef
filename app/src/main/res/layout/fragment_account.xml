@@ -68,6 +68,7 @@
                 android:layout_marginEnd="@dimen/_6sdp"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:text="@{uiState.name}"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/white"
@@ -86,6 +87,7 @@
                 android:layout_marginEnd="@dimen/_6sdp"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:text="@{uiState.body}"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/white"
@@ -252,35 +254,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_notifications" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_contact"
-                    style="@style/TextMediumFont"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_18sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:drawableStart="@drawable/ic_love"
-                    android:drawableEnd="@drawable/ic_arrow_right"
-                    android:drawablePadding="@dimen/_8sdp"
-                    android:gravity="center_vertical"
-                    android:onClick="@{()->eventListener.openFavorite()}"
-                    android:text="@string/my_favorites"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/black_light"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_notifications" />
-
-                <View
-                    android:id="@+id/view_contact"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:background="@color/line_color_op"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_contact" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_subscription"
@@ -297,10 +270,7 @@
                     android:onClick="@{()->eventListener.openSubscribe()}"
                     android:text="@string/subscriptions"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/black_light"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_contact" />
+                    android:textColor="@color/black_light" />
 
                 <View
                     android:id="@+id/view_subscribtion"

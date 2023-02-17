@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="itemUiState"
+            type="app.te.alo_chef.presentation.wallet.ui_state.ItemTransactionUiState" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_6sdp"
+        android:background="@drawable/corner_view_white"
+        android:elevation="4dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_old_points"
+            style="@style/TextRegularFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_6sdp"
+            android:text="@{itemUiState.oldPoints(context)}"
+            android:textColor="@color/colordark"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_new_points"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="50 point" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_new_points"
+            style="@style/TextRegularFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_6sdp"
+            android:text="@{itemUiState.newPoints(context)}"
+            android:textColor="@color/colordark"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_old_points"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="500 point" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/br"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_new_points,tv_old_points" />
+
+        <View
+            android:id="@+id/v_points"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/line_color_op"
+            app:layout_constraintTop_toBottomOf="@id/br" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_old_wallet"
+            style="@style/TextRegularFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_6sdp"
+            android:text="@{itemUiState.oldWallet(context)}"
+            android:textColor="@color/colordark"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_new_wallet"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_points"
+            tools:text="50 EGP" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_new_wallet"
+            style="@style/TextRegularFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_6sdp"
+            android:text="@{itemUiState.newWallet(context)}"
+            android:textColor="@color/colordark"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_old_wallet"
+            app:layout_constraintTop_toBottomOf="@+id/v_points"
+            tools:text="500 EGP" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/br2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_new_wallet,tv_old_wallet" />
+
+        <View
+            android:id="@+id/v_wallet"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/line_color_op"
+            app:layout_constraintTop_toBottomOf="@id/br2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_4sdp"
+            android:text="@{itemUiState.item.description}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/medium_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_wallet"
+            tools:text="Description Description Description Description Description Description" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

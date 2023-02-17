@@ -2,7 +2,6 @@ package app.te.alo_chef.presentation.account
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import app.te.alo_chef.R
 import app.te.alo_chef.databinding.FragmentAccountBinding
 import app.te.alo_chef.presentation.auth.AuthActivity
@@ -59,12 +58,14 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(), AccountEventList
 
     override fun openWallet() {
         if (binding.uiState?.accessAccount == true)
+            navigateSafe(AccountFragmentDirections.actionAccountFragmentToWalletFragment())
         else
             openLogInScreen()
     }
 
     override fun openMyOrders() {
         if (binding.uiState?.accessAccount == true)
+            navigateSafe(AccountFragmentDirections.actionAccountFragmentToMyOrdersFragment())
         else
             openLogInScreen()
     }
@@ -82,14 +83,9 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(), AccountEventList
             openLogInScreen()
     }
 
-    override fun openFavorite() {
-        if (binding.uiState?.accessAccount == true)
-        else
-            openLogInScreen()
-    }
-
     override fun openSubscribe() {
         if (binding.uiState?.accessAccount == true)
+            navigateSafe(AccountFragmentDirections.actionAccountFragmentToSubscriptionsFragment())
         else
             openLogInScreen()
     }

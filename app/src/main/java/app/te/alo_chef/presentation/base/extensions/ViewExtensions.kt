@@ -336,6 +336,12 @@ fun TextView.applyTextColor(color: Int) {
     setTextColor(ContextCompat.getColor(context, color))
 }
 
+@BindingAdapter("app:apply_background_color")
+fun View.applyBackgroundColor(color: Int) {
+    if (color != 0)
+        setBackgroundResource(color)
+}
+
 fun SearchView.getQueryTextChangeStateFlow(): StateFlow<String> {
 
     val query = MutableStateFlow("")
@@ -354,6 +360,7 @@ fun SearchView.getQueryTextChangeStateFlow(): StateFlow<String> {
     return query
 
 }
+
 @BindingAdapter(value = ["app:badge_value"])
 fun imageBadgeValue(
     imageView: ImageBadgeView, value: Int

@@ -5,7 +5,6 @@ interface AccountEventListener {
     fun openMyOrders()
     fun openMyLocations()
     fun openProfile()
-    fun openFavorite()
     fun openSubscribe()
     fun logout()
 }

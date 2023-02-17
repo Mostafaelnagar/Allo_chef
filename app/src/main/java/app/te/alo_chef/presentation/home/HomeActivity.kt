@@ -57,16 +57,17 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     private fun navChangeListener() {
         nav.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.home_fragment
-                || destination.id == R.id.languageFragment
                 || destination.id == R.id.favoriteFragment
                 || destination.id == R.id.moreFragment
                 || destination.id == R.id.vipFragment
                 || destination.id == R.id.accountFragment
+                || destination.id == R.id.productDetailsFragment
                 || destination.id == R.id.mealsFilterDialog
             ) {
                 binding.bottomNavigationView.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.GONE
             } else {
+                binding.bottomNavigationView.visibility = View.GONE
                 binding.toolbar.visibility = View.VISIBLE
             }
         }

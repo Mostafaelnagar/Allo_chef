@@ -53,7 +53,7 @@ object RetrofitModule {
             )
             chain.proceed(
                 chain.request().newBuilder()
-                    .addHeader("Authorization", "Bearer $userToken")
+                    .addHeader("jwt", userToken)
                     .addHeader("Accept", "application/json")
                     .addHeader("lang", Locale.getDefault().language)
                     .addHeader("version", BuildConfig.VERSION_CODE.toString())

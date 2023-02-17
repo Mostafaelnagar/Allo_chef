@@ -14,6 +14,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{()->uiState.openDetails()}"
         app:cardCornerRadius="@dimen/_8sdp"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true">
@@ -143,16 +144,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_7sdp"
-                app:backgroundTint="@color/vip"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                app:cornerRadius="0dp"
                 android:onClick="@{()-> uiState.btnClick()}"
                 android:text="@string/add_cart"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/white"
+                app:backgroundTint="@color/vip"
+                app:cornerRadius="0dp"
                 app:icon="@drawable/ic_commerce"
                 app:iconGravity="textStart"
                 app:layout_constraintTop_toBottomOf="@id/tv_home_new_price" />

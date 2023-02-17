@@ -13,18 +13,30 @@ import app.te.alo_chef.data.home.repository.HomeRepositoryImpl
 import app.te.alo_chef.data.intro.data_source.IntroRemoteDataSource
 import app.te.alo_chef.data.intro.repository.IntroRepositoryImpl
 import app.te.alo_chef.data.local.preferences.AppPreferences
+import app.te.alo_chef.data.meal_details.data_source.MealDetailsDataSource
+import app.te.alo_chef.data.meal_details.repository.MealDetailsRepositoryImpl
+import app.te.alo_chef.data.my_orders.data_source.OrdersDataSource
+import app.te.alo_chef.data.my_orders.repository.OrdersRepositoryImpl
 import app.te.alo_chef.data.profile.data_source.ProfileDataSource
 import app.te.alo_chef.data.profile.repository.ProfileRepositoryImpl
 import app.te.alo_chef.data.settings.data_source.remote.SettingsRemoteDataSource
 import app.te.alo_chef.data.settings.repository.SettingsRepositoryImpl
+import app.te.alo_chef.data.subscriptions.data_source.SubscriptionsDataSource
+import app.te.alo_chef.data.subscriptions.repository.SubscriptionsRepositoryImpl
+import app.te.alo_chef.data.wallet.data_source.WalletDataSource
+import app.te.alo_chef.data.wallet.repository.WalletRepositoryImpl
 import app.te.alo_chef.domain.account.repository.AccountRepository
 import app.te.alo_chef.domain.auth.repository.AuthRepository
 import app.te.alo_chef.domain.general.repository.GeneralRepository
 import app.te.alo_chef.domain.home.repository.HomeRepository
 import app.te.alo_chef.domain.home.repository.local.HomeLocalRepository
 import app.te.alo_chef.domain.intro.repository.IntroRepository
+import app.te.alo_chef.domain.meal_details.repository.MealDetailsRepository
+import app.te.alo_chef.domain.orders.repository.OrdersRepository
 import app.te.alo_chef.domain.profile.repository.ProfileRepository
 import app.te.alo_chef.domain.settings.repository.SettingsRepository
+import app.te.alo_chef.domain.subscriptions.repository.SubscriptionsRepository
+import app.te.alo_chef.domain.wallet.repository.WalletRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,7 +59,7 @@ class RepositoryModule {
     fun provideAuthRepository(
         remoteDataSource: AuthRemoteDataSource,
         appPreferences: AppPreferences
-    ): AuthRepository = AuthRepositoryImpl(remoteDataSource,appPreferences)
+    ): AuthRepository = AuthRepositoryImpl(remoteDataSource, appPreferences)
 
 
     @Provides
@@ -87,6 +99,30 @@ class RepositoryModule {
     fun provideUpdateProfileRepository(
         remoteDataSource: ProfileDataSource,
         appPreferences: AppPreferences
-    ): ProfileRepository = ProfileRepositoryImpl(remoteDataSource,appPreferences)
+    ): ProfileRepository = ProfileRepositoryImpl(remoteDataSource, appPreferences)
+
+    @Provides
+    @Singleton
+    fun provideMealDetailsRepository(
+        remoteDataSource: MealDetailsDataSource
+    ): MealDetailsRepository = MealDetailsRepositoryImpl(remoteDataSource)
+
+    @Provides
+    @Singleton
+    fun provideWalletRepository(
+        remoteDataSource: WalletDataSource
+    ): WalletRepository = WalletRepositoryImpl(remoteDataSource)
+
+    @Provides
+    @Singleton
+    fun provideOrdersRepository(
+        remoteDataSource: OrdersDataSource
+    ): OrdersRepository = OrdersRepositoryImpl(remoteDataSource)
+
+    @Provides
+    @Singleton
+    fun provideSubscriptionsRepository(
+        remoteDataSource: SubscriptionsDataSource
+    ): SubscriptionsRepository = SubscriptionsRepositoryImpl(remoteDataSource)
 
 }

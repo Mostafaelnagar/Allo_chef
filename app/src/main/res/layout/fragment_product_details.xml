@@ -7,7 +7,7 @@
 
         <variable
             name="uiState"
-            type="app.te.alo_chef.presentation.home.ui_state.MealsUiState" />
+            type="app.te.alo_chef.presentation.product_details.ui_state.OrderDetailsUiState" />
 
     </data>
 
@@ -62,21 +62,16 @@
                     app:ibv_showCounter="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/viewPager2"
-                    tools:ibv_badgeColor="@color/white" />
+                    tools:ibv_badgeColor="@color/overlayBackground" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ic_cart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:src="@drawable/ic_cart"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/viewPager2" />
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/badge_light"
+                    android:onClick="@{()-> uiState.productDetailsListener.back()}"
+                    android:padding="@dimen/_6sdp"
                     android:src="@drawable/ic_arrow_back"
                     app:layout_constraintStart_toStartOf="@id/viewPager2"
                     app:layout_constraintTop_toTopOf="parent"
@@ -97,6 +92,7 @@
                         android:layout_marginStart="@dimen/_18sdp"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/_6sdp"
+                        android:text="@{uiState.mainDetails.meal.name}"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/colordark"
@@ -114,6 +110,7 @@
                         android:layout_marginEnd="@dimen/_18sdp"
                         android:ellipsize="end"
                         android:lines="1"
+                        android:text="@{uiState.priceAfter(context)}"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/colorPrimary"
@@ -127,9 +124,11 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginTop="@dimen/_6sdp"
                         android:layout_marginEnd="@dimen/_18sdp"
+                        android:onClick="@{()->uiState.changeLike()}"
                         android:src="@drawable/ic_favorite_border"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_home_title" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_home_title"
+                        app:load_drawable="@{uiState.likeIcon}" />
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/ic_more_share"
@@ -150,6 +149,7 @@
                         android:layout_marginStart="@dimen/_18sdp"
                         android:ellipsize="end"
                         android:lines="1"
+                        android:text="@{uiState.mealWeight(context)}"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/medium_color"
@@ -166,11 +166,12 @@
                         android:drawableStart="@drawable/ic_audience"
                         android:drawablePadding="@dimen/_4sdp"
                         android:gravity="center"
+                        android:text="@{uiState.mealCapacity(context)}"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/medium_color"
                         app:layout_constraintStart_toEndOf="@id/tv_home_weight"
                         app:layout_constraintTop_toBottomOf="@id/ic_more_share"
-                        tools:text="550 gm" />
+                        tools:text="4 person" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_home_points"
@@ -181,8 +182,10 @@
                         android:drawableStart="@drawable/ic_points"
                         android:drawablePadding="@dimen/_4sdp"
                         android:gravity="center"
+                        android:text="@{uiState.point(context)}"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/medium_color"
+                        android:visibility="@{uiState.pointsVisibility()}"
                         app:layout_constraintStart_toEndOf="@id/tv_home_persons"
                         app:layout_constraintTop_toBottomOf="@id/ic_more_share"
                         tools:text="30 points" />
@@ -201,7 +204,8 @@
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_rates_count"
                         android:drawablePadding="@dimen/_4sdp"
-                        android:textAlignment="viewStart"
+                        android:text="@{uiState.mealRatings(context)}"
+                        android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/colordark"
                         tools:text="4.7\nRating" />
@@ -213,7 +217,8 @@
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_favo_num"
                         android:drawablePadding="@dimen/_4sdp"
-                        android:textAlignment="viewStart"
+                        android:text="@{uiState.mealFavorites(context)}"
+                        android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/colordark"
                         tools:text="200\nFavourite" />
@@ -225,7 +230,8 @@
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_photos"
                         android:drawablePadding="@dimen/_4sdp"
-                        android:textAlignment="viewStart"
+                        android:text="@{uiState.mealPhotos(context)}"
+                        android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/colordark"
                         tools:text="200\nPhoto" />
@@ -290,6 +296,7 @@
                         android:layout_marginStart="@dimen/_18sdp"
                         android:layout_marginTop="@dimen/_6sdp"
                         android:layout_marginEnd="@dimen/_6sdp"
+                        android:text="@{uiState.homeMealsData.description}"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/medium_color"
@@ -340,7 +347,8 @@
                         android:layout_marginEnd="@dimen/_8sdp"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:layout_constraintTop_toBottomOf="@id/v4"
-                        app:spanCount="2" />
+                        app:spanCount="2"
+                        tools:listitem="@layout/item_ingredient" />
 
                     <View
                         android:id="@+id/v6"
@@ -384,6 +392,7 @@
                         android:layout_marginStart="@dimen/_18sdp"
                         android:layout_marginTop="@dimen/_6sdp"
                         android:layout_marginEnd="@dimen/_6sdp"
+                        android:text="@{uiState.homeMealsData.method}"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/medium_color"
@@ -445,10 +454,11 @@
             android:id="@+id/btn_add_cart"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
             android:layout_marginTop="@dimen/_7sdp"
-            android:layout_marginBottom="@dimen/_7sdp"
             android:background="@color/colorPrimaryDark"
-            android:text="@string/add_cart"
+            android:onClick="@{()-> uiState.btnClick()}"
+            android:text="@{uiState.btnText(context)}"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -463,13 +473,13 @@
             android:id="@+id/remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
-            android:background="@drawable/badge"
             android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:background="@drawable/badge"
+            android:padding="@dimen/_10sdp"
             android:src="@drawable/ic_remove_circle"
-            app:layout_constraintBottom_toBottomOf="@id/btn_add_cart"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/btn_add_cart" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/count"
@@ -478,7 +488,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:text="10"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/remove"
             app:layout_constraintStart_toEndOf="@id/remove"
@@ -489,12 +499,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
-            android:src="@drawable/ic_add_circle"
-            android:padding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
             android:background="@drawable/badge"
-            app:layout_constraintBottom_toBottomOf="@id/btn_add_cart"
-            app:layout_constraintStart_toEndOf="@id/count"
-            app:layout_constraintTop_toTopOf="@id/btn_add_cart" />
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_add_circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/count" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

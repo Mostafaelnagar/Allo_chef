@@ -10,7 +10,7 @@ import app.te.alo_chef.presentation.base.BaseUiState
 import app.te.alo_chef.presentation.base.utils.Constants
 import app.te.alo_chef.presentation.home.eventListener.HomeEventListener
 
-class MealsUiState(val homeMealsData: MealsData, val homeEventListener: HomeEventListener) :
+open class MealsUiState(val homeMealsData: MealsData, val homeEventListener: HomeEventListener) :
     BaseUiState() {
     @Bindable
     var likeIcon: Int =
@@ -65,5 +65,9 @@ class MealsUiState(val homeMealsData: MealsData, val homeEventListener: HomeEven
 
     fun btnClick() {
         homeEventListener.addToCart(homeMealsData, homeMealsData.add_to_cart)
+    }
+
+    fun openDetails() {
+        homeEventListener.openProductDetails(homeMealsData.id, homeMealsData.publishDate)
     }
 }

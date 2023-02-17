@@ -40,4 +40,10 @@ class AccountUiState : BaseUiState() {
 
     fun getLogUser(context: Context): String =
         if (user.name.isNotEmpty()) context.getString(R.string.log_out) else context.getString(R.string.login)
+
+    fun getName(): String = user.name
+    fun getBody(): String = userEmail().plus(" - ").plus(userPhone())
+    private fun userEmail(): String = user.email
+    private fun userPhone(): String = user.phone
+//    fun userAddress(): String = user.address
 }

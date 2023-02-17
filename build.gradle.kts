@@ -13,7 +13,7 @@ buildscript {
         classpath(Config.Dependencies.kotlin)
         classpath(Config.Dependencies.navigationSafeArgs)
         classpath(Config.Dependencies.hilt)
-//        classpath(Config.Dependencies.google_services)
+        classpath(Config.Dependencies.google_services)
         classpath(Config.Dependencies.proto_buf)
         classpath(Config.Dependencies.google_secret)
     }

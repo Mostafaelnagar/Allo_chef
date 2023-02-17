@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="te.app.moon.views.fragments.SplashFragment">
+
+    <data>
+
+        <variable
+            name="uiState"
+            type="app.te.alo_chef.presentation.my_orders.ui_state.OrderItemUiState" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_home_item"
+            style="@style/TextMediumFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:text="@{uiState.orderNumber()}"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colordark"
+            app:layout_constraintEnd_toStartOf="@id/tv_home_price"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="#12345678" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_home_price"
+            style="@style/TextMediumFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:text="@{uiState.orderPrice(context)}"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colordark"
+            app:layout_constraintBottom_toBottomOf="@id/tv_home_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_home_item"
+            tools:text="500 EGP" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_home_desc"
+            style="@style/TextMediumFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:text="@{uiState.myOrdersData.createdAt}"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/medium_color"
+            app:layout_constraintEnd_toStartOf="@id/tv_home_price"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_item" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/br"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_home_price,tv_home_desc" />
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/line_color_op"
+            app:layout_constraintTop_toBottomOf="@id/br" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_watch_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:src="@drawable/ic_watch_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_order_received"
+            style="@style/TextRegularFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:text="@string/order_received"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/medium_color"
+            app:layout_constraintStart_toEndOf="@+id/ic_watch_icon"
+            app:layout_constraintTop_toBottomOf="@id/v1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_order_received_date"
+            style="@style/TextMediumFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:text="@{uiState.myOrdersData.received}"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/colordark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ic_watch_icon"
+            app:layout_constraintTop_toBottomOf="@id/tv_order_received" />
+
+        <View
+            android:id="@+id/v21"
+            android:layout_width="1dp"
+            android:layout_height="@dimen/_85sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="@drawable/dotted_line"
+            android:layerType="software"
+            app:layout_constraintEnd_toEndOf="@id/ic_watch_icon"
+            app:layout_constraintStart_toStartOf="@id/ic_watch_icon"
+            app:layout_constraintTop_toBottomOf="@id/ic_watch_icon" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_delivery_motorbike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v21"
+            app:load_drawable="@{uiState.onWayIcon()}"
+            tools:src="@drawable/ic_delivery_motorbike_success" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_order_onWay"
+            style="@style/TextRegularFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_70sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:text="@string/on_way"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/medium_color"
+            app:layout_constraintStart_toEndOf="@+id/ic_delivery_motorbike"
+            app:layout_constraintTop_toBottomOf="@id/ic_watch_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_order_onWay_date"
+            style="@style/TextMediumFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:text="@{uiState.onWayDate()}"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/colordark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ic_delivery_motorbike"
+            app:layout_constraintTop_toBottomOf="@id/tv_order_onWay"
+            tools:text="2022-12-12" />
+
+        <View
+            android:id="@+id/v22"
+            android:layout_width="1dp"
+            android:layout_height="@dimen/_85sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layerType="software"
+            app:apply_background_color="@{uiState.onDeliveredLineIcon()}"
+            app:layout_constraintEnd_toEndOf="@id/ic_delivery_motorbike"
+            app:layout_constraintStart_toStartOf="@id/ic_delivery_motorbike"
+            app:layout_constraintTop_toBottomOf="@id/ic_delivery_motorbike"
+            tools:background="@drawable/dotted_line_gray" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_delivered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v22"
+            app:load_drawable="@{uiState.onDeliveredIcon()}"
+            tools:src="@drawable/ic_confirm_success" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_order_delivered"
+            style="@style/TextRegularFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_70sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:text="@string/delivered"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/medium_color"
+            app:layout_constraintStart_toEndOf="@+id/ic_delivered"
+            app:layout_constraintTop_toBottomOf="@id/ic_delivery_motorbike" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_order_delivered_date"
+            style="@style/TextMediumFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:text="@{uiState.deliveredDate()}"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colordark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ic_delivered"
+            app:layout_constraintTop_toBottomOf="@id/tv_order_delivered"
+            tools:text="2022-12-12" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

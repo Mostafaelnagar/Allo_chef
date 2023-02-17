@@ -24,6 +24,10 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(), LoginEventListener {
         binding.eventListener = this
     }
 
+    override fun setUpViews() {
+        viewModel.updateFireBaseToken(requireActivity())
+    }
+
     override
     fun setupObservers() {
         lifecycleScope.launchWhenResumed {
@@ -51,7 +55,6 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(), LoginEventListener {
 
 
     override fun openHome() {
-//        requireActivity().openActivityAndClearStack(HomeActivity::class.java)
         back()
     }
 

@@ -47,6 +47,7 @@
     <string name="support">Customer support</string>
     <string name="share">Share</string>
     <string name="rate">Rate app</string>
+    <string name="ratings">Ratings</string>
 
     <!--  Suggestions-->
     <string name="first_name">First Name</string>
@@ -57,6 +58,7 @@
     <string name="login_btn">Login</string>
     <string name="new_account">SignUp</string>
     <string name="create_an_account">Don’t have an account?</string>
+    <string name="photo">Photo</string>
 
     <string name="log_out_hint">Are you sure you want to log out?</string>
     <string name="favorite">Favorite</string>
@@ -133,12 +135,29 @@
     <string name="my_orders">My Orders</string>
     <string name="my_location">My Location</string>
     <string name="my_favorites">My Favourites</string>
-    <string name="subscriptions">subscriptions</string>
+    <string name="subscriptions">Subscriptions</string>
     <string name="account_settings">Settings</string>
     <string name="message_hint">Message</string>
     <string name="market_details">Details</string>
     <string name="ingredients">Ingredients</string>
     <string name="methods">Method</string>
     <string name="tv_similar">other Day meals</string>
+    <string name="gm"> <font fgcolor='#2B2A2A'>gm</font></string>
+    <string name="persons">persons</string>
+    <string name="package_name">Package Name</string>
+    <string name="expire_date">Expire at</string>
+    <string name="old_points">Old points :</string>
+    <string name="new_points">New points :</string>
+    <string name="old_wallet">Old wallet :</string>
+    <string name="new_wallet">New wallet</string>
+    <string name="transaction">Transactions</string>
+    <string name="tv_track">Track Order</string>
+    <string name="delivered">Delivered</string>
+    <string name="on_way">On way</string>
+    <string name="order_received">Order received</string>
+    <string name="empty_orders">No Orders are Saved\nOnce you order product , it will appear here.</string>
+    <string name="order_history">Orders history</string>
+    <string name="days">Days</string>
+    <string name="tv_subscription"><font fgcolor='#FD5A1F'>Alo</font> chef packages</string>
 
 </resources>

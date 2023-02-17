@@ -41,7 +41,7 @@ data class UserResponse(
     val lat: Double = 0.0,
 
     @SerializedName("points")
-    val points: Int = 0,
+    val points: Long = 0,
 
     @SerializedName("wallet")
     val wallet: Float = 0f,

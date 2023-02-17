@@ -1,6 +1,8 @@
 package app.te.alo_chef.presentation.auth.sign_up
 
+import android.content.Context
 import androidx.lifecycle.viewModelScope
+import app.te.alo_chef.core.notifications.notification_manager.FCMManager
 import app.te.alo_chef.domain.auth.use_case.RegisterUseCase
 import app.te.alo_chef.domain.utils.BaseResponse
 import app.te.alo_chef.domain.utils.Resource
@@ -15,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase
-    ) :
+) :
     BaseViewModel() {
     lateinit var registerUiState: RegisterUiState
     private val _registerResponse = MutableStateFlow<Resource<BaseResponse<*>>>(Resource.Default)
@@ -23,11 +25,16 @@ class SignUpViewModel @Inject constructor(
 
     fun register() {
         registerUseCase(registerUiState.request)
-            .catch { exception -> }
+            .catch { }
             .onEach { result ->
                 _registerResponse.value = result
             }
             .launchIn(viewModelScope)
     }
 
+    fun updateFireBaseToken(context: Context) {
+        FCMManager.generateFCMToken(context) { token ->
+            registerUiState.request.firebase_token = token
+        }
+    }
 }

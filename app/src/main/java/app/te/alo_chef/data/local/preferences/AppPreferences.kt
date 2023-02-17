@@ -102,6 +102,8 @@ class AppPreferences @Inject constructor(private val context: Context) {
                 .setJwt(user.jwt)
                 .setSubscriber(user.subscriptionName)
                 .setSubscriptionExpire(user.subscriptionExpire)
+                .setWallet(user.wallet)
+                .setPoints(user.points)
                 .build()
         }
     }

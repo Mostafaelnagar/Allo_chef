@@ -35,6 +35,10 @@ class HomeViewModel @Inject constructor(
     val isLogged = MutableStateFlow(false)
     var dayDate: String = ""
 
+    init {
+        checkUserLogged()
+    }
+
     fun getHomeData(date: String) {
         viewModelScope.launch {
             _homeResponse.value = Resource.Loading

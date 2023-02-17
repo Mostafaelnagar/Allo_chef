@@ -44,7 +44,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
     }
 
     override fun setUpViews() {
-        viewModel.checkUserLogged()
         checkNotificationsPermissions(requireActivity()) {}
     }
 
@@ -119,8 +118,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
         viewModel.filterMeals(date, "1")
     }
 
-    override fun openProductDetails(productId: Int) {
-        navigateSafe(HomeFragmentDirections.actionHomeFragmentToProductDetailsFragment(productId))
+    override fun openProductDetails(productId: Int, publishDate: String) {
+        navigateSafe(
+            HomeFragmentDirections.actionHomeFragmentToProductDetailsFragment(
+                productId,
+                publishDate
+            )
+        )
     }
 
     override fun changeLike(mealId: Int) {

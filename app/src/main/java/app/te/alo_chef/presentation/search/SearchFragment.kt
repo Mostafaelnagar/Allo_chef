@@ -38,7 +38,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), HomeEventListener 
     }
 
     override fun setUpViews() {
-        viewModel.checkUserLogged()
         binding.searchInput.doOnTextChanged { text, _, _, _ ->
             lifecycleScope.launch {
                 delay(500)
@@ -79,16 +78,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), HomeEventListener 
     }
 
     private fun updateMeals(mealsDataList: List<MealsData>) {
-            productsAdapter.differ.submitList(mealsDataList.map { meal ->
-                MealsUiState(
-                    meal,
-                    this@SearchFragment
-                )
-            })
+        productsAdapter.differ.submitList(mealsDataList.map { meal ->
+            MealsUiState(
+                meal,
+                this@SearchFragment
+            )
+        })
     }
 
-    override fun openProductDetails(productId: Int) {
-//        navigateSafe(VipFragmentDirections.actionVipFragmentToProductDetailsFragment(productId))
+    override fun openProductDetails(productId: Int, publishDate: String) {
+        navigateSafe(
+            SearchFragmentDirections.actionSearchFragmentToProductDetailsFragment(
+                productId,
+                publishDate
+            )
+        )
     }
 
     override fun changeLike(mealId: Int) {

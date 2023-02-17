@@ -9,7 +9,7 @@ plugins {
     id(Config.Plugins.hilt)
     id(Config.Plugins.proto_buf)
     id(Config.Plugins.google_secrets)
-//    id(Config.Plugins.google_services)
+    id(Config.Plugins.google_services)
 //    id(Config.Plugins.huawei_services)
     id(Config.Plugins.checkDependencyUpdates) version "1.5.0"
 
@@ -208,6 +208,9 @@ dependencies {
 
     //AdvancedWebView
     implementation(Libraries.AdvancedWebView)
+    
+    //cardSlider
+    implementation(Libraries.cardSlider)
 
     // Project Modules
     implementation(project(Config.Modules.prettyPopUp))

@@ -5,8 +5,12 @@ import app.te.alo_chef.data.auth.data_source.remote.AuthServices
 import app.te.alo_chef.data.general.data_source.remote.GeneralServices
 import app.te.alo_chef.data.home.data_source.remote.HomeServices
 import app.te.alo_chef.data.intro.data_source.IntroServices
+import app.te.alo_chef.data.meal_details.data_source.MealDetailsServices
+import app.te.alo_chef.data.my_orders.data_source.OrdersServices
 import app.te.alo_chef.data.profile.data_source.ProfileServices
 import app.te.alo_chef.data.settings.data_source.remote.SettingsServices
+import app.te.alo_chef.data.subscriptions.data_source.SubscriptionsServices
+import app.te.alo_chef.data.wallet.data_source.WalletServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,4 +57,25 @@ object NetworkServicesModule {
     @Singleton
     fun provideSettingsServices(retrofit: Retrofit): SettingsServices =
         retrofit.create(SettingsServices::class.java)
+
+    @Provides
+    @Singleton
+    fun provideMealDetailsServices(retrofit: Retrofit): MealDetailsServices =
+        retrofit.create(MealDetailsServices::class.java)
+
+    @Provides
+    @Singleton
+    fun provideWalletServices(retrofit: Retrofit): WalletServices =
+        retrofit.create(WalletServices::class.java)
+
+    @Provides
+    @Singleton
+    fun provideOrdersServices(retrofit: Retrofit): OrdersServices =
+        retrofit.create(OrdersServices::class.java)
+
+    @Provides
+    @Singleton
+    fun provideSubscriptionsServices(retrofit: Retrofit): SubscriptionsServices =
+        retrofit.create(SubscriptionsServices::class.java)
+
 }
