@@ -10,6 +10,7 @@ object Keys {
   external fun appDataStore(): String
   external fun appDataStoreFirstTime(): String
   external fun userDataStoreFileName(): String
+  external fun defaultLocationStoreFileName(): String
   external fun firebaseToken(): String
   external fun userToken(): String
   external fun firstTime(): String

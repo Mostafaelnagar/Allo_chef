@@ -159,5 +159,10 @@
     <string name="order_history">Orders history</string>
     <string name="days">Days</string>
     <string name="tv_subscription"><font fgcolor='#FD5A1F'>Alo</font> chef packages</string>
+    <string name="your_location">Your Location</string>
+    <string name="edit">Edit</string>
+    <string name="delete_event">Delete</string>
+    <string name="add_place">Add place</string>
+    <string name="no_places">No Places are Saved\nOnce you favourite a places , it will appear here.</string>
 
 </resources>

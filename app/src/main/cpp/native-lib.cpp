@@ -36,6 +36,13 @@ Java_app_te_alo_1chef_data_remote_Keys_userDataStoreFileName(JNIEnv *env, jobjec
 }
 extern "C"
 JNIEXPORT jstring JNICALL
+Java_app_te_alo_1chef_data_remote_Keys_defaultLocationStoreFileName(JNIEnv *env, jobject thiz) {
+    std::string user_store = "location_store.pb";
+    return env->NewStringUTF(user_store.c_str());
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
 Java_app_te_alo_1chef_data_remote_Keys_firebaseToken(JNIEnv *env, jobject thiz) {
     std::string firebaseToken = "FIREBASE_TOKEN.pb";
     return env->NewStringUTF(firebaseToken.c_str());

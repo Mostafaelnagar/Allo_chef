@@ -15,6 +15,8 @@ import app.te.alo_chef.data.intro.repository.IntroRepositoryImpl
 import app.te.alo_chef.data.local.preferences.AppPreferences
 import app.te.alo_chef.data.meal_details.data_source.MealDetailsDataSource
 import app.te.alo_chef.data.meal_details.repository.MealDetailsRepositoryImpl
+import app.te.alo_chef.data.my_locations.data_source.MyLocationsDataSource
+import app.te.alo_chef.data.my_locations.repository.MyLocationsRepositoryImpl
 import app.te.alo_chef.data.my_orders.data_source.OrdersDataSource
 import app.te.alo_chef.data.my_orders.repository.OrdersRepositoryImpl
 import app.te.alo_chef.data.profile.data_source.ProfileDataSource
@@ -32,6 +34,7 @@ import app.te.alo_chef.domain.home.repository.HomeRepository
 import app.te.alo_chef.domain.home.repository.local.HomeLocalRepository
 import app.te.alo_chef.domain.intro.repository.IntroRepository
 import app.te.alo_chef.domain.meal_details.repository.MealDetailsRepository
+import app.te.alo_chef.domain.my_locations.repository.MyLocationsRepository
 import app.te.alo_chef.domain.orders.repository.OrdersRepository
 import app.te.alo_chef.domain.profile.repository.ProfileRepository
 import app.te.alo_chef.domain.settings.repository.SettingsRepository
@@ -124,5 +127,12 @@ class RepositoryModule {
     fun provideSubscriptionsRepository(
         remoteDataSource: SubscriptionsDataSource
     ): SubscriptionsRepository = SubscriptionsRepositoryImpl(remoteDataSource)
+
+    @Provides
+    @Singleton
+    fun provideMyLocationsRepository(
+        remoteDataSource: MyLocationsDataSource,
+        appPreferences: AppPreferences
+    ): MyLocationsRepository = MyLocationsRepositoryImpl(remoteDataSource,appPreferences)
 
 }

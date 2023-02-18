@@ -152,5 +152,11 @@
     <string name="order_history">الطلبات السابقة</string>
     <string name="days">يوم</string>
     <string name="tv_subscription">باقات <font fgcolor='#FD5A1F'>ألو</font> شيف</string>
+    <string name="your_location">موقعك</string>
+    <string name="edit">تعديل</string>
+    <string name="delete_event">حذف</string>
+    <string name="add_place">إضافة مكان</string>
+    <string name="no_places">لا توجد اماكن مفضلة\nبمجرد أن تفضل الأماكن ، ستظهر هنا</string>
+
 
 </resources>

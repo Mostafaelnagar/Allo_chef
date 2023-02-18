@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="event"
+            type="app.te.alo_chef.presentation.my_locations.listeners.LocationsListener" />
+
+        <variable
+            name="item"
+            type="app.te.alo_chef.data.my_locations.dto.LocationsData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/slider_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_4sdp"
+        android:background="@drawable/corner_view_white"
+        android:elevation="4dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_first_location"
+            style="@style/TextMediumFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_6sdp"
+            android:text="@{item.title}"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/colordark"
+            app:layout_constraintEnd_toStartOf="@id/radio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="First location" />
+
+        <RadioButton
+            android:id="@+id/radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@{item.selected}"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/v23"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/line_color_op"
+            app:layout_constraintTop_toBottomOf="@+id/tv_first_location" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:src="@drawable/ic_location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v23" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_your_location"
+            style="@style/TextRegularFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:text="@string/your_location"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/medium_color"
+            app:layout_constraintStart_toEndOf="@id/img_location"
+            app:layout_constraintTop_toBottomOf="@id/v23" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/your_location"
+            style="@style/TextRegularFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:text="@{item.street}"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colordark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_location"
+            app:layout_constraintTop_toBottomOf="@id/tv_your_location" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ic_edit"
+            style="@style/TextRegularFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:drawableStart="@drawable/ic_edit"
+            android:drawablePadding="@dimen/_4sdp"
+            android:onClick="@{()-> event.openEdit(item)}"
+            android:text="@string/edit"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/your_location" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ic_delete"
+            style="@style/TextRegularFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:drawableStart="@drawable/ic_delete"
+            android:drawablePadding="@dimen/_4sdp"
+            android:onClick="@{()-> event.deleteLocation(item.id)}"
+            android:text="@string/delete_event"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ic_edit"
+            app:layout_constraintTop_toBottomOf="@id/your_location" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

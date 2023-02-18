@@ -1,5 +1,6 @@
 package app.te.alo_chef.domain.account.use_case
 
+import app.te.alo_chef.data.my_locations.dto.LocationsData
 import app.te.alo_chef.domain.account.repository.AccountRepository
 import app.te.alo_chef.domain.auth.entity.model.UserResponse
 import com.structure.base_mvvm.User
@@ -15,5 +16,7 @@ class UserLocalUseCase @Inject constructor(private val accountRepository: Accoun
     suspend operator fun invoke(): Flow<User> = accountRepository.getUserToLocal()
 
     suspend fun logOut() = accountRepository.clearPreferences()
-
+    suspend fun saveDefaultLocation(item: LocationsData) {
+        accountRepository.saveDefaultLocation(item)
+    }
 }

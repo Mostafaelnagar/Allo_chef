@@ -6,6 +6,7 @@ import app.te.alo_chef.data.general.data_source.remote.GeneralServices
 import app.te.alo_chef.data.home.data_source.remote.HomeServices
 import app.te.alo_chef.data.intro.data_source.IntroServices
 import app.te.alo_chef.data.meal_details.data_source.MealDetailsServices
+import app.te.alo_chef.data.my_locations.data_source.MyLocationsServices
 import app.te.alo_chef.data.my_orders.data_source.OrdersServices
 import app.te.alo_chef.data.profile.data_source.ProfileServices
 import app.te.alo_chef.data.settings.data_source.remote.SettingsServices
@@ -77,5 +78,10 @@ object NetworkServicesModule {
     @Singleton
     fun provideSubscriptionsServices(retrofit: Retrofit): SubscriptionsServices =
         retrofit.create(SubscriptionsServices::class.java)
+
+    @Provides
+    @Singleton
+    fun provideMyLocationsServices(retrofit: Retrofit): MyLocationsServices =
+        retrofit.create(MyLocationsServices::class.java)
 
 }

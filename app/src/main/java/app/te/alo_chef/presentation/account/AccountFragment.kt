@@ -72,6 +72,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(), AccountEventList
 
     override fun openMyLocations() {
         if (binding.uiState?.accessAccount == true)
+            navigateSafe(AccountFragmentDirections.actionAccountFragmentToMyLocationsFragment())
         else
             openLogInScreen()
     }

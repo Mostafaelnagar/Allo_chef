@@ -81,6 +81,13 @@
             app:exitAnim="@anim/anim_slide_out_left"
             app:popEnterAnim="@anim/anim_slide_in_left"
             app:popExitAnim="@anim/anim_slide_out_right" />
+        <action
+            android:id="@+id/action_accountFragment_to_myLocationsFragment"
+            app:destination="@id/myLocationsFragment"
+            app:enterAnim="@anim/anim_slide_in_right"
+            app:exitAnim="@anim/anim_slide_out_left"
+            app:popEnterAnim="@anim/anim_slide_in_left"
+            app:popExitAnim="@anim/anim_slide_out_right" />
 
     </fragment>
     <include app:graph="@navigation/nav_auth" />
@@ -311,6 +318,11 @@
         android:name="app.te.alo_chef.presentation.subscriptions.SubscriptionsFragment"
         android:label="@string/subscriptions"
         tools:layout="@layout/fragment_subscriptions" />
+    <fragment
+        android:id="@+id/myLocationsFragment"
+        android:name="app.te.alo_chef.presentation.my_locations.MyLocationsFragment"
+        android:label="@string/my_location"
+        tools:layout="@layout/fragment_my_location" />
 
 
 </navigation>

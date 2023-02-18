@@ -5,9 +5,12 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+import app.te.alo_chef.data.my_locations.dto.DefaultLocationSerializer
+import app.te.alo_chef.data.my_locations.dto.LocationsData
 import app.te.alo_chef.data.remote.Keys
 import app.te.alo_chef.domain.auth.entity.model.UserResponse
 import app.te.alo_chef.domain.auth.entity.model.UserSerializer
+import com.structure.base_mvvm.DefaultLocation
 import com.structure.base_mvvm.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +27,7 @@ class AppPreferences @Inject constructor(private val context: Context) {
     private val STORE_NAME = Keys.appDataStore()
     private val STORE_NAME_FIRST_TIME = Keys.appDataStoreFirstTime()
     private val USER_DATA_STORE_FILE_NAME = Keys.userDataStoreFileName()
+    private val DEFAULTLOCATIONFILE = Keys.defaultLocationStoreFileName()
 
     private val FIREBASE_TOKEN = stringPreferencesKey(Keys.firebaseToken())
     private val USER_TOKEN = stringPreferencesKey(Keys.userToken())
@@ -38,6 +42,10 @@ class AppPreferences @Inject constructor(private val context: Context) {
     private val Context.userDataStore: DataStore<User> by dataStore(
         fileName = USER_DATA_STORE_FILE_NAME,
         serializer = UserSerializer
+    )
+    private val Context.defaultLocationDataStore: DataStore<DefaultLocation> by dataStore(
+        fileName = DEFAULTLOCATIONFILE,
+        serializer = DefaultLocationSerializer
     )
 
     suspend fun saveFireBaseToken(token: String) {
@@ -113,6 +121,27 @@ class AppPreferences @Inject constructor(private val context: Context) {
     suspend fun getUserValue(): User = suspendCancellableCoroutine { continuation ->
         CoroutineScope(Dispatchers.IO).launch {
             context.userDataStore.data.collectLatest {
+                if (continuation.isActive)
+                    continuation.resume(it)
+            }
+        }
+    }
+
+    suspend fun saveDefaultLocation(location: LocationsData) {
+        context.defaultLocationDataStore.updateData { item ->
+            item.toBuilder()
+                .setId(location.id)
+                .setTitle(location.title)
+                .setCityName(location.cityName)
+                .setLat(location.lat)
+                .setLng(location.lng)
+                .build()
+        }
+    }
+    
+    suspend fun getDefaultLocationValue(): DefaultLocation = suspendCancellableCoroutine { continuation ->
+        CoroutineScope(Dispatchers.IO).launch {
+            context.defaultLocationDataStore.data.collectLatest {
                 if (continuation.isActive)
                     continuation.resume(it)
             }
