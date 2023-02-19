@@ -133,20 +133,24 @@ class AppPreferences @Inject constructor(private val context: Context) {
                 .setId(location.id)
                 .setTitle(location.title)
                 .setCityName(location.cityName)
+                .setRegionName(location.regionName)
                 .setLat(location.lat)
                 .setLng(location.lng)
                 .build()
         }
     }
-    
-    suspend fun getDefaultLocationValue(): DefaultLocation = suspendCancellableCoroutine { continuation ->
-        CoroutineScope(Dispatchers.IO).launch {
-            context.defaultLocationDataStore.data.collectLatest {
-                if (continuation.isActive)
-                    continuation.resume(it)
+
+    fun getDefaultLocation(): Flow<DefaultLocation> = context.defaultLocationDataStore.data
+
+    suspend fun getDefaultLocationValue(): DefaultLocation =
+        suspendCancellableCoroutine { continuation ->
+            CoroutineScope(Dispatchers.IO).launch {
+                context.defaultLocationDataStore.data.collectLatest {
+                    if (continuation.isActive)
+                        continuation.resume(it)
+                }
             }
         }
-    }
 
     suspend fun saveSplash(splashScreen: String) {
         context.dataStore.edit {

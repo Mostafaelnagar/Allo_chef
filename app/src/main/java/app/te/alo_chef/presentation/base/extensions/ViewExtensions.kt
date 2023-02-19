@@ -125,7 +125,7 @@ fun ImageView.loadImage(imageUrl: String?, progressBar: ProgressBar?, defaultIma
                 .data(imageUrl)
                 .crossfade(true)
                 .crossfade(400)
-                .error(R.drawable.place_holder)
+                .error(R.drawable.splash)
                 .placeholder(R.color.white)
                 .listener(
                     onStart = { request ->
@@ -150,7 +150,7 @@ fun ImageView.loadImage(imageUrl: String?, progressBar: ProgressBar?, defaultIma
 
     } else {
         progressBar?.hide()
-        load(defaultImage ?: R.drawable.place_holder) {
+        load(defaultImage ?: R.drawable.splash) {
             crossfade(true)
             transformations(
                 CircleCropTransformation()

@@ -34,7 +34,7 @@ interface AccountRepository {
     suspend fun saveDefaultLocation(location: LocationsData)
 
     suspend fun getDefaultLocation(): DefaultLocation
-
+    suspend fun getDefaultLocationFlow(): Flow<DefaultLocation>
     suspend fun saveUserToken(userToken: String)
 
     suspend fun getUserToken(): Flow<String>

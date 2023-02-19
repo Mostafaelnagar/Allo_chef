@@ -6,8 +6,9 @@ message DefaultLocation{
   int32 id = 1;
   string title = 2;
   string cityName = 3;
-  string lat = 4;
-  string lng = 5;
+  string regionName = 4;
+  string lat = 5;
+  string lng = 6;
 
 
 }

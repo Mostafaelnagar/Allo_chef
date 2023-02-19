@@ -20,6 +20,7 @@ open class MealsUiState(val homeMealsData: MealsData, val homeEventListener: Hom
             field = value
         }
 
+
     fun changeLike() {
         if (homeMealsData.isLiked == 0) {
             homeMealsData.isLiked = 1
@@ -63,11 +64,12 @@ open class MealsUiState(val homeMealsData: MealsData, val homeEventListener: Hom
         else
             context.getString(R.string.subscribe)
 
-    fun btnClick() {
+   open fun btnClick() {
         homeEventListener.addToCart(homeMealsData, homeMealsData.add_to_cart)
     }
 
     fun openDetails() {
         homeEventListener.openProductDetails(homeMealsData.id, homeMealsData.publishDate)
     }
+
 }

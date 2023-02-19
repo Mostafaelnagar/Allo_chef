@@ -1,7 +1,6 @@
 package app.te.alo_chef.data.home.data_source.remote
 
 import app.te.alo_chef.data.remote.BaseRemoteDataSource
-import app.te.alo_chef.domain.home.enity.FilterRequest
 import app.te.alo_chef.domain.intro.entity.MealRequest
 import javax.inject.Inject
 

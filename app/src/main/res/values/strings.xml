@@ -164,5 +164,11 @@
     <string name="delete_event">Delete</string>
     <string name="add_place">Add place</string>
     <string name="no_places">No Places are Saved\nOnce you favourite a places , it will appear here.</string>
+    <string name="address_title">Address name</string>
+    <string name="address_hint">Street Address</string>
+    <string name="floor_hint">Floor Apartment</string>
+    <string name="tab_location">Tab to get your location</string>
+    <string name="register_city_hint">City</string>
+    <string name="register_region_hint">Region</string>
 
 </resources>

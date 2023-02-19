@@ -157,6 +157,12 @@
     <string name="delete_event">حذف</string>
     <string name="add_place">إضافة مكان</string>
     <string name="no_places">لا توجد اماكن مفضلة\nبمجرد أن تفضل الأماكن ، ستظهر هنا</string>
+    <string name="address_title">اسم عنوان</string>
+    <string name="address_hint">عنوان الشارع</string>
+    <string name="floor_hint">رقم الطابق</string>
+    <string name="tab_location">إضغط لاختيار الموقع</string>
+    <string name="register_city_hint">المدينة</string>
+    <string name="register_region_hint">المنطقة</string>
 
 
 </resources>

@@ -8,6 +8,10 @@
         <variable
             name="event"
             type="app.te.alo_chef.presentation.home.eventListener.HomeEventListener" />
+
+        <variable
+            name="cartCount"
+            type="Integer" />
     </data>
 
 
@@ -57,7 +61,7 @@
                 app:ibv_badgeTextColor="@color/colorPrimaryDark"
                 app:ibv_badgeTextSize="@dimen/_8ssp"
                 app:ibv_badgeTextStyle="bold"
-                app:ibv_badgeValue="10"
+                app:badge_value="@{cartCount}"
                 app:ibv_fixedBadgeRadius="8dp"
                 app:ibv_showCounter="true"
                 app:layout_constraintEnd_toEndOf="parent"

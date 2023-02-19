@@ -23,6 +23,8 @@ class AccountViewModel @Inject constructor(
 
     private val _userData = MutableStateFlow(AccountUiState())
     val userData = _userData
+    private val _saveLocation = MutableStateFlow("")
+    val saveLocation = _saveLocation
 
     fun getUserFromLocal() {
         viewModelScope.launch {
@@ -33,6 +35,15 @@ class AccountViewModel @Inject constructor(
             }
         }
     }
+
+    fun getSavedLocation() {
+        viewModelScope.launch {
+            userLocalUseCase.getSavedLocationFlow().collect { defaultLocation ->
+                _saveLocation.value = defaultLocation.regionName
+            }
+        }
+    }
+
 
     fun logOut() {
         accountUseCases.logOutUseCase()

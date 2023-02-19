@@ -18,6 +18,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(), AccountEventList
     fun getLayoutId() = R.layout.fragment_account
     override fun setBindingVariables() {
         binding.eventListener = this
+        accountViewModel.getSavedLocation()
         accountViewModel.getUserFromLocal()
     }
 
@@ -27,6 +28,11 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(), AccountEventList
         lifecycleScope.launchWhenResumed {
             accountViewModel.userData.collect {
                 binding.uiState = it
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            accountViewModel.saveLocation.collect {
+                binding.region = it
             }
         }
     }

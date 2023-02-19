@@ -208,9 +208,12 @@ dependencies {
 
     //AdvancedWebView
     implementation(Libraries.AdvancedWebView)
-    
+
     //cardSlider
     implementation(Libraries.cardSlider)
+
+    //file_picker
+    implementation(Libraries.file_picker)
 
     // Project Modules
     implementation(project(Config.Modules.prettyPopUp))

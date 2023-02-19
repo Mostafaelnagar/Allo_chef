@@ -18,6 +18,13 @@ class AccountUiState : BaseUiState() {
 
     @Bindable
     var updateProfileVisibility: Int = View.GONE
+
+    @Bindable
+    var regionName: String = ""
+        set(value) {
+            notifyPropertyChanged(BR.regionName)
+            field = value
+        }
     var user: User = User.getDefaultInstance()
     fun updateUi(user: User) {
         this.user = user

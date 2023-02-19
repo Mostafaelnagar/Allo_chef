@@ -62,6 +62,9 @@ class AccountRepositoryImpl @Inject constructor(
     override suspend fun getDefaultLocation() =
         appPreferences.getDefaultLocationValue()
 
+    override suspend fun getDefaultLocationFlow(): Flow<DefaultLocation> =
+        appPreferences.getDefaultLocation()
+
     override suspend fun saveUserToken(userToken: String) {
         appPreferences.userToken(userToken)
     }

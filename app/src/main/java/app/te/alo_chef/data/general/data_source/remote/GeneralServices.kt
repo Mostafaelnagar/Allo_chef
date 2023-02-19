@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface GeneralServices {
 
-    @GET("v1/app/cities")
+    @GET("app/cities")
     suspend fun getCities(): BaseResponse<List<CityModel>>
 
     @POST("v1/user/update_fcm_token")

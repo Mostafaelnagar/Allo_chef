@@ -62,6 +62,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                 || destination.id == R.id.vipFragment
                 || destination.id == R.id.accountFragment
                 || destination.id == R.id.productDetailsFragment
+                || destination.id == R.id.profileFragment
                 || destination.id == R.id.mealsFilterDialog
             ) {
                 binding.bottomNavigationView.visibility = View.VISIBLE

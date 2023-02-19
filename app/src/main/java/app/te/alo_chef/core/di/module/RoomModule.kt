@@ -3,7 +3,7 @@ package app.te.alo_chef.core.di.module
 import android.content.Context
 import androidx.room.Room
 import app.te.alo_chef.core.AppDatabase
-import app.te.alo_chef.data.home.data_source.local.HomeLocalRemoteDataSource
+import app.te.alo_chef.data.cart.CartDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,8 +26,8 @@ object RoomModule {
 
   @Provides
   @Singleton
-  fun provideHomeLocalRepository(db: AppDatabase): HomeLocalRemoteDataSource {
-    return HomeLocalRemoteDataSource(db.getHomeDao)
+  fun provideHomeLocalRepository(db: AppDatabase): CartDataSource {
+    return CartDataSource(db.getCartDao)
   }
 
 }

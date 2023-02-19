@@ -2,7 +2,6 @@ package app.te.alo_chef.data.home.data_source.remote
 
 import app.te.alo_chef.data.home.data_source.dto.HomeData
 import app.te.alo_chef.data.home.data_source.dto.MealsData
-import app.te.alo_chef.domain.home.enity.FilterRequest
 import app.te.alo_chef.domain.intro.entity.MealRequest
 import app.te.alo_chef.domain.utils.BaseResponse
 import retrofit2.http.Body

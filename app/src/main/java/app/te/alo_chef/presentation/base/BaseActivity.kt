@@ -12,6 +12,7 @@ import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import app.te.alo_chef.presentation.base.ImmediateUpdateActivity.Companion.UPDATE_REQUEST_CODE
 import app.te.alo_chef.presentation.base.extensions.adjustFontScale
+import com.atwa.filepicker.core.FilePicker
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.zeugmasolutions.localehelper.LocaleHelper
@@ -25,6 +26,7 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
     open val binding get() = _binding!!
     lateinit var navController: LiveData<NavController>
     lateinit var immediateUpdateActivity: ImmediateUpdateActivity
+    lateinit var filePicker: FilePicker
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(localeDelegate.attachBaseContext(newBase))
@@ -56,6 +58,7 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
     override
     fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        filePicker = FilePicker.getInstance(this)
         localeDelegate.onCreate(this)
         adjustFontScale()
         initViewBinding()

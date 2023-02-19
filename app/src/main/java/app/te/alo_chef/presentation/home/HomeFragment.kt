@@ -1,6 +1,6 @@
 package app.te.alo_chef.presentation.home
 
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -14,6 +14,7 @@ import app.te.alo_chef.presentation.base.BaseFragment
 import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.Constants
 import app.te.alo_chef.presentation.base.utils.getToday
+import app.te.alo_chef.presentation.cart.view_model.CartViewModel
 import app.te.alo_chef.presentation.home.adapters.DaysAdapter
 import app.te.alo_chef.presentation.home.adapters.ProductsAdapter
 import app.te.alo_chef.presentation.home.eventListener.HomeEventListener
@@ -26,7 +27,8 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
-    private val viewModel: HomeViewModel by activityViewModels()
+    private val viewModel: HomeViewModel by viewModels()
+    private val cartViewModel: CartViewModel by viewModels()
     private lateinit var daysAdapter: DaysAdapter
     private lateinit var productsAdapter: ProductsAdapter
 
@@ -41,6 +43,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
         binding.rcDays.adapter = daysAdapter
         binding.rcProducts.adapter = productsAdapter
         viewModel.getHomeData(getToday())
+        cartViewModel.getCartCount()
     }
 
     override fun setUpViews() {
@@ -68,6 +71,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
                 }
             }
         }
+        lifecycleScope.launchWhenResumed {
+            cartViewModel.cartCountFlow.collect {
+                binding.cartCount = it
+            }
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
 
@@ -137,7 +146,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
     override fun addToCart(homeMealsData: MealsData, addToCart: Int) {
         if (viewModel.isLogged.value) {
             if (addToCart == Constants.ADD_TO_CART_KEY)
-                viewModel.addToCart(homeMealsData)
+                cartViewModel.addToCart(homeMealsData)
             else
                 openSubscriptions()
         }

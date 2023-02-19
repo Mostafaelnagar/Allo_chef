@@ -8,10 +8,12 @@ import android.content.pm.PackageManager
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -25,6 +27,7 @@ import app.te.alo_chef.domain.utils.Resource.Failure
 import app.te.alo_chef.presentation.auth.AuthActivity
 import app.te.alo_chef.presentation.base.utils.*
 import app.te.alo_chef.presentation.base.utils.Constants.MY_PERMISSIONS_REQUEST_POST_NOTIFICATIONS
+import app.te.alo_chef.presentation.base.utils.Constants.MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
 
 
 fun Fragment.handleApiError(
@@ -197,3 +200,74 @@ fun checkNotificationsPermissions(activity: Activity, operation: () -> Unit) {
         }
     }
 }
+
+fun checkStoragePermissions(activity: Activity, operation: () -> Unit) {
+    if (ContextCompat.checkSelfPermission(activity,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        != PackageManager.PERMISSION_GRANTED) {
+        // Permission is not granted
+        // Should we show an explanation?
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+                activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            // Show an explanation to the user *asynchronously* -- don't block
+            // this thread waiting for the user's response! After the user
+            // sees the explanation, try again to request the permission.
+
+            //to simplify, call requestPermissions again
+            Toast.makeText(activity,
+                activity.getString(R.string.permission_dialog_content1),
+                Toast.LENGTH_LONG).show()
+            ActivityCompat.requestPermissions(activity,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+        } else {
+            // No explanation needed; request the permission
+            ActivityCompat.requestPermissions(activity,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+        }
+    } else {
+        // permission granted
+        operation()
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+fun checkStorage13Permissions(activity: Activity, operation: () -> Unit) {
+    if (ContextCompat.checkSelfPermission(activity,
+            Manifest.permission.READ_MEDIA_IMAGES)
+        != PackageManager.PERMISSION_GRANTED) {
+        Log.e("checkStoragePermissions", "checkStoragePermissions: ")
+        // Permission is not granted
+        // Should we show an explanation?
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+                activity,
+                Manifest.permission.READ_MEDIA_IMAGES)) {
+            Log.e("checkStoragePermissions", "shouldShowRequestPermissionRationale: ")
+            // Show an explanation to the user *asynchronously* -- don't block
+            // this thread waiting for the user's response! After the user
+            // sees the explanation, try again to request the permission.
+
+            //to simplify, call requestPermissions again
+            Toast.makeText(activity,
+                activity.getString(R.string.permission_dialog_content1),
+                Toast.LENGTH_LONG).show()
+            ActivityCompat.requestPermissions(activity,
+                arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
+                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+        } else {
+            Log.e("checkStoragePermissions", "else: ")
+            // No explanation needed; request the permission
+            ActivityCompat.requestPermissions(activity,
+                arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
+                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+        }
+    } else {
+        Log.e("checkStoragePermissions", "operation : ")
+
+        // permission granted
+        operation()
+    }
+}
+

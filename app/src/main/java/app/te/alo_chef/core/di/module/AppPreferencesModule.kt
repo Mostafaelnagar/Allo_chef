@@ -3,6 +3,7 @@ package app.te.alo_chef.core.di.module
 import android.content.Context
 import app.te.alo_chef.core.notifications.handler.NotificationHandler
 import app.te.alo_chef.data.local.preferences.AppPreferences
+import app.te.alo_chef.presentation.my_locations.ui_state.AddLocationUiState
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +21,11 @@ object AppPreferencesModule {
 
     @Provides
     @Singleton
-    fun providePushNotificationHandler(@ApplicationContext context: Context) = NotificationHandler(context)
+    fun provideAddLocationUiState(@ApplicationContext context: Context) = AddLocationUiState(context)
+
+    @Provides
+    @Singleton
+    fun providePushNotificationHandler(@ApplicationContext context: Context) =
+        NotificationHandler(context)
 
 }

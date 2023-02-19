@@ -6,8 +6,8 @@ import app.te.alo_chef.data.auth.data_source.remote.AuthRemoteDataSource
 import app.te.alo_chef.data.auth.repository.AuthRepositoryImpl
 import app.te.alo_chef.data.general.data_source.remote.GeneralRemoteDataSource
 import app.te.alo_chef.data.general.repository.GeneralRepositoryImpl
-import app.te.alo_chef.data.home.data_source.local.HomeLocalRemoteDataSource
-import app.te.alo_chef.data.home.repository.local.HomeLocalRepositoryImpl
+import app.te.alo_chef.data.cart.CartDataSource
+import app.te.alo_chef.data.home.repository.local.CartRepositoryImpl
 import app.te.alo_chef.data.home.data_source.remote.HomeRemoteDataSource
 import app.te.alo_chef.data.home.repository.HomeRepositoryImpl
 import app.te.alo_chef.data.intro.data_source.IntroRemoteDataSource
@@ -31,7 +31,7 @@ import app.te.alo_chef.domain.account.repository.AccountRepository
 import app.te.alo_chef.domain.auth.repository.AuthRepository
 import app.te.alo_chef.domain.general.repository.GeneralRepository
 import app.te.alo_chef.domain.home.repository.HomeRepository
-import app.te.alo_chef.domain.home.repository.local.HomeLocalRepository
+import app.te.alo_chef.domain.cart.repository.CartRepository
 import app.te.alo_chef.domain.intro.repository.IntroRepository
 import app.te.alo_chef.domain.meal_details.repository.MealDetailsRepository
 import app.te.alo_chef.domain.my_locations.repository.MyLocationsRepository
@@ -82,8 +82,8 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun provideHomeLocalRepository(
-        homeLocalRemoteDataSource: HomeLocalRemoteDataSource
-    ): HomeLocalRepository = HomeLocalRepositoryImpl(homeLocalRemoteDataSource)
+        cartDataSource: CartDataSource
+    ): CartRepository = CartRepositoryImpl(cartDataSource)
 
     @Provides
     @Singleton

@@ -1,6 +1,6 @@
 package app.te.alo_chef.presentation.favorites
 
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -12,6 +12,7 @@ import app.te.alo_chef.presentation.auth.AuthActivity
 import app.te.alo_chef.presentation.base.BaseFragment
 import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.Constants
+import app.te.alo_chef.presentation.cart.view_model.CartViewModel
 import app.te.alo_chef.presentation.home.adapters.ProductsAdapter
 import app.te.alo_chef.presentation.home.eventListener.HomeEventListener
 import app.te.alo_chef.presentation.home.ui_state.MealsUiState
@@ -22,8 +23,9 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>(), HomeEventListener {
-    private val viewModel: HomeViewModel by activityViewModels()
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var productsAdapter: ProductsAdapter
+    private val cartViewModel: CartViewModel by viewModels()
 
     override
     fun getLayoutId() = R.layout.fragment_favorites
@@ -33,7 +35,7 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>(), HomeEventLis
         binding.event = this
         productsAdapter = ProductsAdapter()
         binding.rcProducts.adapter = productsAdapter
-
+        cartViewModel.getCartCount()
     }
 
     override
@@ -69,6 +71,11 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>(), HomeEventLis
                 }
             }
 
+        }
+        lifecycleScope.launchWhenResumed {
+            cartViewModel.cartCountFlow.collect {
+                binding.cartCount = it
+            }
         }
     }
 
@@ -107,7 +114,7 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>(), HomeEventLis
 
     override fun addToCart(homeMealsData: MealsData, addToCart: Int) {
         if (addToCart == Constants.ADD_TO_CART_KEY)
-            viewModel.addToCart(homeMealsData)
+            cartViewModel.addToCart(homeMealsData)
 
     }
 

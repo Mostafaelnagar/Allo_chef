@@ -16,7 +16,12 @@ class UserLocalUseCase @Inject constructor(private val accountRepository: Accoun
     suspend operator fun invoke(): Flow<User> = accountRepository.getUserToLocal()
 
     suspend fun logOut() = accountRepository.clearPreferences()
+
     suspend fun saveDefaultLocation(item: LocationsData) {
         accountRepository.saveDefaultLocation(item)
     }
+
+    suspend fun getSavedLocationFlow() = accountRepository.getDefaultLocationFlow()
+    suspend fun getSavedLocation() = accountRepository.getDefaultLocation()
+
 }

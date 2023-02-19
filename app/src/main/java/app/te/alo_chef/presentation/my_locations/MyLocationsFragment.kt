@@ -5,10 +5,12 @@ import androidx.lifecycle.lifecycleScope
 import app.te.alo_chef.R
 import app.te.alo_chef.data.my_locations.dto.LocationsData
 import app.te.alo_chef.databinding.FragmentMyLocationBinding
+import app.te.alo_chef.domain.my_locations.entity.AddLocationRequest
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.base.BaseFragment
 import app.te.alo_chef.presentation.base.extensions.handleApiError
 import app.te.alo_chef.presentation.base.extensions.hideKeyboard
+import app.te.alo_chef.presentation.base.extensions.navigateSafe
 import app.te.alo_chef.presentation.base.extensions.show
 import app.te.alo_chef.presentation.my_locations.adapters.MyLocationsAdapters
 import app.te.alo_chef.presentation.my_locations.listeners.LocationsListener
@@ -21,13 +23,14 @@ class MyLocationsFragment : BaseFragment<FragmentMyLocationBinding>(), Locations
     private val viewModel: LocationsViewModel by activityViewModels()
 
     override fun setBindingVariables() {
+        binding.event = this
         viewModel.locationsAdapters = MyLocationsAdapters(this)
         binding.rcLocations.adapter = viewModel.locationsAdapters
         viewModel.getMyLocations()
     }
 
     override fun observeAPICall() {
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+        lifecycleScope.launchWhenResumed {
             viewModel.locationsResponse.collect {
                 when (it) {
                     Resource.Loading -> {
@@ -37,6 +40,25 @@ class MyLocationsFragment : BaseFragment<FragmentMyLocationBinding>(), Locations
                     is Resource.Success -> {
                         hideLoading()
                         updateLocationsAdapter(it.value.data)
+                    }
+                    is Resource.Failure -> {
+                        hideLoading()
+                        handleApiError(it)
+                    }
+                    else -> {}
+                }
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.deleteLocationResponse.collect {
+                when (it) {
+                    Resource.Loading -> {
+                        hideKeyboard()
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        hideLoading()
+                        viewModel.getMyLocations()
                     }
                     is Resource.Failure -> {
                         hideLoading()
@@ -69,13 +91,18 @@ class MyLocationsFragment : BaseFragment<FragmentMyLocationBinding>(), Locations
 
 
     override fun openEdit(item: LocationsData) {
-
+        viewModel.addLocationUiState.prepareRequestForEdit(item)
+        toAddPlace()
     }
 
     override fun deleteLocation(locationId: Int) {
+        val request = AddLocationRequest()
+        request.location_id = locationId.toString()
+        viewModel.deleteLocation(request)
     }
 
     override fun toAddPlace() {
+        navigateSafe(MyLocationsFragmentDirections.actionMyLocationsFragmentToAddLocationFragment())
     }
 
     override fun saveAsDefault(item: LocationsData) {

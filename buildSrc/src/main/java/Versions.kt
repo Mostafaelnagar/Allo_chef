@@ -72,5 +72,6 @@ object Versions {
 
     const val AdvancedWebView = "v3.2.1"
     const val cardSlider = "1.0.1"
+    const val file_picker = "1.0.4"
 
 }

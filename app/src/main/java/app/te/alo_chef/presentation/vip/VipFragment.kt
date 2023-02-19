@@ -1,6 +1,6 @@
 package app.te.alo_chef.presentation.vip
 
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -12,6 +12,7 @@ import app.te.alo_chef.presentation.auth.AuthActivity
 import app.te.alo_chef.presentation.base.BaseFragment
 import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.Constants
+import app.te.alo_chef.presentation.cart.view_model.CartViewModel
 import app.te.alo_chef.presentation.home.eventListener.HomeEventListener
 import app.te.alo_chef.presentation.home.ui_state.MealsUiState
 import app.te.alo_chef.presentation.home.viewModels.HomeViewModel
@@ -21,8 +22,9 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
-    private val viewModel: HomeViewModel by activityViewModels()
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var vipMealsAdapter: VipMealsAdapter
+    private val cartViewModel: CartViewModel by viewModels()
 
     override
     fun getLayoutId() = R.layout.fragment_vip
@@ -32,6 +34,7 @@ class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
         binding.event = this
         vipMealsAdapter = VipMealsAdapter()
         binding.rcProducts.adapter = vipMealsAdapter
+        cartViewModel.getCartCount()
 
     }
 
@@ -68,6 +71,11 @@ class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
                 }
             }
 
+        }
+        lifecycleScope.launchWhenResumed {
+            cartViewModel.cartCountFlow.collect {
+                binding.cartCount = it
+            }
         }
     }
 
@@ -106,7 +114,7 @@ class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
 
     override fun addToCart(homeMealsData: MealsData, addToCart: Int) {
         if (addToCart == Constants.ADD_TO_CART_KEY)
-            viewModel.addToCart(homeMealsData)
+            cartViewModel.addToCart(homeMealsData)
 
     }
 

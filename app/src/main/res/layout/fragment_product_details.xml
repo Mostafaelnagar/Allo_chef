@@ -9,6 +9,9 @@
             name="uiState"
             type="app.te.alo_chef.presentation.product_details.ui_state.OrderDetailsUiState" />
 
+        <variable
+            name="cartCount"
+            type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,13 +54,13 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:elevation="5dp"
                     android:padding="2dp"
+                    app:badge_value="@{cartCount}"
                     app:ibv_badgeColor="@color/white"
                     app:ibv_badgeLimitValue="false"
                     app:ibv_badgePosition="center"
                     app:ibv_badgeTextColor="@color/colorPrimaryDark"
                     app:ibv_badgeTextSize="@dimen/_8ssp"
                     app:ibv_badgeTextStyle="bold"
-                    app:ibv_badgeValue="10"
                     app:ibv_fixedBadgeRadius="8dp"
                     app:ibv_showCounter="true"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -124,11 +127,11 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginTop="@dimen/_6sdp"
                         android:layout_marginEnd="@dimen/_18sdp"
-                        android:onClick="@{()->uiState.changeLike()}"
+                        android:onClick="@{()->uiState.changeLikeDetails()}"
                         android:src="@drawable/ic_favorite_border"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_home_title"
-                        app:load_drawable="@{uiState.likeIcon}" />
+                        app:load_drawable="@{uiState.iconLike}" />
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/ic_more_share"
@@ -476,6 +479,7 @@
             android:layout_marginStart="@dimen/_4sdp"
             android:layout_marginBottom="@dimen/_4sdp"
             android:background="@drawable/badge"
+            android:onClick="@{()->uiState.minus()}"
             android:padding="@dimen/_10sdp"
             android:src="@drawable/ic_remove_circle"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -487,7 +491,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
-            android:text="10"
+            android:text="@{String.valueOf(uiState.count)}"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/remove"
@@ -501,6 +505,7 @@
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_4sdp"
             android:background="@drawable/badge"
+            android:onClick="@{()->uiState.plus()}"
             android:padding="@dimen/_10sdp"
             android:src="@drawable/ic_add_circle"
             app:layout_constraintBottom_toBottomOf="parent"

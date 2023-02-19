@@ -22,6 +22,7 @@ import app.te.alo_chef.data.meal_details.dto.IngredientsItem
 import app.te.alo_chef.data.meal_details.dto.MealImages
 import app.te.alo_chef.presentation.auth.AuthActivity
 import app.te.alo_chef.presentation.base.utils.Constants
+import app.te.alo_chef.presentation.cart.view_model.CartViewModel
 import app.te.alo_chef.presentation.home.adapters.ProductsAdapter
 import app.te.alo_chef.presentation.home.ui_state.MealsUiState
 import app.te.alo_chef.presentation.home.viewModels.HomeViewModel
@@ -39,6 +40,7 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
     ProductDetailsListener {
     private val viewModel: MealDetailsViewModel by viewModels()
     private val homeViewModel: HomeViewModel by viewModels()
+    private val cartViewModel: CartViewModel by viewModels()
     private var handler: Handler = Handler(Looper.myLooper()!!)
     private lateinit var adapter: ImageAdapter
     private lateinit var productsAdapter: ProductsAdapter
@@ -54,6 +56,7 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
         binding.rcIngredients.adapter = ingredientsAdapter
         binding.rcSimilar.adapter = productsAdapter
         viewModel.getDetails()
+        cartViewModel.getCartCount()
     }
 
     override
@@ -88,6 +91,12 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
             }
 
         }
+        lifecycleScope.launchWhenResumed {
+            cartViewModel.cartCountFlow.collect {
+                binding.cartCount = it
+            }
+        }
+
     }
 
     private fun updateIngredients(ingredients: List<IngredientsItem>) {
@@ -165,7 +174,7 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
     override fun addToCart(homeMealsData: MealsData, addToCart: Int) {
         if (homeViewModel.isLogged.value) {
             if (addToCart == Constants.ADD_TO_CART_KEY)
-                homeViewModel.addToCart(homeMealsData)
+                cartViewModel.addToCart(homeMealsData)
             else
                 openSubscriptions()
         }

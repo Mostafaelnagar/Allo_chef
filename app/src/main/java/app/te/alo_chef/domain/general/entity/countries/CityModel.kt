@@ -5,14 +5,13 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 data class CityModel(
+    @SerializedName("regions")
+    var regions: List<RegionsItem> = emptyList(),
 
-  @SerializedName("image")
-  var image: String = "",
+    @SerializedName("name")
+    val name: String = "",
 
-  @SerializedName("name")
-  val name: String = "",
-
-  @SerializedName("id")
-  val id: Int = 0
+    @SerializedName("id")
+    val id: Int = 0
 )
 

@@ -12,6 +12,11 @@
         <variable
             name="eventListener"
             type="app.te.alo_chef.presentation.account.AccountEventListener" />
+
+        <variable
+            name="region"
+            type="String" />
+
     </data>
 
 
@@ -43,6 +48,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{uiState.user.image}"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                 app:strokeColor="@color/colorLight"
                 app:strokeWidth="4dp" />
@@ -109,6 +115,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:onClick="@{()->eventListener.openMyLocations()}"
+                android:text="@{region}"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/white"

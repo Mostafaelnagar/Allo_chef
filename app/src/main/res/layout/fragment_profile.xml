@@ -15,159 +15,356 @@
             type="app.te.alo_chef.domain.profile.entity.UpdateProfileRequest" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/corner_view_gradient">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_200sdp"
+            android:background="@drawable/corner_view_auth"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_name"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:layout_marginEnd="@dimen/_35sdp"
-                android:hint="@string/first_name"
-                android:textColorHint="@color/colorGray"
-                app:boxBackgroundColor="@color/colorLight"
-                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
-                app:boxCornerRadiusBottomStart="@dimen/_30sdp"
-                app:boxCornerRadiusTopEnd="@dimen/_30sdp"
-                app:boxCornerRadiusTopStart="@dimen/_30sdp"
-                app:boxStrokeColor="@color/colorLight"
-                app:error="@{request.validation.nameError.equals(Constants.EMPTY)?@string/empty_warning:``}"
-                app:errorEnabled="@{request.validation.nameError==null?false:true}"
-                app:helperTextTextColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconDrawable="@drawable/ic_user"
-                app:startIconTint="@color/colorGray">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_profile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:text="@string/profile"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="@id/card_person_info"
+                    app:layout_constraintStart_toEndOf="@+id/ic_back"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:onClick="@{()-> eventListener.back()}"
+                    android:src="@drawable/ic_arrow_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_person_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="@={request.name}"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/colorGray" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_margin="@dimen/_12sdp"
+                    android:background="@drawable/corner_view_white"
+                    android:elevation="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_profile">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_phone"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_35sdp"
-                android:hint="@string/phone_hint"
-                android:textColorHint="@color/colorGray"
-                app:boxBackgroundColor="@color/colorLight"
-                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
-                app:boxCornerRadiusBottomStart="@dimen/_30sdp"
-                app:boxCornerRadiusTopEnd="@dimen/_30sdp"
-                app:boxCornerRadiusTopStart="@dimen/_30sdp"
-                app:boxStrokeColor="@color/colorLight"
-                app:error="@{request.validation.phoneError.equals(Constants.EMPTY)?@string/empty_warning:``}"
-                app:errorEnabled="@{request.validation.phoneError==null?false:true}"
-                app:helperTextTextColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/input_name"
-                app:startIconDrawable="@drawable/ic_user"
-                app:startIconTint="@color/colorGray">
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/member_profile"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:onClick="@{()->eventListener.pickImage()}"
+                        android:padding="6dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/splash"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:loadImage="@{request.userImage}"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                        app:strokeColor="@color/colorLight"
+                        app:strokeWidth="4dp" />
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:digits="0123456789"
-                    android:inputType="phone"
-                    android:text="@={request.phone}"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/colorGray" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:onClick="@{()->eventListener.pickImage()}"
+                        android:src="@drawable/ic_edit_profile"
+                        app:layout_constraintEnd_toEndOf="@id/member_profile"
+                        app:layout_constraintTop_toTopOf="@id/member_profile" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_city"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_35sdp"
-                android:hint="@string/country_hint"
-                android:textAlignment="viewEnd"
-                android:textColorHint="@color/colorGray"
-                app:boxBackgroundColor="@color/colorLight"
-                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
-                app:boxCornerRadiusBottomStart="@dimen/_30sdp"
-                app:boxCornerRadiusTopEnd="@dimen/_30sdp"
-                app:boxCornerRadiusTopStart="@dimen/_30sdp"
-                app:boxStrokeColor="@color/colorLight"
-                app:endIconDrawable="@drawable/ic_arrow_down"
-                app:endIconMode="custom"
-                app:error="@{request.validation.cityError.equals(Constants.EMPTY)?@string/empty_warning:``}"
-                app:errorEnabled="@{request.validation.cityError==null?false:true}"
-                app:helperTextTextColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/input_phone"
-                app:startIconDrawable="@drawable/ic_password"
-                app:startIconTint="@color/colorGray">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_name"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_14sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:layout_marginEnd="@dimen/_14sdp"
+                        android:hint="@string/name_hint"
+                        app:error="@{request.validation.nameError.equals(Constants.EMPTY)?@string/empty_warning:``}"
+                        app:errorEnabled="@{request.validation.nameError==null?false:true}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/member_profile"
+                        app:startIconDrawable="@drawable/ic_user">
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:inputType="text"
-                    android:onClick="@{()-> eventListener.showCities()}"
-                    android:text="@={request.cityName}"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/colorGray" />
-            </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:text="@={request.name}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/overlayBackground"
+                            android:textDirection="ltr" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/appCompatButtonNext"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_50sdp"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:layout_marginEnd="@dimen/_50sdp"
-                android:onClick="@{()-> eventListener.updateProfile()}"
-                android:padding="@dimen/_8sdp"
-                android:text="@string/save"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/colorPrimaryDark"
-                app:cornerRadius="@dimen/_25sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_city" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_register_email"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_14sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:layout_marginEnd="@dimen/_14sdp"
+                        android:hint="@string/email"
+                        app:error="@{request.validation.emailError.equals(Constants.EMPTY)?@string/empty_warning:``}"
+                        app:errorEnabled="@{request.validation.emailError==null?false:true}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/input_name"
+                        app:startIconDrawable="@drawable/ic_email">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/forget_password"
-                style="@style/TextBoldFont"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:onClick="@{()-> eventListener.changePassword()}"
-                android:text="@string/change_password"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatButtonNext" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textEmailAddress"
+                            android:text="@={request.email}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/overlayBackground" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_phone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_14sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:layout_marginEnd="@dimen/_14sdp"
+                        android:hint="@string/phone_hint"
+                        app:error="@{request.validation.phoneError.equals(Constants.EMPTY)?@string/empty_warning:``}"
+                        app:errorEnabled="@{request.validation.phoneError==null?false:true}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/input_register_email"
+                        app:startIconDrawable="@drawable/ic_phone">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="phone"
+                            android:text="@={request.phone}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/overlayBackground" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_password"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_14sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:layout_marginEnd="@dimen/_14sdp"
+                        android:hint="@string/password"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/input_phone"
+                        app:passwordToggleEnabled="true"
+                        app:startIconDrawable="@drawable/ic_password">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:text="@={request.password}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/overlayBackground" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_14sdp"
+                        android:background="@drawable/corner_view_primary_dark"
+                        android:onClick="@{()-> eventListener.updateProfile()}"
+                        android:text="@string/save"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/input_password" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!--        <com.google.android.material.textfield.TextInputLayout-->
+        <!--            android:id="@+id/input_name"-->
+        <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="@dimen/_35sdp"-->
+        <!--            android:layout_marginTop="@dimen/_16sdp"-->
+        <!--            android:layout_marginEnd="@dimen/_35sdp"-->
+        <!--            android:hint="@string/first_name"-->
+        <!--            android:textColorHint="@color/colorGray"-->
+        <!--            app:boxBackgroundColor="@color/colorLight"-->
+        <!--            app:boxCornerRadiusBottomEnd="@dimen/_30sdp"-->
+        <!--            app:boxCornerRadiusBottomStart="@dimen/_30sdp"-->
+        <!--            app:boxCornerRadiusTopEnd="@dimen/_30sdp"-->
+        <!--            app:boxCornerRadiusTopStart="@dimen/_30sdp"-->
+        <!--            app:boxStrokeColor="@color/colorLight"-->
+        <!--            app:error="@{request.validation.nameError.equals(Constants.EMPTY)?@string/empty_warning:``}"-->
+        <!--            app:errorEnabled="@{request.validation.nameError==null?false:true}"-->
+        <!--            app:helperTextTextColor="@color/black"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:startIconDrawable="@drawable/ic_user"-->
+        <!--            app:startIconTint="@color/colorGray">-->
+
+        <!--            <androidx.appcompat.widget.AppCompatEditText-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:inputType="text"-->
+        <!--                android:text="@={request.name}"-->
+        <!--                android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+        <!--                android:textColor="@color/black"-->
+        <!--                android:textColorHint="@color/colorGray" />-->
+        <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+        <!--        <com.google.android.material.textfield.TextInputLayout-->
+        <!--            android:id="@+id/input_phone"-->
+        <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="@dimen/_35sdp"-->
+        <!--            android:layout_marginTop="@dimen/_8sdp"-->
+        <!--            android:layout_marginEnd="@dimen/_35sdp"-->
+        <!--            android:hint="@string/phone_hint"-->
+        <!--            android:textColorHint="@color/colorGray"-->
+        <!--            app:boxBackgroundColor="@color/colorLight"-->
+        <!--            app:boxCornerRadiusBottomEnd="@dimen/_30sdp"-->
+        <!--            app:boxCornerRadiusBottomStart="@dimen/_30sdp"-->
+        <!--            app:boxCornerRadiusTopEnd="@dimen/_30sdp"-->
+        <!--            app:boxCornerRadiusTopStart="@dimen/_30sdp"-->
+        <!--            app:boxStrokeColor="@color/colorLight"-->
+        <!--            app:error="@{request.validation.phoneError.equals(Constants.EMPTY)?@string/empty_warning:``}"-->
+        <!--            app:errorEnabled="@{request.validation.phoneError==null?false:true}"-->
+        <!--            app:helperTextTextColor="@color/black"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/input_name"-->
+        <!--            app:startIconDrawable="@drawable/ic_user"-->
+        <!--            app:startIconTint="@color/colorGray">-->
+
+        <!--            <androidx.appcompat.widget.AppCompatEditText-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:digits="0123456789"-->
+        <!--                android:inputType="phone"-->
+        <!--                android:text="@={request.phone}"-->
+        <!--                android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+        <!--                android:textColor="@color/black"-->
+        <!--                android:textColorHint="@color/colorGray" />-->
+        <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+        <!--        <com.google.android.material.textfield.TextInputLayout-->
+        <!--            android:id="@+id/input_city"-->
+        <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="@dimen/_35sdp"-->
+        <!--            android:layout_marginTop="@dimen/_8sdp"-->
+        <!--            android:layout_marginEnd="@dimen/_35sdp"-->
+        <!--            android:hint="@string/country_hint"-->
+        <!--            android:textAlignment="viewEnd"-->
+        <!--            android:textColorHint="@color/colorGray"-->
+        <!--            app:boxBackgroundColor="@color/colorLight"-->
+        <!--            app:boxCornerRadiusBottomEnd="@dimen/_30sdp"-->
+        <!--            app:boxCornerRadiusBottomStart="@dimen/_30sdp"-->
+        <!--            app:boxCornerRadiusTopEnd="@dimen/_30sdp"-->
+        <!--            app:boxCornerRadiusTopStart="@dimen/_30sdp"-->
+        <!--            app:boxStrokeColor="@color/colorLight"-->
+        <!--            app:endIconDrawable="@drawable/ic_arrow_down"-->
+        <!--            app:endIconMode="custom"-->
+        <!--            app:error="@{request.validation.cityError.equals(Constants.EMPTY)?@string/empty_warning:``}"-->
+        <!--            app:errorEnabled="@{request.validation.cityError==null?false:true}"-->
+        <!--            app:helperTextTextColor="@color/black"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/input_phone"-->
+        <!--            app:startIconDrawable="@drawable/ic_password"-->
+        <!--            app:startIconTint="@color/colorGray">-->
+
+        <!--            <androidx.appcompat.widget.AppCompatEditText-->
+        <!--                android:id="@+id/city"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:focusable="false"-->
+        <!--                android:inputType="text"-->
+        <!--                android:onClick="@{()-> eventListener.showCities()}"-->
+        <!--                android:text="@={request.cityName}"-->
+        <!--                android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+        <!--                android:textColor="@color/black"-->
+        <!--                android:textColorHint="@color/colorGray" />-->
+        <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+        <!--        <com.google.android.material.button.MaterialButton-->
+        <!--            android:id="@+id/appCompatButtonNext"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="@dimen/_50sdp"-->
+        <!--            android:layout_marginTop="@dimen/_16sdp"-->
+        <!--            android:layout_marginEnd="@dimen/_50sdp"-->
+        <!--            android:onClick="@{()-> eventListener.updateProfile()}"-->
+        <!--            android:padding="@dimen/_8sdp"-->
+        <!--            android:text="@string/save"-->
+        <!--            android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            app:backgroundTint="@color/colorPrimaryDark"-->
+        <!--            app:cornerRadius="@dimen/_25sdp"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/input_city" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/forget_password"-->
+        <!--            style="@style/TextBoldFont"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/_10sdp"-->
+        <!--            android:onClick="@{()-> eventListener.changePassword()}"-->
+        <!--            android:text="@string/change_password"-->
+        <!--            android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/appCompatButtonNext" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
