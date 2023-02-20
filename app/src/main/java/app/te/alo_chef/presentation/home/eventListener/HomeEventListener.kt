@@ -25,4 +25,7 @@ interface HomeEventListener : BaseEventListener {
     fun openSearch() {
         return
     }
+    fun openCart() {
+        return
+    }
 }

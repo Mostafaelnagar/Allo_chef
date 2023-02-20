@@ -6,8 +6,8 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class UpdateQuantityCartUseCase @Inject constructor(private val cartRepository: CartRepository) {
-    suspend fun updateQuantityCart(dispatcher: CoroutineDispatcher, cartId: Int, quantity: Int) =
+    suspend fun updateQuantityCart(dispatcher: CoroutineDispatcher, productId: Int, quantity: Int) =
         withContext(dispatcher) {
-            cartRepository.updateQuantityCart(cartId, quantity)
+            cartRepository.updateQuantityCart(productId, quantity)
         }
 }

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="uiState"
+            type="app.te.alo_chef.presentation.cart.ui_state.ItemCartUiState" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cart_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/item_detail_order_img"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:padding="@dimen/_4sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/splash"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{uiState.mealCart.image}"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_detail_order_name"
+            style="@style/TextMediumFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:text="@{uiState.mealCart.name}"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/colordark"
+            app:layout_constraintEnd_toStartOf="@id/item_edit"
+            app:layout_constraintStart_toEndOf="@id/item_detail_order_img"
+            app:layout_constraintTop_toTopOf="@id/item_detail_order_img"
+            tools:text="Chilled Aussie Beaf Mince" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:src="@drawable/ic_close"
+            android:onClick="@{()-> uiState.deleteItem()}"
+            app:layout_constraintBottom_toBottomOf="@id/item_detail_order_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/item_detail_order_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_detail_order_desc"
+            style="@style/TextMediumFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{uiState.mealCart.description}"
+            android:textAlignment="viewStart"
+            android:textColor="@color/medium_color"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_detail_order_img"
+            app:layout_constraintTop_toBottomOf="@id/item_detail_order_name"
+            tools:text="Chilled Aussie Beaf Mince" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_detail_order_price"
+            style="@style/TextMediumFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:text="@{uiState.itemPrice(context)}"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/flow_actions"
+            app:layout_constraintTop_toBottomOf="@id/item_detail_order_desc"
+            tools:text="300 EGP" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/flow_actions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toStartOf="@+id/item_detail_order_price"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_detail_order_img"
+            app:layout_constraintTop_toBottomOf="@+id/item_detail_order_desc">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:onClick="@{()->uiState.minus()}"
+                    android:src="@drawable/ic_remove_circle" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/item_number"
+                    style="@style/TextMediumFont"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:text="@{String.valueOf(uiState.itemCount)}"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/medium_color"
+                    tools:text="3" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:onClick="@{()->uiState.plus()}"
+                    android:src="@drawable/ic_add_circle" />
+
+                <androidx.constraintlayout.helper.widget.Flow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="ic_plus,item_number,ic_minus"
+                    app:flow_horizontalGap="@dimen/_4sdp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/br_detail_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="item_detail_order_img,item_detail_order_price,flow_actions" />
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/line_color_op"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/br_detail_order" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

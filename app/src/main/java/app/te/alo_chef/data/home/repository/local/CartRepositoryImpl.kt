@@ -1,19 +1,28 @@
 package app.te.alo_chef.data.home.repository.local
 
 import app.te.alo_chef.data.cart.CartDataSource
+import app.te.alo_chef.data.local.preferences.AppPreferences
 import app.te.alo_chef.domain.cart.entity.MealCart
 import app.te.alo_chef.domain.cart.repository.CartRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class CartRepositoryImpl @Inject constructor(private val cartDataSource: CartDataSource) :
+class CartRepositoryImpl @Inject constructor(
+    private val cartDataSource: CartDataSource
+) :
     CartRepository {
 
     override fun getCart(): Flow<List<MealCart>> =
         cartDataSource.getCart()
 
+    override fun getCartItemsTotal(): Flow<String> =
+        cartDataSource.getCartItemsTotal()
+
     override fun getCartCount(): Flow<Int> =
         cartDataSource.getCartCount()
+
+    override fun getDeliveryDates(): Flow<List<String>> =
+        cartDataSource.getDeliveryDates()
 
 
     override suspend fun addToCart(cart: MealCart) {

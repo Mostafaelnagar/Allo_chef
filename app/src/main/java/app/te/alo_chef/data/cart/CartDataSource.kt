@@ -9,6 +9,10 @@ class CartDataSource @Inject constructor(private val cartDao: CartDao) {
 
     fun getCart() = cartDao.getProducts()
 
+    fun getDeliveryDates() = cartDao.getDeliveryDates()
+
+    fun getCartItemsTotal() = cartDao.getCartTotal()
+
     suspend fun addToCart(meal: MealCart) = cartDao.addProduct(meal)
 
     suspend fun deleteItem(cartId: Int) = cartDao.deleteItem(cartId)

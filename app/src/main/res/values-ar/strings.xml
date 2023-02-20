@@ -163,6 +163,18 @@
     <string name="tab_location">إضغط لاختيار الموقع</string>
     <string name="register_city_hint">المدينة</string>
     <string name="register_region_hint">المنطقة</string>
+    <string name="add_promo">إضافة خصم</string>
+    <string name="delivery_time">وقت التسليم او الوصول</string>
+    <string name="choose_payment">اختر طريقة الدفع</string>
+    <string name="sub_total">مجموع الوجبات</string>
+    <string name="discount">خصم</string>
+    <string name="delivery_dates">إيام التوصيل</string>
+    <string name="cart_total">المجموع</string>
+    <string name="change_location">تغيير</string>
+    <string name="total_delivery_fee">التكلفة الاجمالية للتوصيل</string>
+    <string name="pickup_your_location">اختار عنوان التوصيل</string>
+    <string name="finish_order">إرسال الطلب</string>
+    <string name="change_delivery_time">تغيير وقت التوصيل</string>
 
 
 </resources>

@@ -170,5 +170,17 @@
     <string name="tab_location">Tab to get your location</string>
     <string name="register_city_hint">City</string>
     <string name="register_region_hint">Region</string>
+    <string name="add_promo">Apply Coupon</string>
+    <string name="delivery_time">Delivery time</string>
+    <string name="choose_payment">Choose your payment</string>
+    <string name="discount">Discount</string>
+    <string name="sub_total">Item Total</string>
+    <string name="delivery_dates">Delivery dates</string>
+    <string name="cart_total">Total</string>
+    <string name="change_location">Change</string>
+    <string name="total_delivery_fee">Total delivery fees</string>
+    <string name="pickup_your_location">Pick up your location</string>
+    <string name="finish_order">Finish Order</string>
+    <string name="change_delivery_time">Change delivery time</string>
 
 </resources>

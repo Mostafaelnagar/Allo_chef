@@ -7,7 +7,11 @@ import kotlinx.coroutines.flow.Flow
 interface CartRepository {
     fun getCart(): Flow<List<MealCart>>
 
+    fun getCartItemsTotal(): Flow<String>
+
     fun getCartCount(): Flow<Int>
+
+    fun getDeliveryDates(): Flow<List<String>>
 
     suspend fun addToCart(cart: MealCart)
 

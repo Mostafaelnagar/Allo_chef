@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import app.te.alo_chef.R
 import app.te.alo_chef.data.home.data_source.dto.HomeDaysData
 import app.te.alo_chef.data.home.data_source.dto.MealsData
@@ -161,4 +162,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
         navigateSafe(HomeFragmentDirections.actionHomeFragmentToMealsFilterDialog())
     }
 
+    override fun openCart() {
+        findNavController().navigate(R.id.openCart)
+    }
 }

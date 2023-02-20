@@ -9,6 +9,7 @@ message DefaultLocation{
   string regionName = 4;
   string lat = 5;
   string lng = 6;
+  float delivery = 7;
 
 
 }

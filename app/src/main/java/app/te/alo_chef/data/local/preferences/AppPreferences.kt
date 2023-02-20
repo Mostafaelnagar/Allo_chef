@@ -136,6 +136,7 @@ class AppPreferences @Inject constructor(private val context: Context) {
                 .setRegionName(location.regionName)
                 .setLat(location.lat)
                 .setLng(location.lng)
+                .setDelivery(location.delivery.toFloat())
                 .build()
         }
     }
