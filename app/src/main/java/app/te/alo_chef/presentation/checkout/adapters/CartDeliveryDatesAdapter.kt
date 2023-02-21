@@ -1,4 +1,4 @@
-package app.te.alo_chef.presentation.cart.adapters
+package app.te.alo_chef.presentation.checkout.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import app.te.alo_chef.R
 import app.te.alo_chef.databinding.ItemDeliveryBinding
 import app.te.alo_chef.presentation.cart.listener.CartListener
+import app.te.alo_chef.presentation.checkout.listener.CheckoutListener
 
-class CartDeliveryDatesAdapter(private val cartListener: CartListener) :
+class CartDeliveryDatesAdapter(private val checkoutListener: CheckoutListener) :
     RecyclerView.Adapter<CartDeliveryDatesAdapter.ViewHolder>() {
     private val differCallback = object : DiffUtil.ItemCallback<String>() {
         override fun areItemsTheSame(
@@ -37,7 +38,7 @@ class CartDeliveryDatesAdapter(private val cartListener: CartListener) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (position == 0)
-            cartListener.callSavedLocation(differ.currentList.size)
+            checkoutListener.callSavedLocation(differ.currentList.size)
         val data = differ.currentList[position]
         holder.setModel(data)
     }

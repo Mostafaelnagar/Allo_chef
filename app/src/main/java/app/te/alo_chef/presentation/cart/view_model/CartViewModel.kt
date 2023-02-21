@@ -31,6 +31,9 @@ class CartViewModel @Inject constructor(
     private val _deliveryFeeFlow =
         MutableStateFlow(Pair("", 0f))
     val deliveryFeeFlow = _deliveryFeeFlow
+    private val _walletPointFlow =
+        MutableStateFlow(Pair(0L, 0f))
+    val walletPointFlow = _walletPointFlow
 
     private val _cartItemsTotalFlow =
         MutableStateFlow("0.0")
@@ -119,6 +122,13 @@ class CartViewModel @Inject constructor(
         viewModelScope.launch {
             userLocalUseCase.getSavedLocationFlow().collect {
                 _deliveryFeeFlow.value = Pair(first = it.regionName, second = it.delivery)
+            }
+        }
+    }
+    fun getWalletAndPoints() {
+        viewModelScope.launch {
+            userLocalUseCase.invoke().collect {
+                _walletPointFlow.value = Pair(first = it.points, second = it.wallet)
             }
         }
     }

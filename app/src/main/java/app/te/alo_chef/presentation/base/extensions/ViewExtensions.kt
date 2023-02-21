@@ -28,6 +28,7 @@ import coil.transform.RoundedCornersTransformation
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import app.te.alo_chef.R
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -326,7 +327,7 @@ fun Long.toStringMatch(): String {
 }
 
 @BindingAdapter("app:stroke_color")
-fun ShapeableImageView.setupStoke(colorRes: Int) {
+fun MaterialButton.setupStoke(colorRes: Int) {
     this.setStrokeColorResource(colorRes)
     this.setStrokeWidthResource(R.dimen._1sdp)
 }

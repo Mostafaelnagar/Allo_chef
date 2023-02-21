@@ -9,5 +9,50 @@
         android:id="@+id/cartFragment"
         android:name="app.te.alo_chef.presentation.cart.CartFragment"
         android:label="@string/cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment"
+            app:enterAnim="@anim/anim_slide_in_right"
+            app:exitAnim="@anim/anim_slide_out_left"
+            app:popEnterAnim="@anim/anim_slide_in_left"
+            app:popExitAnim="@anim/anim_slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="app.te.alo_chef.presentation.checkout.CheckoutFragment"
+        android:label="@string/checkout"
+        app:enterAnim="@anim/anim_slide_in_right"
+        app:exitAnim="@anim/anim_slide_out_left"
+        app:popEnterAnim="@anim/anim_slide_in_left"
+        app:popExitAnim="@anim/anim_slide_out_right"
+        tools:layout="@layout/fragment_checkout">
+        <argument
+            android:name="cart_total"
+            app:argType="float" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_promoCodeDialog"
+            app:destination="@id/promoCodeDialog"
+            app:enterAnim="@anim/anim_slide_in_right"
+            app:exitAnim="@anim/anim_slide_out_left"
+            app:popEnterAnim="@anim/anim_slide_in_left"
+            app:popExitAnim="@anim/anim_slide_out_right" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_chooseDeliveryTimeFragment"
+            app:destination="@id/chooseDeliveryTimeFragment"
+            app:enterAnim="@anim/anim_slide_in_right"
+            app:exitAnim="@anim/anim_slide_out_left"
+            app:popEnterAnim="@anim/anim_slide_in_left"
+            app:popExitAnim="@anim/anim_slide_out_right" />
+    </fragment>
+    <dialog
+        android:id="@+id/promoCodeDialog"
+        android:name="app.te.alo_chef.presentation.checkout.dialogs.PromoCodeDialog"
+        tools:layout="@layout/promo_code_dialog" />
+    <fragment
+        android:id="@+id/chooseDeliveryTimeFragment"
+        android:name="app.te.alo_chef.presentation.checkout.ChooseDeliveryTimeFragment"
+        android:label="@string/delivey_time_title"
+        tools:layout="@layout/fragment_choose_delivery" />
+
 </navigation>

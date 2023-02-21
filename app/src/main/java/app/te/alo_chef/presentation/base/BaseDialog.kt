@@ -16,10 +16,6 @@ abstract class BaseDialog<VB : ViewDataBinding> : DialogFragment() {
     private var mRootView: View? = null
     private var hasInitializedRootView = false
 
-//  override
-//  fun getTheme(): Int {
-//    return style.CustomDialogAnimation
-//  }
 
     override
     fun onCreateView(

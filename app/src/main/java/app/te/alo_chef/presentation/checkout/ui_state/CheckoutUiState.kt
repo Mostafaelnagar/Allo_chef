@@ -1,4 +1,4 @@
-package app.te.alo_chef.presentation.cart.ui_state
+package app.te.alo_chef.presentation.checkout.ui_state
 
 import android.content.Context
 import android.util.Log
@@ -57,9 +57,9 @@ class CheckoutUiState(val context: Context) : BaseUiState() {
             field = value
         }
 
-    fun updateCartItemTotal(cartItemTotal: String) {
-        this.cartItemTotal = cartItemTotal.toFloat()
-        cartItemTotalText = cartItemTotal.plus(" ${context.getString(R.string.coin)}")
+    fun updateCartItemTotal(cartItemTotal: Float) {
+        this.cartItemTotal = cartItemTotal
+        cartItemTotalText = cartItemTotal.toString().plus(" ${context.getString(R.string.coin)}")
         updateTotal()
     }
 

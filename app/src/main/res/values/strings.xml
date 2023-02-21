@@ -182,5 +182,16 @@
     <string name="pickup_your_location">Pick up your location</string>
     <string name="finish_order">Finish Order</string>
     <string name="change_delivery_time">Change delivery time</string>
+    <string name="online">Online</string>
+    <string name="checkout">Check out</string>
+    <string name="coupon_Code">Coupon Code !</string>
+    <string name="apply">Apply</string>
+    <string name="promo_hint">Enter yor Coupon</string>
+    <string name="tv_choose_delivery">Stay safe &amp; enjoy online shopping></string>
+    <string name="tv_select_time">Choose time to receive your order</string>
+    <string name="tv_delivery_instruction">Enter Delivery instructions</string>
+    <string name="tv_select_time_hint">Please enter instruction in details</string>
+    <string name="confirm_times">Confirm</string>
+    <string name="delivey_time_title">choose Delivery Time</string>
 
 </resources>

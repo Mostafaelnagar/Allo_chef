@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="grand.app.moon.views.fragments.SplashFragment">
+
+    <data>
+
+        <variable
+            name="uiState"
+            type="app.te.alo_chef.presentation.checkout.ui_state.CheckoutUiState" />
+
+        <variable
+            name="event"
+            type="app.te.alo_chef.presentation.checkout.listener.CheckoutListener" />
+    </data>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/add_promo"
+                style="@style/TextMediumFont"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:drawableStart="@drawable/ic_add_promo"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawablePadding="@dimen/_8sdp"
+                android:onClick="@{()-> event.openPromoDialog()}"
+                android:text="@string/add_promo"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/v9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@color/line_color_op"
+                app:layout_constraintTop_toBottomOf="@id/add_promo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_delivery_time_text"
+                style="@style/TextMediumFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/delivery_time"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/v9" />
+
+            <RadioButton
+                android:id="@+id/tv_delivery_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:checked="true"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:onClick="@{()->event.openDeliveryTimes()}"
+                android:text="@{uiState.deliveryTime}"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colordark"
+                app:layout_constraintEnd_toEndOf="@+id/add_promo"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/tv_delivery_time_text"
+                tools:text="@string/change_delivery_time" />
+
+            <View
+                android:id="@+id/v"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@color/line_color_op"
+                app:layout_constraintEnd_toEndOf="@+id/add_promo"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/tv_delivery_time" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_delivery_text"
+                style="@style/TextMediumFont"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/delivery_dates"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="@id/add_promo"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/v" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcDelivery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="@id/add_promo"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/tv_delivery_text"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_delivery" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_payment_text"
+                style="@style/TextMediumFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/choose_payment"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/rcDelivery" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc_delivery_payment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="@id/add_promo"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/tv_payment_text"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_payment" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@color/line_color_op"
+                app:layout_constraintEnd_toEndOf="@+id/add_promo"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/rc_delivery_payment" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_total_text"
+                style="@style/TextMediumFont"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_22sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:text="@string/sub_total"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/tv_total"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/view" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_total"
+                style="@style/TextMediumFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_22sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@{uiState.cartItemTotalText}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/view"
+                tools:text="300 EGP" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_vat_text"
+                style="@style/TextMediumFont"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/discount"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/tv_total"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/tv_total_text" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_vat"
+                style="@style/TextMediumFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@{uiState.discountText}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/tv_total_text"
+                tools:text="30 EGP" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_delivery_total_text"
+                style="@style/TextMediumFont"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/total_delivery_fee"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/tv_total"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/tv_vat_text" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_delivery"
+                style="@style/TextMediumFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@{uiState.deliveryFeesText}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/tv_vat_text"
+                tools:text="30 EGP" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@color/line_color_op"
+                app:layout_constraintEnd_toEndOf="@+id/add_promo"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/tv_delivery_total_text" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_total_cart_text"
+                style="@style/TextMediumFont"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:text="@string/cart_total"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/tv_total_cart"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/view5" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_total_cart"
+                style="@style/TextRegularFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@{uiState.orderTotal}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/view5"
+                tools:text="500 EGP" />
+
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@color/line_color_op"
+                app:layout_constraintEnd_toEndOf="@+id/add_promo"
+                app:layout_constraintStart_toStartOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/tv_total_cart_text" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_selected_location"
+                style="@style/TextMediumFont"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="@dimen/_4sdp"
+                android:text="@{uiState.deliveryRegion}"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/colordark"
+                app:layout_constraintEnd_toStartOf="@id/tv_change_location"
+                app:layout_constraintStart_toStartOf="@id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/view6"
+                tools:text="New Cairo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_change_location"
+                style="@style/TextMediumFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:onClick="@{()->event.changeDeliveryAddress()}"
+                android:text="@string/change_location"
+                android:textAlignment="viewStart"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="@+id/add_promo"
+                app:layout_constraintTop_toBottomOf="@id/view6" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_cart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12sdp"
+                android:padding="@dimen/_8sdp"
+                android:text="@string/finish_order"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/colorPrimaryDark"
+                app:cornerRadius="@dimen/_8sdp"
+                app:icon="@drawable/ic_commerce"
+                app:iconGravity="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_selected_location" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

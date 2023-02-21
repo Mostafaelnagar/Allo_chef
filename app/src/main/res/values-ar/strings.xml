@@ -175,6 +175,17 @@
     <string name="pickup_your_location">اختار عنوان التوصيل</string>
     <string name="finish_order">إرسال الطلب</string>
     <string name="change_delivery_time">تغيير وقت التوصيل</string>
+    <string name="online">Online</string>
+    <string name="checkout">Check out</string>
+    <string name="coupon_Code">رمز الكوبون !</string>
+    <string name="apply">تأكيد</string>
+    <string name="promo_hint">أدخل الكوبون</string>
+    <string name="tv_choose_delivery">ابق آمنًا واستمتع بالتسوق عبر الإنترنت</string>
+    <string name="tv_select_time">اختر الوقت لاستلام طلبك</string>
+    <string name="tv_delivery_instruction">أدخل تعليمات التسليم</string>
+    <string name="tv_select_time_hint">الرجاء إدخال التعليمات في التفاصيل</string>
+    <string name="confirm_times">تأكيد</string>
+    <string name="delivey_time_title">اختر وقت التسليم</string>
 
 
 </resources>

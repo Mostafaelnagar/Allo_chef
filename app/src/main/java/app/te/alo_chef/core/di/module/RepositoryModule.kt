@@ -7,6 +7,8 @@ import app.te.alo_chef.data.auth.repository.AuthRepositoryImpl
 import app.te.alo_chef.data.general.data_source.remote.GeneralRemoteDataSource
 import app.te.alo_chef.data.general.repository.GeneralRepositoryImpl
 import app.te.alo_chef.data.cart.CartDataSource
+import app.te.alo_chef.data.checkout.data_source.CheckoutDataSource
+import app.te.alo_chef.data.checkout.repository.CheckoutRepositoryImpl
 import app.te.alo_chef.data.home.repository.local.CartRepositoryImpl
 import app.te.alo_chef.data.home.data_source.remote.HomeRemoteDataSource
 import app.te.alo_chef.data.home.repository.HomeRepositoryImpl
@@ -32,6 +34,7 @@ import app.te.alo_chef.domain.auth.repository.AuthRepository
 import app.te.alo_chef.domain.general.repository.GeneralRepository
 import app.te.alo_chef.domain.home.repository.HomeRepository
 import app.te.alo_chef.domain.cart.repository.CartRepository
+import app.te.alo_chef.domain.checkout.repository.CheckoutRepository
 import app.te.alo_chef.domain.intro.repository.IntroRepository
 import app.te.alo_chef.domain.meal_details.repository.MealDetailsRepository
 import app.te.alo_chef.domain.my_locations.repository.MyLocationsRepository
@@ -133,6 +136,12 @@ class RepositoryModule {
     fun provideMyLocationsRepository(
         remoteDataSource: MyLocationsDataSource,
         appPreferences: AppPreferences
-    ): MyLocationsRepository = MyLocationsRepositoryImpl(remoteDataSource,appPreferences)
+    ): MyLocationsRepository = MyLocationsRepositoryImpl(remoteDataSource, appPreferences)
+
+    @Provides
+    @Singleton
+    fun provideCheckoutRepository(
+        remoteDataSource: CheckoutDataSource,
+    ): CheckoutRepository = CheckoutRepositoryImpl(remoteDataSource)
 
 }
