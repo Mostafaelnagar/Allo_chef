@@ -9,6 +9,10 @@
         <variable
             name="event"
             type="app.te.alo_chef.presentation.checkout.listener.DeliveryTimesListener" />
+
+        <variable
+            name="request"
+            type="app.te.alo_chef.domain.checkout.entity.NewOrderRequest" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -57,10 +61,10 @@
                 android:layout_marginStart="@dimen/_25sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
-                tools:listitem="@layout/item_delivery_time"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/tv_delivery_time"
-                app:spanCount="2" />
+                app:spanCount="2"
+                tools:listitem="@layout/item_delivery_time" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_delivery_instruction"
@@ -96,6 +100,7 @@
                     android:layout_height="@dimen/_150sdp"
                     android:gravity="top"
                     android:inputType="textMultiLine"
+                    android:text="@={request.deliveryNote}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/overlayBackground" />

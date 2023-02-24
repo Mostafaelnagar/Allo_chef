@@ -1,7 +1,6 @@
 package app.te.alo_chef.presentation.checkout.ui_state
 
 import android.content.Context
-import android.util.Log
 import androidx.databinding.Bindable
 import app.te.alo_chef.BR
 import app.te.alo_chef.R
@@ -44,7 +43,7 @@ class CheckoutUiState(val context: Context) : BaseUiState() {
         }
 
     @Bindable
-    var deliveryTime: String =context.getString(R.string.change_delivery_time)
+    var deliveryTime: String = context.getString(R.string.change_delivery_time)
         set(value) {
             notifyPropertyChanged(BR.deliveryTime)
             field = value
@@ -70,7 +69,6 @@ class CheckoutUiState(val context: Context) : BaseUiState() {
     }
 
     fun updateDeliveryFees(deliveryFees: Float) {
-        Log.e("updateDeliveryFees", "updateDeliveryFees: " + deliveryFees)
         this.deliveryFees = deliveryFees
         deliveryFeesText = deliveryFees.toString().plus(" ${context.getString(R.string.coin)}")
         updateTotal()
@@ -81,4 +79,8 @@ class CheckoutUiState(val context: Context) : BaseUiState() {
             .plus(" ${context.getString(R.string.coin)}")
     }
 
+    fun updateDeliveryTimeText(deliverySlot: String) {
+        deliveryTime =
+            deliverySlot.ifEmpty { context.getString(R.string.change_delivery_time) }
+    }
 }

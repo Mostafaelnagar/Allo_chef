@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.te.alo_chef.data.checkout.dto.DeliveryTimes
 import app.te.alo_chef.data.checkout.dto.promo.PromoData
+import app.te.alo_chef.domain.checkout.entity.NewOrderRequest
 import app.te.alo_chef.domain.checkout.use_case.CheckPromoCodeUseCase
 import app.te.alo_chef.domain.checkout.use_case.DeliveryTimesUseCase
 import app.te.alo_chef.domain.utils.BaseResponse
@@ -20,6 +21,8 @@ class CheckoutViewModel @Inject constructor(
     private val checkPromoCodeUseCase: CheckPromoCodeUseCase,
     private val deliveryTimesUseCase: DeliveryTimesUseCase
 ) : ViewModel() {
+    val newOrderRequest = NewOrderRequest()
+
     private val _checkPromoResponse =
         MutableStateFlow<Resource<BaseResponse<PromoData>>>(Resource.Default)
     val checkPromoResponse = _checkPromoResponse

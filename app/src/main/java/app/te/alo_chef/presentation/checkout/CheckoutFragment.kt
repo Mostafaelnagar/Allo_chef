@@ -125,6 +125,10 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
         binding.rcDeliveryPayment.adapter = paymentTypesAdapter
     }
 
+    override fun onResume() {
+        super.onResume()
+        checkoutUiState.updateDeliveryTimeText(checkoutViewModel.newOrderRequest.deliveryTimeText)
+    }
     override
     fun getLayoutId() = R.layout.fragment_checkout
 

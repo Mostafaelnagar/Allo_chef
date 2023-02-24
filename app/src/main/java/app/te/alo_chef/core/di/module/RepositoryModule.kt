@@ -9,7 +9,7 @@ import app.te.alo_chef.data.general.repository.GeneralRepositoryImpl
 import app.te.alo_chef.data.cart.CartDataSource
 import app.te.alo_chef.data.checkout.data_source.CheckoutDataSource
 import app.te.alo_chef.data.checkout.repository.CheckoutRepositoryImpl
-import app.te.alo_chef.data.home.repository.local.CartRepositoryImpl
+import app.te.alo_chef.data.cart.CartRepositoryImpl
 import app.te.alo_chef.data.home.data_source.remote.HomeRemoteDataSource
 import app.te.alo_chef.data.home.repository.HomeRepositoryImpl
 import app.te.alo_chef.data.intro.data_source.IntroRemoteDataSource
@@ -82,11 +82,6 @@ class RepositoryModule {
         remoteDataSource: HomeRemoteDataSource
     ): HomeRepository = HomeRepositoryImpl(remoteDataSource)
 
-    @Provides
-    @Singleton
-    fun provideHomeLocalRepository(
-        cartDataSource: CartDataSource
-    ): CartRepository = CartRepositoryImpl(cartDataSource)
 
     @Provides
     @Singleton

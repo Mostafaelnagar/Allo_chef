@@ -6,6 +6,7 @@ import app.te.alo_chef.R
 import app.te.alo_chef.databinding.FragmentChooseDeliveryBinding
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.base.BaseFragment
+import app.te.alo_chef.presentation.base.extensions.backToPreviousScreen
 import app.te.alo_chef.presentation.base.extensions.handleApiError
 import app.te.alo_chef.presentation.base.extensions.hideKeyboard
 import app.te.alo_chef.presentation.checkout.adapters.DeliveryTimesAdapter
@@ -51,12 +52,14 @@ class ChooseDeliveryTimeFragment : BaseFragment<FragmentChooseDeliveryBinding>()
     override
     fun getLayoutId() = R.layout.fragment_choose_delivery
 
-    override fun openDeliveryTimes() {
-
-    }
-
     override fun confirmSelection() {
-
+        if (deliveryTimesAdapter.lastSelected != -1) {
+            checkoutViewModel.newOrderRequest.deliveryTime =
+                deliveryTimesAdapter.differ.currentList[deliveryTimesAdapter.lastSelected].id
+            checkoutViewModel.newOrderRequest.deliveryTimeText =
+                deliveryTimesAdapter.differ.currentList[deliveryTimesAdapter.lastSelected].getTimeSlot()
+            backToPreviousScreen()
+        }
     }
 
 }
