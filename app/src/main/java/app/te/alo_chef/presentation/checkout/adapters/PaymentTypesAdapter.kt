@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.te.alo_chef.R
 import app.te.alo_chef.databinding.ItemPaymentBinding
+import app.te.alo_chef.presentation.checkout.listener.CheckoutListener
 import app.te.alo_chef.presentation.checkout.ui_state.ItemPayment
 
-class PaymentTypesAdapter :
+class PaymentTypesAdapter(private val checkoutListener: CheckoutListener) :
     RecyclerView.Adapter<PaymentTypesAdapter.ViewHolder>() {
     var lastSelected: Int = -1
     private val differCallback = object : DiffUtil.ItemCallback<ItemPayment>() {
@@ -40,6 +41,7 @@ class PaymentTypesAdapter :
         holder.itemLayoutBinding.paymentItem.setOnClickListener {
             notifyItemChanged(lastSelected)
             lastSelected = position
+            checkoutListener.onPaymentChange(data.type)
             notifyItemChanged(lastSelected)
         }
         holder.itemLayoutBinding.tvDeliveryPayment.isChecked = lastSelected == position

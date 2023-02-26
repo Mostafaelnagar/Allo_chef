@@ -193,5 +193,7 @@
     <string name="tv_select_time_hint">Please enter instruction in details</string>
     <string name="confirm_times">Confirm</string>
     <string name="delivey_time_title">choose Delivery Time</string>
+    <string name="balance_not_enough">Your balance not enough</string>
+    <string name="payment_cancelled">Payment cancelled</string>
 
 </resources>

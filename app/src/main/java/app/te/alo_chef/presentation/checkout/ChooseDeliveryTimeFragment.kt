@@ -23,6 +23,7 @@ class ChooseDeliveryTimeFragment : BaseFragment<FragmentChooseDeliveryBinding>()
 
     override fun setBindingVariables() {
         binding.event = this
+        binding.uiState = checkoutViewModel.checkoutUiState
         binding.rcDeliveryTimes.adapter = deliveryTimesAdapter
         checkoutViewModel.getDeliveryTimes()
     }
@@ -54,10 +55,11 @@ class ChooseDeliveryTimeFragment : BaseFragment<FragmentChooseDeliveryBinding>()
 
     override fun confirmSelection() {
         if (deliveryTimesAdapter.lastSelected != -1) {
-            checkoutViewModel.newOrderRequest.deliveryTime =
+            checkoutViewModel.checkoutUiState.newOrderRequest.deliveryTime =
                 deliveryTimesAdapter.differ.currentList[deliveryTimesAdapter.lastSelected].id
-            checkoutViewModel.newOrderRequest.deliveryTimeText =
+            checkoutViewModel.checkoutUiState.newOrderRequest.deliveryTimeText =
                 deliveryTimesAdapter.differ.currentList[deliveryTimesAdapter.lastSelected].getTimeSlot()
+            checkoutViewModel.checkoutUiState.updateDeliveryTimeText()
             backToPreviousScreen()
         }
     }

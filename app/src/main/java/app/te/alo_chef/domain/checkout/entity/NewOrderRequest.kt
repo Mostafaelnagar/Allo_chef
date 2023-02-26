@@ -9,19 +9,19 @@ data class NewOrderRequest(
 
     var deliveryTimeText: String = "",
     @SerializedName("delivery_note")
-    var deliveryNote: String = "",
+    var deliveryNote: String? = null,
 
     @SerializedName("promo_id")
-    var promoId: String = "",
+    var promoId: Int? = null,
 
     @SerializedName("location_id")
-    var locationId: String = "",
+    var locationId: Int = 0,
 
     @SerializedName("total_delivery")
     var totalDelivery: String = "",
 
     @SerializedName("total_meals")
-    var totalMeals: String = "",
+    var totalMeals: Float = 0f,
 
     @SerializedName("package")
     var paymentMethod: Int = 0,

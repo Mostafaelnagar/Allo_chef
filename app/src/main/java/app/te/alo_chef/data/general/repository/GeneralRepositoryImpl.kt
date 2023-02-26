@@ -9,7 +9,7 @@ import app.te.alo_chef.domain.utils.Resource
 import javax.inject.Inject
 
 class GeneralRepositoryImpl @Inject constructor(
-    private val remoteDataSource: GeneralRemoteDataSource
+    private val remoteDataSource: GeneralRemoteDataSource,
 ) : GeneralRepository {
 
     override suspend fun getCities(): Resource<BaseResponse<List<CityModel>>> =
@@ -17,4 +17,6 @@ class GeneralRepositoryImpl @Inject constructor(
 
     override suspend fun updateFirebaseTokenRequest(updateFirebaseTokenRequest: UpdateFirebaseTokenRequest): Resource<BaseResponse<*>> =
         remoteDataSource.updateFirebaseToken(updateFirebaseTokenRequest)
+
+
 }

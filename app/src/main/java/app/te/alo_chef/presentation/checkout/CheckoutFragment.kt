@@ -1,21 +1,26 @@
 package app.te.alo_chef.presentation.checkout
 
+import android.net.Uri
+import android.os.Bundle
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.te.alo_chef.R
+import app.te.alo_chef.data.payment.dto.PaymentData
 import app.te.alo_chef.databinding.FragmentCheckoutBinding
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.base.BaseFragment
+import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.PaymentTypes
 import app.te.alo_chef.presentation.base.extensions.handleApiError
 import app.te.alo_chef.presentation.base.extensions.hideKeyboard
 import app.te.alo_chef.presentation.base.extensions.navigateSafe
+import app.te.alo_chef.presentation.base.utils.Constants
+import app.te.alo_chef.presentation.base.utils.showNoApiErrorAlert
 import app.te.alo_chef.presentation.checkout.adapters.CartDeliveryDatesAdapter
 import app.te.alo_chef.presentation.checkout.adapters.PaymentTypesAdapter
-import app.te.alo_chef.presentation.checkout.ui_state.CheckoutUiState
 import app.te.alo_chef.presentation.checkout.ui_state.ItemPayment
 import app.te.alo_chef.presentation.cart.view_model.CartViewModel
 import app.te.alo_chef.presentation.checkout.listener.CheckoutListener
@@ -26,27 +31,23 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListener {
     private val checkoutViewModel: CheckoutViewModel by activityViewModels()
-
     private val args: CheckoutFragmentArgs by navArgs()
     private var datesSize: Int = 0
-    private val viewModel: CartViewModel by viewModels()
-    private val paymentTypesAdapter = PaymentTypesAdapter()
+    private val viewModel: CartViewModel by activityViewModels()
+    private val paymentTypesAdapter = PaymentTypesAdapter(this)
     private val cartDeliveryDatesAdapter = CartDeliveryDatesAdapter(this)
-
-    private lateinit var checkoutUiState: CheckoutUiState
-
     override fun setBindingVariables() {
-        checkoutUiState = CheckoutUiState(requireActivity())
-        binding.uiState = checkoutUiState
+        binding.uiState = checkoutViewModel.checkoutUiState
         binding.event = this
         updateCartItemsTotal()
         initCartDeliveryDatesRecycler()
         viewModel.getDeliveryDates()
         viewModel.getWalletAndPoints()
+        listenToResult()
     }
 
     private fun updateCartItemsTotal() {
-        checkoutUiState.updateCartItemTotal(args.cartTotal)
+        checkoutViewModel.checkoutUiState.updateCartItemTotal(args.cartTotal)
     }
 
     private fun initCartDeliveryDatesRecycler() {
@@ -61,13 +62,13 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
         }
         lifecycleScope.launchWhenResumed {
             viewModel.deliveryFeeFlow.collect { delivery ->
-                checkoutUiState.updateDeliveryFees(delivery.second * datesSize)
-                checkoutUiState.deliveryRegion =
-                    delivery.first.ifEmpty { getString(R.string.pickup_your_location) }
+                checkoutViewModel.checkoutUiState.updateLocation(delivery, datesSize)
             }
         }
         lifecycleScope.launchWhenResumed {
             viewModel.walletPointFlow.collect { data ->
+                checkoutViewModel.checkoutUiState.totalPoints = data.first
+                checkoutViewModel.checkoutUiState.totalWallet = data.second
                 setUpPaymentTypesList(data.first, data.second)
             }
         }
@@ -80,7 +81,30 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
                     }
                     is Resource.Success -> {
                         hideLoading()
-                        checkoutUiState.updateDiscount(it.value.data.discount)
+                        checkoutViewModel.checkoutUiState.updateDiscount(it.value.data)
+                    }
+                    is Resource.Failure -> {
+                        hideLoading()
+                        handleApiError(it)
+                    }
+                    else -> {}
+                }
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            checkoutViewModel.paymentResponse.collect {
+                when (it) {
+                    Resource.Loading -> {
+                        hideKeyboard()
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        hideLoading()
+                        val response = it.value
+                        openPaymentPage(
+                            isSuccess = response.status,
+                            payment_data = response.data
+                        )
                     }
                     is Resource.Failure -> {
                         hideLoading()
@@ -96,39 +120,32 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
         val paymentList: MutableList<ItemPayment> = mutableListOf()
         paymentList.add(
             ItemPayment(
-                PaymentTypes.WALLET.ordinal,
+                PaymentTypes.WALLET.paymentType,
                 getString(R.string.tv_wallet),
                 R.drawable.ic_wallet,
-                "$wallet ${getString(R.string.coin)}",
-                ""
+                amount = "$wallet ${getString(R.string.coin)}"
             )
         )
         paymentList.add(
             ItemPayment(
-                PaymentTypes.POINTS.ordinal,
+                PaymentTypes.POINTS.paymentType,
                 getString(R.string.point),
                 R.drawable.ic_point_payment,
-                "$points ${getString(R.string.point)}",
-                ""
+                amount = "$points ${getString(R.string.point)}"
             )
         )
         paymentList.add(
             ItemPayment(
-                PaymentTypes.ONLINE.ordinal,
+                PaymentTypes.ONLINE.paymentType,
                 getString(R.string.online),
                 R.drawable.ic_online,
-                "",
-                ""
+                amount = ""
             )
         )
         paymentTypesAdapter.differ.submitList(paymentList)
         binding.rcDeliveryPayment.adapter = paymentTypesAdapter
     }
 
-    override fun onResume() {
-        super.onResume()
-        checkoutUiState.updateDeliveryTimeText(checkoutViewModel.newOrderRequest.deliveryTimeText)
-    }
     override
     fun getLayoutId() = R.layout.fragment_checkout
 
@@ -147,5 +164,47 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
 
     override fun openDeliveryTimes() {
         navigateSafe(CheckoutFragmentDirections.actionCheckoutFragmentToChooseDeliveryTimeFragment())
+    }
+
+    override fun finishOrder() {
+        checkoutViewModel.checkoutUiState.checkoutPreValidation(
+            showValidationError = { message ->
+                showNoApiErrorAlert(requireActivity(), message)
+            },
+            openPayment = {
+                checkoutViewModel.getPaymentData()
+//                openPaymentPage(PaymentData(), true)
+            },
+            finishOrder = { checkoutViewModel.submitOrder(viewModel.cartItems.value) }
+        )
+
+    }
+
+    override fun onPaymentChange(paymentId: Int) {
+        checkoutViewModel.checkoutUiState.newOrderRequest.paymentMethod = paymentId
+    }
+
+    override fun openPaymentPage(payment_data: PaymentData, isSuccess: Boolean) {
+        if (isSuccess) {
+            findNavController().navigate(
+                Uri.parse(
+                    DeepLinks.openPayment(
+                        title = getString(R.string.checkout),
+                        invoiceURL = payment_data.invoiceURL,
+                        responseURL = payment_data.responseURL,
+                    )
+                ),
+                navOptions = DeepLinks.setNavOptions()
+            )
+        }
+    }
+
+    private fun listenToResult() {
+        setFragmentResultListener(Constants.PAYMENT_SUCCESS) { _: String, bundle: Bundle ->
+            if (bundle.getBoolean(Constants.PAYMENT_SUCCESS)) {
+                checkoutViewModel.submitOrder(viewModel.cartItems.value)
+            } else
+                showNoApiErrorAlert(requireActivity(), getString(R.string.payment_cancelled))
+        }
     }
 }

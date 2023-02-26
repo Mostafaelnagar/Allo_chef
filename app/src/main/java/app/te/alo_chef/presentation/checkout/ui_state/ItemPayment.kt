@@ -6,5 +6,4 @@ data class ItemPayment(
     val name: String,
     val icon: Int,
     val amount: String,
-    val points: String
 )

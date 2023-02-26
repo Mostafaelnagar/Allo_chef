@@ -6,8 +6,10 @@ import app.te.alo_chef.data.home.data_source.dto.MealsData
 import app.te.alo_chef.domain.account.use_case.UserLocalUseCase
 import app.te.alo_chef.domain.cart.entity.MealCart
 import app.te.alo_chef.domain.cart.use_case.*
+import com.structure.base_mvvm.DefaultLocation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,7 +31,7 @@ class CartViewModel @Inject constructor(
     val cartCountFlow = _cartCountFlow
 
     private val _deliveryFeeFlow =
-        MutableStateFlow(Pair("", 0f))
+        MutableSharedFlow<DefaultLocation>()
     val deliveryFeeFlow = _deliveryFeeFlow
     private val _walletPointFlow =
         MutableStateFlow(Pair(0L, 0f))
@@ -120,11 +122,12 @@ class CartViewModel @Inject constructor(
 
     fun getDeliveryFeeFromSavedLocation() {
         viewModelScope.launch {
-            userLocalUseCase.getSavedLocationFlow().collect {
-                _deliveryFeeFlow.value = Pair(first = it.regionName, second = it.delivery)
+            userLocalUseCase.getSavedLocationFlow().collect { defaultLocation ->
+                _deliveryFeeFlow.emit(defaultLocation)
             }
         }
     }
+
     fun getWalletAndPoints() {
         viewModelScope.launch {
             userLocalUseCase.invoke().collect {

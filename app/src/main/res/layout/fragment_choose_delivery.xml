@@ -11,8 +11,9 @@
             type="app.te.alo_chef.presentation.checkout.listener.DeliveryTimesListener" />
 
         <variable
-            name="request"
-            type="app.te.alo_chef.domain.checkout.entity.NewOrderRequest" />
+            name="uiState"
+            type="app.te.alo_chef.presentation.checkout.ui_state.CheckoutUiState" />
+
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -100,7 +101,7 @@
                     android:layout_height="@dimen/_150sdp"
                     android:gravity="top"
                     android:inputType="textMultiLine"
-                    android:text="@={request.deliveryNote}"
+                    android:text="@={uiState.newOrderRequest.deliveryNote}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/overlayBackground" />

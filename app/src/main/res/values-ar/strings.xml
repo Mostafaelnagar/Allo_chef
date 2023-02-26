@@ -186,6 +186,8 @@
     <string name="tv_select_time_hint">الرجاء إدخال التعليمات في التفاصيل</string>
     <string name="confirm_times">تأكيد</string>
     <string name="delivey_time_title">اختر وقت التسليم</string>
+    <string name="balance_not_enough">رصيدك لا يكفي</string>
+    <string name="payment_cancelled">تم الغاء عملية الدفع</string>
 
 
 </resources>
