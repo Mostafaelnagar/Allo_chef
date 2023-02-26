@@ -8,6 +8,7 @@ import androidx.navigation.fragment.navArgs
 import app.te.alo_chef.R
 import app.te.alo_chef.databinding.FragmentSupportBinding
 import app.te.alo_chef.presentation.base.BaseFragment
+import app.te.alo_chef.presentation.base.extensions.decodeUrl
 import dagger.hilt.android.AndroidEntryPoint
 import im.delight.android.webview.AdvancedWebView
 
@@ -29,7 +30,7 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>(), AdvancedWebView.
         binding.webview.setListener(requireActivity(), this)
         binding.webview.setMixedContentAllowed(false)
         binding.webview.setDesktopMode(true)
-        binding.webview.loadUrl(args.url)
+        binding.webview.loadUrl(decodeUrl(args.url))
 
     }
 

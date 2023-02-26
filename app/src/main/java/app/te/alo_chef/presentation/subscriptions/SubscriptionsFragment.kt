@@ -1,16 +1,25 @@
 package app.te.alo_chef.presentation.subscriptions
 
+import android.os.Bundle
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import app.te.alo_chef.R
+import app.te.alo_chef.data.payment.dto.PaymentData
 import app.te.alo_chef.data.subscriptions.dto.SubscriptionData
 import app.te.alo_chef.databinding.FragmentSubscriptionsBinding
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.base.BaseFragment
+import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.extensions.handleApiError
 import app.te.alo_chef.presentation.base.extensions.hideKeyboard
+import app.te.alo_chef.presentation.base.extensions.navigateSafe
+import app.te.alo_chef.presentation.base.extensions.openActivityAndClearStack
+import app.te.alo_chef.presentation.base.utils.Constants
+import app.te.alo_chef.presentation.base.utils.showNoApiErrorAlert
+import app.te.alo_chef.presentation.home.HomeActivity
 import app.te.alo_chef.presentation.subscriptions.adapters.SubscriptionsAdapters
 import app.te.alo_chef.presentation.subscriptions.listener.SubscriptionsListener
 import app.te.alo_chef.presentation.subscriptions.ui_state.SubscriptionItemUiState
@@ -28,6 +37,7 @@ class SubscriptionsFragment : BaseFragment<FragmentSubscriptionsBinding>(), Subs
         viewModel.subscriptionsAdapters = SubscriptionsAdapters()
         binding.viewPager.adapter = viewModel.subscriptionsAdapters
         viewModel.getSubscriptions()
+        listenToResult()
     }
 
     override fun observeAPICall() {
@@ -55,6 +65,29 @@ class SubscriptionsFragment : BaseFragment<FragmentSubscriptionsBinding>(), Subs
             }
 
         }
+        lifecycleScope.launchWhenResumed {
+            viewModel.paymentResponse.collect {
+                when (it) {
+                    Resource.Loading -> {
+                        hideKeyboard()
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        hideLoading()
+                        val response = it.value
+                        openPaymentPage(
+                            isSuccess = response.status,
+                            payment_data = response.data
+                        )
+                    }
+                    is Resource.Failure -> {
+                        hideLoading()
+                        handleApiError(it)
+                    }
+                    else -> {}
+                }
+            }
+        }
     }
 
     private fun updateSubscriptionsAdapter(data: List<SubscriptionData>) {
@@ -65,11 +98,31 @@ class SubscriptionsFragment : BaseFragment<FragmentSubscriptionsBinding>(), Subs
         })
     }
 
+    private fun openPaymentPage(payment_data: PaymentData, isSuccess: Boolean) {
+        if (isSuccess) {
+            navigateSafe(
+                DeepLinks.openPayment(
+                    title = getString(R.string.checkout),
+                    invoiceURL = payment_data.invoiceURL,
+                    responseURL = payment_data.responseURL,
+                )
+            )
+        }
+    }
 
     override
     fun getLayoutId() = R.layout.fragment_subscriptions
 
-    override fun subscribeNow() {
+    override fun subscribeNow(subscribeAmount: Float) {
+        viewModel.getPaymentData(subscribeAmount)
+    }
 
+    private fun listenToResult() {
+        setFragmentResultListener(Constants.PAYMENT_SUCCESS) { _: String, bundle: Bundle ->
+            if (bundle.getBoolean(Constants.PAYMENT_SUCCESS)) {
+                openActivityAndClearStack(HomeActivity::class.java)
+            } else
+                showNoApiErrorAlert(requireActivity(), getString(R.string.payment_cancelled))
+        }
     }
 }

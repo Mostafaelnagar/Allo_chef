@@ -1,8 +1,11 @@
 package app.te.alo_chef.presentation.more
 
+import android.net.Uri
+import androidx.navigation.fragment.findNavController
 import app.te.alo_chef.R
 import app.te.alo_chef.databinding.FragmentMoreBinding
 import app.te.alo_chef.presentation.base.BaseFragment
+import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.Constants
 import app.te.alo_chef.presentation.base.utils.rateYourApp
@@ -25,11 +28,11 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(), MoreEventListener {
     }
 
     override fun openSupport() {
-        navigateSafe(MoreFragmentDirections.actionMoreFragmentToSupportFragment(Constants.SUPPORT))
+        navigateSafe(DeepLinks.SUPPORT_LINK.plus(encodeUrl(Constants.SUPPORT)))
     }
 
     override fun openAbout() {
-        navigateSafe(MoreFragmentDirections.actionMoreFragmentToAboutFragment())
+        navigateSafe(DeepLinks.ABOUT_LINK)
     }
 
     override fun shareApp() {
@@ -41,14 +44,14 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(), MoreEventListener {
     }
 
     override fun openTerms() {
-        navigateSafe(MoreFragmentDirections.actionMoreFragmentToTermsFragment())
+        navigateSafe(DeepLinks.TERMS_LINK)
     }
 
     override fun openContact() {
-        navigateSafe(MoreFragmentDirections.actionMoreFragmentToContactFragment())
+        navigateSafe(DeepLinks.CONTACT_LINK)
     }
 
     override fun openTesDialog() {
-        navigateSafe(MoreFragmentDirections.actionMoreFragmentToNavTes())
+        navigateSafe(DeepLinks.TES_DIALOG_LINK)
     }
 }

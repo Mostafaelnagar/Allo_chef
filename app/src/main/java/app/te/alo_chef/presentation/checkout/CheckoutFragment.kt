@@ -1,6 +1,5 @@
 package app.te.alo_chef.presentation.checkout
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
@@ -186,15 +185,12 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
 
     override fun openPaymentPage(payment_data: PaymentData, isSuccess: Boolean) {
         if (isSuccess) {
-            findNavController().navigate(
-                Uri.parse(
-                    DeepLinks.openPayment(
-                        title = getString(R.string.checkout),
-                        invoiceURL = payment_data.invoiceURL,
-                        responseURL = payment_data.responseURL,
-                    )
-                ),
-                navOptions = DeepLinks.setNavOptions()
+            navigateSafe(
+                DeepLinks.openPayment(
+                    title = getString(R.string.checkout),
+                    invoiceURL = payment_data.invoiceURL,
+                    responseURL = payment_data.responseURL,
+                )
             )
         }
     }

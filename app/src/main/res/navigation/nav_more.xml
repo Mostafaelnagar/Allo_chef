@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_more">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_more"
+    app:startDestination="@id/aboutFragment">
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="app.te.alo_chef.presentation.settings.AboutFragment"
+        tools:layout="@layout/fragment_about">
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="android-app://about.alo_chef" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="app.te.alo_chef.presentation.settings.TermsFragment"
+        tools:layout="@layout/fragment_terms">
+        <deepLink
+            android:id="@+id/deepLink3"
+            app:uri="android-app://terms.alo_chef" />
+    </fragment>
+    <fragment
+        android:id="@+id/privacyFragment"
+        android:name="app.te.alo_chef.presentation.settings.PrivacyFragment"
+        tools:layout="@layout/fragment_privacy">
+        <deepLink
+            android:id="@+id/deepLink4"
+            app:uri="android-app://privacy.alo_chef" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/contact_fragment"
+        android:name="app.te.alo_chef.presentation.contactus.ContactUsFragment"
+        android:label="@string/contact_us"
+        tools:layout="@layout/fragment_contact_us">
+        <deepLink
+            android:id="@+id/deepLink5"
+            app:uri="android-app://contact_us.alo_chef" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/supportFragment"
+        android:name="app.te.alo_chef.presentation.settings.SupportFragment"
+        android:label="@string/support"
+        tools:layout="@layout/fragment_support">
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deepLink6"
+            app:uri="android-app://support.alo_chef/{url}" />
+    </fragment>
+    <dialog
+        android:id="@+id/tesDialog"
+        android:name="app.te.alo_chef.presentation.base.custom_views.TesDialog"
+        tools:layout="@layout/layout_tes">
+        <deepLink
+            android:id="@+id/deepLink7"
+            app:uri="android-app://owner.alo_chef" />
+    </dialog>
 
 </navigation>

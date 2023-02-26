@@ -1,5 +1,6 @@
 package app.te.alo_chef.presentation.home.viewModels
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import app.te.alo_chef.data.home.data_source.dto.HomeData
 import app.te.alo_chef.data.home.data_source.dto.MealsData
@@ -68,6 +69,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun checkUserLogged() {
+        Log.e("checkUserLogged", "checkUserLogged: ")
         viewModelScope.launch {
             generalUseCases.checkLoggedInUserUseCase.invoke().collectLatest {
                 isLogged.value = it.id != 0

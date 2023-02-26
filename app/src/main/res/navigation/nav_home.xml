@@ -50,6 +50,66 @@
     </fragment>
 
 
+    <dialog
+        android:id="@+id/mealsFilterDialog"
+        android:name="app.te.alo_chef.presentation.home.dialogs.MealsFilterDialog"
+        tools:layout="@layout/filter_dialog">
+
+    </dialog>
+
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="app.te.alo_chef.presentation.product_details.ProductDetailsFragment"
+        tools:layout="@layout/fragment_product_details">
+        <argument
+            android:name="meal_id"
+            app:argType="integer" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="app.te.alo_chef.presentation.search.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/anim_slide_in_right"
+            app:exitAnim="@anim/anim_slide_out_left"
+            app:popEnterAnim="@anim/anim_slide_in_left"
+            app:popExitAnim="@anim/anim_slide_out_right" />
+    </fragment>
+
+
+    <include app:graph="@navigation/nav_checkout" />
+
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="app.te.alo_chef.presentation.web_view.PaymentFragment"
+        tools:layout="@layout/fragment_web_view">
+
+        <argument
+            android:name="title"
+            app:argType="string" />
+
+        <argument
+            android:name="invoice_url"
+            app:argType="string" />
+
+        <argument
+            android:name="response_url"
+            app:argType="string" />
+
+        <deepLink
+            android:id="@+id/deepLink"
+            app:mimeType="text/html"
+            app:uri="android-app://payment.alo_chef/{invoice_url}/{response_url}/{title}" />
+    </fragment>
+
     <fragment
         android:id="@+id/accountFragment"
         android:name="app.te.alo_chef.presentation.account.AccountFragment"
@@ -106,145 +166,6 @@
             app:popExitAnim="@anim/anim_slide_out_right" />
 
     </fragment>
-    <include app:graph="@navigation/nav_auth" />
-
-    <fragment
-        android:id="@+id/moreFragment"
-        android:name="app.te.alo_chef.presentation.more.MoreFragment"
-        tools:layout="@layout/fragment_more">
-        <action
-            android:id="@+id/action_moreFragment_to_aboutFekraFragment"
-            app:destination="@id/aboutFekraFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-        <action
-            android:id="@+id/action_moreFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-        <action
-            android:id="@+id/action_moreFragment_to_termsFragment"
-            app:destination="@id/termsFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-        <action
-            android:id="@+id/action_moreFragment_to_privacyFragment"
-            app:destination="@id/privacyFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-
-        <action
-            android:id="@+id/action_moreFragment_to_contactFragment"
-            app:destination="@id/contact_fragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-        <action
-            android:id="@+id/action_moreFragment_to_nav_tes"
-            app:destination="@id/nav_tes" />
-        <action
-            android:id="@+id/action_moreFragment_to_supportFragment"
-            app:destination="@id/supportFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/aboutFragment"
-        android:name="app.te.alo_chef.presentation.settings.AboutFragment"
-        tools:layout="@layout/fragment_about" />
-
-    <fragment
-        android:id="@+id/aboutFekraFragment"
-        android:name="app.te.alo_chef.presentation.settings.AboutFekraFragment"
-        tools:layout="@layout/fragment_about_fekra" />
-    <fragment
-        android:id="@+id/termsFragment"
-        android:name="app.te.alo_chef.presentation.settings.TermsFragment"
-        tools:layout="@layout/fragment_terms" />
-    <fragment
-        android:id="@+id/privacyFragment"
-        android:name="app.te.alo_chef.presentation.settings.PrivacyFragment"
-        tools:layout="@layout/fragment_privacy" />
-
-    <fragment
-        android:id="@+id/contact_fragment"
-        android:name="app.te.alo_chef.presentation.contactus.ContactUsFragment"
-        android:label="@string/contact_us"
-        tools:layout="@layout/fragment_contact_us" />
-    <fragment
-        android:id="@+id/languageFragment"
-        android:name="app.te.alo_chef.presentation.account.LanguageFragment"
-        tools:layout="@layout/fragment_language" />
-
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="app.te.alo_chef.presentation.profile.ProfileFragment"
-        tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/action_profileFragment_to_changePasswordFragment"
-            app:destination="@id/changePasswordFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/changePasswordFragment"
-        android:name="app.te.alo_chef.presentation.profile.changePassword.ChangePasswordFragment"
-        tools:layout="@layout/fragment_change_password" />
-
-    <include app:graph="@navigation/nav_tes" />
-    <dialog
-        android:id="@+id/mealsFilterDialog"
-        android:name="app.te.alo_chef.presentation.home.dialogs.MealsFilterDialog"
-        tools:layout="@layout/filter_dialog">
-
-    </dialog>
-    <fragment
-        android:id="@+id/vipFragment"
-        android:name="app.te.alo_chef.presentation.vip.VipFragment"
-        tools:layout="@layout/fragment_vip">
-        <action
-            android:id="@+id/action_vipFragment_to_productDetailsFragment"
-            app:destination="@id/productDetailsFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-        <action
-            android:id="@+id/action_vipFragment_to_searchFragment"
-            app:destination="@id/searchFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/productDetailsFragment"
-        android:name="app.te.alo_chef.presentation.product_details.ProductDetailsFragment"
-        tools:layout="@layout/fragment_product_details">
-        <argument
-            android:name="meal_id"
-            app:argType="integer" />
-        <argument
-            android:name="date"
-            app:argType="string" />
-
-    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="app.te.alo_chef.presentation.favorites.FavoritesFragment"
@@ -265,120 +186,30 @@
             app:popExitAnim="@anim/anim_slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/supportFragment"
-        android:name="app.te.alo_chef.presentation.settings.SupportFragment"
-        android:label="@string/support"
-        tools:layout="@layout/fragment_support">
-        <argument
-            android:name="url"
-            app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="app.te.alo_chef.presentation.search.SearchFragment"
-        android:label="@string/search"
-        tools:layout="@layout/fragment_search">
+        android:id="@+id/vipFragment"
+        android:name="app.te.alo_chef.presentation.vip.VipFragment"
+        tools:layout="@layout/fragment_vip">
         <action
-            android:id="@+id/action_searchFragment_to_productDetailsFragment"
+            android:id="@+id/action_vipFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment"
             app:enterAnim="@anim/anim_slide_in_right"
             app:exitAnim="@anim/anim_slide_out_left"
             app:popEnterAnim="@anim/anim_slide_in_left"
             app:popExitAnim="@anim/anim_slide_out_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/walletFragment"
-        android:name="app.te.alo_chef.presentation.wallet.WalletFragment"
-        android:label="@string/tv_wallet"
-        tools:layout="@layout/fragment_wallet" />
-    <fragment
-        android:id="@+id/myOrdersFragment"
-        android:name="app.te.alo_chef.presentation.my_orders.MyOrdersFragment"
-        android:label="@string/my_orders"
-        tools:layout="@layout/fragment_my_orders">
         <action
-            android:id="@+id/action_myOrdersFragment_to_trackOrderFragment"
-            app:destination="@id/trackOrderFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-        <action
-            android:id="@+id/action_myOrdersFragment_to_previousOrdersFragment"
-            app:destination="@id/previousOrdersFragment"
+            android:id="@+id/action_vipFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
             app:enterAnim="@anim/anim_slide_in_right"
             app:exitAnim="@anim/anim_slide_out_left"
             app:popEnterAnim="@anim/anim_slide_in_left"
             app:popExitAnim="@anim/anim_slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/trackOrderFragment"
-        android:name="app.te.alo_chef.presentation.my_orders.TrackOrderFragment"
-        android:label="@string/tv_track"
-        tools:layout="@layout/fragment_track_order" />
-    <fragment
-        android:id="@+id/previousOrdersFragment"
-        android:name="app.te.alo_chef.presentation.my_orders.PreviousOrdersFragment"
-        android:label="@string/order_history"
-        tools:layout="@layout/fragment_previous_orders">
-        <action
-            android:id="@+id/action_previousOrdersFragment_to_trackOrderFragment"
-            app:destination="@id/trackOrderFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/subscriptionsFragment"
-        android:name="app.te.alo_chef.presentation.subscriptions.SubscriptionsFragment"
-        android:label="@string/subscriptions"
-        tools:layout="@layout/fragment_subscriptions" />
-    <fragment
-        android:id="@+id/myLocationsFragment"
-        android:name="app.te.alo_chef.presentation.my_locations.MyLocationsFragment"
-        android:label="@string/my_location"
-        tools:layout="@layout/fragment_my_location">
-        <action
-            android:id="@+id/action_myLocationsFragment_to_addLocationFragment"
-            app:destination="@id/addLocationFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/addLocationFragment"
-        android:name="app.te.alo_chef.presentation.my_locations.AddLocationFragment"
-        android:label="@string/add_place"
-        tools:layout="@layout/fragment_add_place" />
+        android:id="@+id/moreFragment"
+        android:name="app.te.alo_chef.presentation.more.MoreFragment"
+        tools:layout="@layout/fragment_more" />
 
-    <include app:graph="@navigation/nav_checkout" />
-
-    <fragment
-        android:id="@+id/paymentFragment"
-        android:name="app.te.alo_chef.presentation.web_view.PaymentFragment"
-        tools:layout="@layout/fragment_web_view">
-
-        <argument
-            android:name="title"
-            app:argType="string" />
-
-        <argument
-            android:name="invoice_url"
-            app:argType="string" />
-
-        <argument
-            android:name="response_url"
-            app:argType="string" />
-
-        <!--    <argument-->
-        <!--        android:name="payment_data"-->
-        <!--        app:argType="app.te.alo_chef.data.payment.dto.PaymentData" />-->
-        <deepLink
-            android:id="@+id/deepLink"
-            app:mimeType="text/html"
-            app:uri="android-app://payment.alo_chef/{invoice_url}/{response_url}/{title}" />
-    </fragment>
+    <include app:graph="@navigation/nav_account" />
+    <include app:graph="@navigation/nav_more" />
 
 </navigation>

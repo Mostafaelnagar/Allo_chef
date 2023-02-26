@@ -8,6 +8,7 @@
         <variable
             name="uiState"
             type="app.te.alo_chef.presentation.subscriptions.ui_state.SubscriptionItemUiState" />
+
     </data>
 
 

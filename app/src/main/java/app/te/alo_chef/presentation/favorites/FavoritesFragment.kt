@@ -1,9 +1,12 @@
 package app.te.alo_chef.presentation.favorites
 
+import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import app.te.alo_chef.R
 import app.te.alo_chef.data.home.data_source.dto.MealsData
 import app.te.alo_chef.databinding.FragmentFavoritesBinding
@@ -45,7 +48,7 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>(), HomeEventLis
                 if (isLogged)
                     viewModel.getFavoritesMeals()
                 else
-                    checkEmptyLayout(isLogged)
+                    checkEmptyLayout(false)
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
@@ -100,12 +103,11 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>(), HomeEventLis
             binding.layoutTryToLogin.tryLogin.show()
     }
 
-    override fun openProductDetails(productId: Int,publishDate:String) {
-        navigateSafe(
-            FavoritesFragmentDirections.actionFavoriteFragmentToProductDetailsFragment(
-                productId,publishDate
-            )
-        )
+    override fun openProductDetails(productId: Int, publishDate: String) {
+        val bundle = Bundle()
+        bundle.putInt("meal_id", productId)
+        bundle.putString("date", publishDate)
+        findNavController().navigate(R.id.openProductDetails, args = bundle)
     }
 
     override fun changeLike(mealId: Int) {

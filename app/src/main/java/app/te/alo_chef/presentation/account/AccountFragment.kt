@@ -6,6 +6,7 @@ import app.te.alo_chef.R
 import app.te.alo_chef.databinding.FragmentAccountBinding
 import app.te.alo_chef.presentation.auth.AuthActivity
 import app.te.alo_chef.presentation.base.BaseFragment
+import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.extensions.*
 import codes.grand.pretty_pop_up.PrettyPopUpHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,35 +65,35 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(), AccountEventList
 
     override fun openWallet() {
         if (binding.uiState?.accessAccount == true)
-            navigateSafe(AccountFragmentDirections.actionAccountFragmentToWalletFragment())
+            navigateSafe(DeepLinks.WALLET_LINK)
         else
             openLogInScreen()
     }
 
     override fun openMyOrders() {
         if (binding.uiState?.accessAccount == true)
-            navigateSafe(AccountFragmentDirections.actionAccountFragmentToMyOrdersFragment())
+            navigateSafe(DeepLinks.ORDERS_LINK)
         else
             openLogInScreen()
     }
 
     override fun openMyLocations() {
         if (binding.uiState?.accessAccount == true)
-            navigateSafe(AccountFragmentDirections.actionAccountFragmentToMyLocationsFragment())
+            navigateSafe(DeepLinks.LOCATIONS_LINK)
         else
             openLogInScreen()
     }
 
     override fun openProfile() {
         if (binding.uiState?.accessAccount == true)
-            navigateSafe(AccountFragmentDirections.actionAccountFragmentToProfileFragment())
+            navigateSafe(DeepLinks.PROFILE_LINK)
         else
             openLogInScreen()
     }
 
     override fun openSubscribe() {
         if (binding.uiState?.accessAccount == true)
-            navigateSafe(AccountFragmentDirections.actionAccountFragmentToSubscriptionsFragment())
+            navigateSafe(DeepLinks.SUBSCRIPTIONS_LINK)
         else
             openLogInScreen()
     }

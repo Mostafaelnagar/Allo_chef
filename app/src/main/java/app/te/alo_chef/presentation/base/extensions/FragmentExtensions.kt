@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -18,6 +19,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavDeepLink
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -25,6 +27,7 @@ import app.te.alo_chef.R
 import app.te.alo_chef.domain.utils.FailureStatus
 import app.te.alo_chef.domain.utils.Resource.Failure
 import app.te.alo_chef.presentation.auth.AuthActivity
+import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.utils.*
 import app.te.alo_chef.presentation.base.utils.Constants.MY_PERMISSIONS_REQUEST_POST_NOTIFICATIONS
 import app.te.alo_chef.presentation.base.utils.Constants.MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
@@ -142,6 +145,10 @@ fun Fragment.navigateSafe(directions: NavDirections, navOptions: NavOptions? = n
     findNavController().navigate(directions, navOptions)
 }
 
+fun Fragment.navigateSafe(deepLink: String) {
+    findNavController().navigate( Uri.parse(deepLink), navOptions = DeepLinks.setNavOptions())
+}
+
 fun Fragment.backToPreviousScreen() {
     findNavController().navigateUp()
 }
@@ -202,30 +209,41 @@ fun checkNotificationsPermissions(activity: Activity, operation: () -> Unit) {
 }
 
 fun checkStoragePermissions(activity: Activity, operation: () -> Unit) {
-    if (ContextCompat.checkSelfPermission(activity,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        != PackageManager.PERMISSION_GRANTED) {
+    if (ContextCompat.checkSelfPermission(
+            activity,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+        != PackageManager.PERMISSION_GRANTED
+    ) {
         // Permission is not granted
         // Should we show an explanation?
         if (ActivityCompat.shouldShowRequestPermissionRationale(
                 activity,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+        ) {
             // Show an explanation to the user *asynchronously* -- don't block
             // this thread waiting for the user's response! After the user
             // sees the explanation, try again to request the permission.
 
             //to simplify, call requestPermissions again
-            Toast.makeText(activity,
+            Toast.makeText(
+                activity,
                 activity.getString(R.string.permission_dialog_content1),
-                Toast.LENGTH_LONG).show()
-            ActivityCompat.requestPermissions(activity,
+                Toast.LENGTH_LONG
+            ).show()
+            ActivityCompat.requestPermissions(
+                activity,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+            )
         } else {
             // No explanation needed; request the permission
-            ActivityCompat.requestPermissions(activity,
+            ActivityCompat.requestPermissions(
+                activity,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+            )
         }
     } else {
         // permission granted
@@ -235,33 +253,44 @@ fun checkStoragePermissions(activity: Activity, operation: () -> Unit) {
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 fun checkStorage13Permissions(activity: Activity, operation: () -> Unit) {
-    if (ContextCompat.checkSelfPermission(activity,
-            Manifest.permission.READ_MEDIA_IMAGES)
-        != PackageManager.PERMISSION_GRANTED) {
+    if (ContextCompat.checkSelfPermission(
+            activity,
+            Manifest.permission.READ_MEDIA_IMAGES
+        )
+        != PackageManager.PERMISSION_GRANTED
+    ) {
         Log.e("checkStoragePermissions", "checkStoragePermissions: ")
         // Permission is not granted
         // Should we show an explanation?
         if (ActivityCompat.shouldShowRequestPermissionRationale(
                 activity,
-                Manifest.permission.READ_MEDIA_IMAGES)) {
+                Manifest.permission.READ_MEDIA_IMAGES
+            )
+        ) {
             Log.e("checkStoragePermissions", "shouldShowRequestPermissionRationale: ")
             // Show an explanation to the user *asynchronously* -- don't block
             // this thread waiting for the user's response! After the user
             // sees the explanation, try again to request the permission.
 
             //to simplify, call requestPermissions again
-            Toast.makeText(activity,
+            Toast.makeText(
+                activity,
                 activity.getString(R.string.permission_dialog_content1),
-                Toast.LENGTH_LONG).show()
-            ActivityCompat.requestPermissions(activity,
+                Toast.LENGTH_LONG
+            ).show()
+            ActivityCompat.requestPermissions(
+                activity,
                 arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
-                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+            )
         } else {
             Log.e("checkStoragePermissions", "else: ")
             // No explanation needed; request the permission
-            ActivityCompat.requestPermissions(activity,
+            ActivityCompat.requestPermissions(
+                activity,
                 arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
-                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+            )
         }
     } else {
         Log.e("checkStoragePermissions", "operation : ")

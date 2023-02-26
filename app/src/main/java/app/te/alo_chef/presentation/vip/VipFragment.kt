@@ -1,9 +1,11 @@
 package app.te.alo_chef.presentation.vip
 
+import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import app.te.alo_chef.R
 import app.te.alo_chef.data.home.data_source.dto.MealsData
 import app.te.alo_chef.databinding.FragmentVipBinding
@@ -100,12 +102,10 @@ class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
     }
 
     override fun openProductDetails(productId: Int, publishDate: String) {
-        navigateSafe(
-            VipFragmentDirections.actionVipFragmentToProductDetailsFragment(
-                productId,
-                publishDate
-            )
-        )
+        val bundle = Bundle()
+        bundle.putInt("meal_id", productId)
+        bundle.putString("date", publishDate)
+        findNavController().navigate(R.id.openProductDetails, args = bundle)
     }
 
     override fun changeLike(mealId: Int) {
@@ -123,6 +123,6 @@ class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
     }
 
     override fun openSearch() {
-        navigateSafe(VipFragmentDirections.actionVipFragmentToSearchFragment())
+//        navigateSafe(VipFragmentDirections.actionVipFragmentToSearchFragment())
     }
 }
