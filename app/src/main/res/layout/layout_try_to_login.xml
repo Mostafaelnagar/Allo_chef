@@ -52,6 +52,7 @@
             android:text="@string/try_login"
             android:textAlignment="center"
             android:textAllCaps="true"
+            android:visibility="gone"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white"
             app:backgroundTint="@color/colorPrimaryDark"

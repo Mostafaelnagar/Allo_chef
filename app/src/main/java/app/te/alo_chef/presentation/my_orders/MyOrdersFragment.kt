@@ -1,12 +1,13 @@
 package app.te.alo_chef.presentation.my_orders
 
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import app.te.alo_chef.R
 import app.te.alo_chef.data.my_orders.dto.MyOrdersData
 import app.te.alo_chef.databinding.FragmentMyOrdersBinding
+import app.te.alo_chef.domain.orders.entity.OrderHistoryType
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.base.BaseFragment
 import app.te.alo_chef.presentation.base.extensions.handleApiError
@@ -24,13 +25,13 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MyOrdersFragment : BaseFragment<FragmentMyOrdersBinding>(), OrdersListener {
 
-    private val viewModel: OrdersViewModel by activityViewModels()
+    private val viewModel: OrdersViewModel by viewModels()
 
     override fun setBindingVariables() {
         binding.event = this
         viewModel.ordersAdapter = OrdersAdapter()
         binding.rcOrder.adapter = viewModel.ordersAdapter
-        viewModel.getMyOrders()
+        viewModel.getMyOrders(OrderHistoryType.CURRENT.type)
     }
 
     override fun observeAPICall() {
@@ -83,8 +84,11 @@ class MyOrdersFragment : BaseFragment<FragmentMyOrdersBinding>(), OrdersListener
     fun getLayoutId() = R.layout.fragment_my_orders
 
     override fun openOrderDetails(selectedItemUiState: OrderItemUiState) {
-        viewModel.selectedItemUiState = selectedItemUiState
-        navigateSafe(MyOrdersFragmentDirections.actionMyOrdersFragmentToTrackOrderFragment())
+        navigateSafe(
+            MyOrdersFragmentDirections.actionMyOrdersFragmentToTrackOrderFragment(
+                selectedItemUiState.myOrdersData.id
+            )
+        )
     }
 
     override fun openOrderHistory() {

@@ -1,14 +1,19 @@
 package app.te.alo_chef.data.payment.data_source
 
-import app.te.alo_chef.data.remote.PaymentRemoteDataSource
+import app.te.alo_chef.data.remote.BaseRemoteDataSource
+import app.te.alo_chef.domain.payment.entity.PaymentRequest
 import javax.inject.Inject
 
 class PaymentDataSource @Inject constructor(private val apiService: PaymentServices) :
-    PaymentRemoteDataSource() {
+    BaseRemoteDataSource() {
 
-    suspend fun getPaymentData(full_name: String, invoice_value: Float) =
+    suspend fun getPaymentData(paymentRequest: PaymentRequest) =
         safeApiCall {
-            apiService.getPaymentData(full_name, invoice_value)
+            apiService.getPaymentData(
+                invoice_value = paymentRequest.invoice_value,
+                id = paymentRequest.id,
+                type = paymentRequest.type
+            )
         }
 
 }

@@ -9,6 +9,11 @@ import javax.inject.Inject
 
 class OrdersRepositoryImpl @Inject constructor(private val remoteDataSource: OrdersDataSource) :
     OrdersRepository {
-    override suspend fun orders(): Resource<BaseResponse<List<MyOrdersData>>> =
-        remoteDataSource.getOrders()
+
+    override suspend fun orders(type: String): Resource<BaseResponse<List<MyOrdersData>>> =
+        remoteDataSource.getOrders(type)
+
+    override suspend fun orderDetails(orderId: Int): Resource<BaseResponse<MyOrdersData>> =
+        remoteDataSource.getOrderDetails(orderId)
+
 }

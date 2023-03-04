@@ -1,6 +1,7 @@
 package app.te.alo_chef.data.account.repository
 
 import app.te.alo_chef.data.account.data_source.remote.AccountRemoteDataSource
+import app.te.alo_chef.data.cart.CartDataSource
 import app.te.alo_chef.data.local.preferences.AppPreferences
 import app.te.alo_chef.data.my_locations.dto.LocationsData
 import app.te.alo_chef.domain.account.entity.request.SendFirebaseTokenRequest
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 class AccountRepositoryImpl @Inject constructor(
     private val remoteDataSource: AccountRemoteDataSource,
-    private val appPreferences: AppPreferences
+    private val appPreferences: AppPreferences,
+    private val cartDataSource: CartDataSource
 ) : AccountRepository {
 
     override
@@ -21,7 +23,12 @@ class AccountRepositoryImpl @Inject constructor(
         remoteDataSource.sendFirebaseToken(request)
 
     override
-    suspend fun logOut() = remoteDataSource.logOut()
+    suspend fun logOut() {
+        cartDataSource.emptyCart()
+        appPreferences.clearPreferences()
+//        remoteDataSource.logOut()
+    }
+
     override suspend fun isLoggedIn(isLoggedIn: Boolean) {
         appPreferences.isLoggedIn(isLoggedIn)
     }

@@ -6,8 +6,12 @@ import javax.inject.Inject
 class OrdersDataSource @Inject constructor(private val apiService: OrdersServices) :
     BaseRemoteDataSource() {
 
-    suspend fun getOrders() = safeApiCall {
-        apiService.getOrders()
+    suspend fun getOrders(type:String) = safeApiCall {
+        apiService.getOrders(type)
+    }
+
+    suspend fun getOrderDetails(orderId:Int) = safeApiCall {
+        apiService.getOrderDetails(orderId)
     }
 
 }

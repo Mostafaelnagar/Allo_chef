@@ -13,6 +13,10 @@ class AuthRemoteDataSource @Inject constructor(
         apiService.logIn(request)
     }
 
+    suspend fun socialLogIn(request: SocialLogInRequest) = safeApiCall {
+        apiService.socialLogIn(request)
+    }
+
 
     suspend fun forgetPassword(request: ForgetPasswordRequest) = safeApiCall {
         apiService.forgetPassword(request)

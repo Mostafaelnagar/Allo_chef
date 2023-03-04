@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.te.alo_chef.R
 import app.te.alo_chef.data.payment.dto.PaymentData
@@ -16,6 +15,7 @@ import app.te.alo_chef.presentation.base.PaymentTypes
 import app.te.alo_chef.presentation.base.extensions.handleApiError
 import app.te.alo_chef.presentation.base.extensions.hideKeyboard
 import app.te.alo_chef.presentation.base.extensions.navigateSafe
+import app.te.alo_chef.presentation.base.extensions.openActivity
 import app.te.alo_chef.presentation.base.utils.Constants
 import app.te.alo_chef.presentation.base.utils.showNoApiErrorAlert
 import app.te.alo_chef.presentation.checkout.adapters.CartDeliveryDatesAdapter
@@ -24,6 +24,7 @@ import app.te.alo_chef.presentation.checkout.ui_state.ItemPayment
 import app.te.alo_chef.presentation.cart.view_model.CartViewModel
 import app.te.alo_chef.presentation.checkout.listener.CheckoutListener
 import app.te.alo_chef.presentation.checkout.view_model.CheckoutViewModel
+import app.te.alo_chef.presentation.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -113,6 +114,26 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
                 }
             }
         }
+        lifecycleScope.launchWhenResumed {
+            checkoutViewModel.checkoutResponse.collect {
+                when (it) {
+                    Resource.Loading -> {
+                        hideKeyboard()
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        hideLoading()
+                        if (checkoutViewModel.checkoutUiState.newOrderRequest.paymentMethod == PaymentTypes.ONLINE.paymentType)
+                            checkoutViewModel.getPaymentData()
+                    }
+                    is Resource.Failure -> {
+                        hideLoading()
+                        handleApiError(it)
+                    }
+                    else -> {}
+                }
+            }
+        }
     }
 
     private fun setUpPaymentTypesList(points: Long, wallet: Float) {
@@ -154,7 +175,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
     }
 
     override fun changeDeliveryAddress() {
-        findNavController().navigate(R.id.openMyLocation)
+        navigateSafe(DeepLinks.LOCATIONS_LINK)
     }
 
     override fun openPromoDialog() {
@@ -172,7 +193,6 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
             },
             openPayment = {
                 checkoutViewModel.getPaymentData()
-//                openPaymentPage(PaymentData(), true)
             },
             finishOrder = { checkoutViewModel.submitOrder(viewModel.cartItems.value) }
         )
@@ -198,7 +218,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
     private fun listenToResult() {
         setFragmentResultListener(Constants.PAYMENT_SUCCESS) { _: String, bundle: Bundle ->
             if (bundle.getBoolean(Constants.PAYMENT_SUCCESS)) {
-                checkoutViewModel.submitOrder(viewModel.cartItems.value)
+                requireActivity().openActivity(HomeActivity::class.java)
             } else
                 showNoApiErrorAlert(requireActivity(), getString(R.string.payment_cancelled))
         }

@@ -64,6 +64,8 @@ object Versions {
     const val hms_remote_config = "1.6.4.300"
     const val google_services = "4.3.10"
     const val google_secret = "2.0.0"
+    const val firebase_auth = "20.1.0"
+    const val facebook_auth = "[8,9)"
 
     //Pin View
     const val pin_code = "1.4.4"

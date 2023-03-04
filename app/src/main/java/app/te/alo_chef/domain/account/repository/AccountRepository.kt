@@ -13,7 +13,7 @@ interface AccountRepository {
 
     suspend fun sendFirebaseToken(request: SendFirebaseTokenRequest): Resource<BaseResponse<*>>
 
-    suspend fun logOut(): Resource<BaseResponse<*>>
+    suspend fun logOut()
 
     suspend fun isLoggedIn(isLoggedIn: Boolean)
 

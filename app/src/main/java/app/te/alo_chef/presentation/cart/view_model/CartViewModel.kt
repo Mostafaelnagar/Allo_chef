@@ -1,5 +1,6 @@
 package app.te.alo_chef.presentation.cart.view_model
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.te.alo_chef.data.home.data_source.dto.MealsData
@@ -11,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,6 +28,10 @@ class CartViewModel @Inject constructor(
     private val emptyUseCase: EmptyUseCase,
     private val userLocalUseCase: UserLocalUseCase
 ) : ViewModel() {
+
+    val isLogged = MutableStateFlow(false)
+
+
     private val _cartCountFlow =
         MutableStateFlow(0)
     val cartCountFlow = _cartCountFlow
@@ -48,6 +54,10 @@ class CartViewModel @Inject constructor(
     private val _cartItems =
         MutableStateFlow<List<MealCart>>(listOf())
     val cartItems = _cartItems
+
+    init {
+        checkUserLogged()
+    }
 
     fun getCartItems() {
         viewModelScope.launch {
@@ -135,4 +145,13 @@ class CartViewModel @Inject constructor(
             }
         }
     }
+    fun checkUserLogged() {
+        Log.e("checkUserLogged", "checkUserLogged: ")
+        viewModelScope.launch {
+            userLocalUseCase.invoke().collectLatest {
+                isLogged.value = it.id != 0
+            }
+        }
+    }
+
 }

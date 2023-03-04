@@ -19,7 +19,7 @@ class SignUpViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase
 ) :
     BaseViewModel() {
-    lateinit var registerUiState: RegisterUiState
+    val registerUiState = RegisterUiState()
     private val _registerResponse = MutableStateFlow<Resource<BaseResponse<*>>>(Resource.Default)
     val registerResponse = _registerResponse
 

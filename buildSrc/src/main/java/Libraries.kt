@@ -90,6 +90,9 @@ object Libraries {
     const val hms_core = "com.huawei.agconnect:agconnect-core:${Versions.hms_core}"
     const val hms_remote_config =
         "com.huawei.agconnect:agconnect-remoteconfig:${Versions.hms_remote_config}"
+    const val firebase_auth_ktx = "com.google.firebase:firebase-auth-ktx"
+    const val firebase_auth = "com.google.android.gms:play-services-auth:${Versions.firebase_auth}"
+    const val facebook_auth = "com.facebook.android:facebook-android-sdk:${Versions.facebook_auth}"
 
     //pin code
     const val pin_code = "io.github.chaosleung:pinview:${Versions.pin_code}"

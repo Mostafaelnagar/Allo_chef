@@ -14,7 +14,6 @@ import app.te.alo_chef.presentation.base.BaseFragment
 import app.te.alo_chef.presentation.base.extensions.backToPreviousScreen
 import app.te.alo_chef.presentation.base.extensions.decodeUrl
 import app.te.alo_chef.presentation.base.extensions.onBackPressedCustomAction
-import app.te.alo_chef.presentation.base.extensions.showError
 import app.te.alo_chef.presentation.base.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import im.delight.android.webview.AdvancedWebView
@@ -71,7 +70,6 @@ class PaymentFragment : BaseFragment<FragmentWebViewBinding>(), AdvancedWebView.
     }
 
     override fun onPageFinished(url: String) {
-        Log.e("onPageFinished", "onPageFinished: $url")
         if (url.contains(decodeUrl(args.responseUrl))) {
             finishWithResult(true)
         }
@@ -79,7 +77,6 @@ class PaymentFragment : BaseFragment<FragmentWebViewBinding>(), AdvancedWebView.
     }
 
     override fun onPageError(errorCode: Int, description: String, failingUrl: String?) {
-        showError(description)
     }
 
     override fun onDownloadRequested(

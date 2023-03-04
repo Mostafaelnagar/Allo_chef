@@ -5,6 +5,8 @@ import app.te.alo_chef.core.notifications.handler.NotificationHandler
 import app.te.alo_chef.data.local.preferences.AppPreferences
 import app.te.alo_chef.presentation.checkout.ui_state.CheckoutUiState
 import app.te.alo_chef.presentation.my_locations.ui_state.AddLocationUiState
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,4 +37,9 @@ object AppPreferencesModule {
     fun provideCheckoutState(@ApplicationContext context: Context) =
         CheckoutUiState(context)
 
+    @Provides
+    @Singleton
+    fun provideFusedLocationProviderClient(@ApplicationContext context: Context): FusedLocationProviderClient {
+        return LocationServices.getFusedLocationProviderClient(context)
+    }
 }

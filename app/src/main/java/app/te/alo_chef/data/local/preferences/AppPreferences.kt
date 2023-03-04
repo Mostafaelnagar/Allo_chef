@@ -171,5 +171,9 @@ class AppPreferences @Inject constructor(private val context: Context) {
         context.userDataStore.updateData {
             it.toBuilder().clear().build()
         }
+        context.defaultLocationDataStore.updateData {
+            it.toBuilder().clear().build()
+        }
+
     }
 }

@@ -26,6 +26,15 @@ class AuthRepositoryImpl @Inject constructor(
         return response
     }
 
+    override suspend fun socialLogIn(request: SocialLogInRequest): Resource<BaseResponse<UserResponse>> {
+        val response = remoteDataSource.socialLogIn(request)
+        if (response is Resource.Success) {
+            appPreferences.userToken(response.value.data.jwt)
+            appPreferences.saveUser(response.value.data)
+        }
+        return response
+    }
+
     override suspend fun changePassword(request: UpdatePassword): Resource<BaseResponse<*>> =
         remoteDataSource.changePassword(request)
 

@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "992119732255",
-    "project_id": "alo-chef",
-    "storage_bucket": "alo-chef.appspot.com"
+    "project_number": "320250483103",
+    "project_id": "allo-chef-79632",
+    "storage_bucket": "allo-chef-79632.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:992119732255:android:c1743bec4c89a8ebe1fd2a",
+        "mobilesdk_app_id": "1:320250483103:android:96d4201203522669036daa",
         "android_client_info": {
           "package_name": "app.te.alo_chef"
         }
       },
       "oauth_client": [
         {
-          "client_id": "992119732255-ih759bg2qp4s56cledl35vkmdeodlktr.apps.googleusercontent.com",
+          "client_id": "320250483103-ng4ra7mrp2u6u67gi7nniirbqius1e04.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.te.alo_chef",
+            "certificate_hash": "e0df37bf2c496af4c19fc1620879cafa3e71ccc1"
+          }
+        },
+        {
+          "client_id": "320250483103-lanenjmf0novc17tumof4mtd0185e176.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAooDUxDqUCxUIMrWAydGOuldNdfxJBRa4"
+          "current_key": "AIzaSyBWdbhC-GJf6ZCo_jlEegM0wwct-DNo-e8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "992119732255-ih759bg2qp4s56cledl35vkmdeodlktr.apps.googleusercontent.com",
+              "client_id": "320250483103-9sdu90h22gp9euctsfgji6djjpvticpg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -9,6 +9,7 @@ import app.te.alo_chef.domain.utils.Resource
 interface AuthRepository {
 
     suspend fun logIn(request: LogInRequest): Resource<BaseResponse<UserResponse>>
+    suspend fun socialLogIn(request: SocialLogInRequest): Resource<BaseResponse<UserResponse>>
     suspend fun changePassword(request: UpdatePassword): Resource<BaseResponse<*>>
     suspend fun authChangePassword(request: UpdatePassword): Resource<BaseResponse<*>>
     suspend fun forgetPassword(request: ForgetPasswordRequest): Resource<BaseResponse<*>>

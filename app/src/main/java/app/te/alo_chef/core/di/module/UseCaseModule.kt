@@ -38,9 +38,8 @@ class UseCaseModule {
     @Provides
     @Singleton
     fun provideSocialLogInUseCase(
-        authRepository: AuthRepository,
-        userLocalUseCase: UserLocalUseCase
-    ): SocialLogInUseCase = SocialLogInUseCase(authRepository, userLocalUseCase)
+        authRepository: AuthRepository
+    ): SocialLogInUseCase = SocialLogInUseCase(authRepository)
 
     @Provides
     @Singleton

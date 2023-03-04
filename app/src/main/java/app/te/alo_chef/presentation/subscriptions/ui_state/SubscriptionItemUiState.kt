@@ -20,6 +20,6 @@ class SubscriptionItemUiState(
         subscriptionData.days.plus(" ${context.getString(R.string.days)}")
 
     fun subscribeNow() {
-        subscriptionsListener.subscribeNow(subscriptionData.price.toFloat())
+        subscriptionsListener.subscribeNow(subscriptionData)
     }
 }

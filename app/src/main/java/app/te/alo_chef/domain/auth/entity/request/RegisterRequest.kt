@@ -35,6 +35,8 @@ class RegisterRequest : BaseRequest(), Parcelable {
     var email: String = ""
     var gender: String = "0"
     var firebase_token: String = "0"
+    var provider_id: String? = null
+    var objective: String? = null
 
 
     @Transient

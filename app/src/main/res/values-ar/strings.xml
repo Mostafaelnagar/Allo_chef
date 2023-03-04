@@ -6,6 +6,8 @@
     <string name="retry">إعادة المحاولة</string>
     <string name="cancel">إلغاء</string>
     <string name="some_error">حدث خطأ ما، برجاء المحاولة فى وقت لاحق</string>
+    <string name="detect_location">تحديد موقعي</string>
+    <string name="not_all_permission_accepted">يرجى قبول التصريحات</string>
 
     <!-- Home -->
     <string name="home">أطفال</string>
@@ -188,6 +190,9 @@
     <string name="delivey_time_title">اختر وقت التسليم</string>
     <string name="balance_not_enough">رصيدك لا يكفي</string>
     <string name="payment_cancelled">تم الغاء عملية الدفع</string>
+    <string name="yes">نعم</string>
+    <string name="location_picked">تم اختيار الموقع بنجاح</string>
+    <string name="cart_empty" >عربة التسوق فارغة</string>
 
 
 </resources>

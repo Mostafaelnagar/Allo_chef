@@ -1,12 +1,14 @@
 package app.te.alo_chef.presentation.my_orders.ui_state
 
 import android.content.Context
+import androidx.annotation.Keep
 import app.te.alo_chef.R
 import app.te.alo_chef.data.my_orders.dto.MyOrdersData
 import app.te.alo_chef.presentation.my_orders.adapters.OrderDetailsAdapter
 import app.te.alo_chef.presentation.my_orders.listener.OrdersListener
 
-class OrderItemUiState(val myOrdersData: MyOrdersData, val ordersListener: OrdersListener) {
+@Keep
+class OrderItemUiState(val myOrdersData: MyOrdersData, val ordersListener: OrdersListener?) {
     val orderDetailsAdapter = OrderDetailsAdapter()
 
     init {
@@ -29,7 +31,7 @@ class OrderItemUiState(val myOrdersData: MyOrdersData, val ordersListener: Order
         context.getString(R.string.order_received)
 
     fun openDetails() {
-        ordersListener.openOrderDetails(this)
+        ordersListener?.openOrderDetails(this)
     }
 
     fun onWayDate(): String =

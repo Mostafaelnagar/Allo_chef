@@ -1,6 +1,10 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name" translatable="false">Allo chef</string>
     <string name="empty_warning">This field is required</string>
+    <string name="detect_location">locate me</string>
+    <string name="location_is_off" translatable="false">Location off</string>
+    <string name="location_off_body_message" translatable="false">please open your location</string>
+    <string name="not_all_permission_accepted">Please accept the permissions</string>
 
     <!-- General Strings -->
     <string name="connection_error">Connection Error</string>
@@ -195,5 +199,11 @@
     <string name="delivey_time_title">choose Delivery Time</string>
     <string name="balance_not_enough">Your balance not enough</string>
     <string name="payment_cancelled">Payment cancelled</string>
+    <string name="yes">Yes</string>
+    <string name="location_picked">Location PIcked Successfully</string>
+    <string name="cart_empty" >Cart Empty</string>
+    <string name="facebook_app_id" translatable="false">501860708822235</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>
+    <string name="facebook_client_token" translatable="false">d18e50e9bfd5fc7d8fa897ab497ad784</string>
 
 </resources>

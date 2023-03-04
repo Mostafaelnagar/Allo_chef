@@ -3,7 +3,7 @@ package app.te.alo_chef.presentation.base.utils
 object Constants {
     const val EGYPT_ID: String = "1"
     const val PAYMENT_SUCCESS: String = "PAYMENT_SUCCESS"
-    const val FREE: Int = 0
+    const val RC_SIGN_IN = 9001
     const val NOT_MATCH_PASSWORD: Int = 20
     const val MY_PERMISSIONS_REQUEST_POST_NOTIFICATIONS: Int = 200
     const val VERIFY: Int = 1

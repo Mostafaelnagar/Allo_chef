@@ -36,7 +36,7 @@ class AddLocationUiState @Inject constructor(private val context: Context) : Bas
         }
 
     @Bindable
-    var address: String = "New Cairo"
+    var address: String = ""
         set(value) {
             request.latError.set(null)
             notifyPropertyChanged(BR.address)

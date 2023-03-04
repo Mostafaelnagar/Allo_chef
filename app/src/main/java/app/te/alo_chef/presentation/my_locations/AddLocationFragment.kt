@@ -10,23 +10,41 @@ import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.domain.utils.showCityPopUp
 import app.te.alo_chef.domain.utils.showRegionsPopUp
 import app.te.alo_chef.presentation.base.BaseFragment
-import app.te.alo_chef.presentation.base.extensions.backToPreviousScreen
-import app.te.alo_chef.presentation.base.extensions.handleApiError
-import app.te.alo_chef.presentation.base.extensions.hideKeyboard
+import app.te.alo_chef.presentation.base.extensions.*
+import app.te.alo_chef.presentation.base.utils.showNoApiErrorAlert
 import app.te.alo_chef.presentation.base.utils.showSuccessAlert
+import app.te.alo_chef.presentation.maps.MapExtractedData
+import app.te.alo_chef.presentation.maps.PermissionManager
+import app.te.alo_chef.presentation.maps.requestAppPermissions
 import app.te.alo_chef.presentation.my_locations.listeners.AddLocationListener
 import app.te.alo_chef.presentation.my_locations.view_models.LocationsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddLocationFragment : BaseFragment<FragmentAddPlaceBinding>(), AddLocationListener {
 
     private val viewModel: LocationsViewModel by activityViewModels()
 
+    @Inject
+    lateinit var permissionManager: PermissionManager
+
     override fun setBindingVariables() {
         binding.event = this
         binding.uiState = viewModel.addLocationUiState
         viewModel.getCities()
+    }
+
+    override fun setUpViews() {
+
+    }
+
+    private val permissionsResult = requestAppPermissions { allIsGranted, _ ->
+        if (allIsGranted) {
+            navigateToMap()
+        } else {
+            showNoApiErrorAlert(requireActivity(), getString(R.string.not_all_permission_accepted))
+        }
     }
 
     override fun observeAPICall() {
@@ -81,7 +99,15 @@ class AddLocationFragment : BaseFragment<FragmentAddPlaceBinding>(), AddLocation
     }
 
     override fun openMap() {
+        if (permissionManager.hasAllLocationPermissions()) {
+            navigateToMap()
+        } else {
+            permissionsResult?.launch(permissionManager.getAllLocationPermissions())
+        }
+    }
 
+    private fun navigateToMap() {
+        navigateSafe(AddLocationFragmentDirections.actionAddLocationFragmentToNavMpa())
     }
 
     override fun chooseCities() {
@@ -122,4 +148,13 @@ class AddLocationFragment : BaseFragment<FragmentAddPlaceBinding>(), AddLocation
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        val mapData = getNavigationResultLiveData<MapExtractedData>()
+        if (mapData?.value != null) {
+            viewModel.addLocationUiState.address = getString(R.string.location_picked)
+            viewModel.addLocationUiState.request.lat = mapData.value?.latitude.toString()
+            viewModel.addLocationUiState.request.lng = mapData.value?.longitude.toString()
+        }
+    }
 }

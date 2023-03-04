@@ -18,4 +18,6 @@ object Keys {
   external fun lang(): String
   external fun splash(): String
   external fun platForm(): String
+  external fun serverClientId(): String
+
 }

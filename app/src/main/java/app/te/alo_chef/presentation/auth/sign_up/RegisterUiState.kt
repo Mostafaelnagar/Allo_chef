@@ -8,9 +8,11 @@ import app.te.alo_chef.domain.auth.entity.request.RegisterRequest
 import app.te.alo_chef.domain.utils.isValidEmail
 import app.te.alo_chef.presentation.base.BaseUiState
 
-class RegisterUiState(val context: Context) : BaseUiState() {
+class RegisterUiState : BaseUiState() {
+    lateinit var context: Context
+
     @Bindable
-    val request = RegisterRequest()
+    var request = RegisterRequest()
 
     /**
     check email validation if

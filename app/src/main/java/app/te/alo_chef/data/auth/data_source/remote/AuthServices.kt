@@ -29,4 +29,7 @@ interface AuthServices {
     @POST("user/register")
     suspend fun register(@Body request: RegisterRequest): BaseResponse<*>
 
+    @POST("user/check-social")
+    suspend fun socialLogIn(@Body request: SocialLogInRequest): BaseResponse<UserResponse>
+
 }

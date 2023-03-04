@@ -85,3 +85,10 @@ Java_app_te_alo_1chef_data_remote_Keys_platForm(JNIEnv *env, jobject thiz) {
     std::string platform = "android";
     return env->NewStringUTF(platform.c_str());
 }
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_app_te_alo_1chef_data_remote_Keys_serverClientId(JNIEnv *env, jobject thiz) {
+    std::string serverClientId = "85157163060-4phus4rlih14uo0dbuqgqnntgnnphjj9.apps.googleusercontent.com";
+    return env->NewStringUTF(serverClientId.c_str());
+}

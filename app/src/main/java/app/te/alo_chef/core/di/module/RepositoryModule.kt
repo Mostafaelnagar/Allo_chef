@@ -4,6 +4,7 @@ import app.te.alo_chef.data.account.data_source.remote.AccountRemoteDataSource
 import app.te.alo_chef.data.account.repository.AccountRepositoryImpl
 import app.te.alo_chef.data.auth.data_source.remote.AuthRemoteDataSource
 import app.te.alo_chef.data.auth.repository.AuthRepositoryImpl
+import app.te.alo_chef.data.cart.CartDataSource
 import app.te.alo_chef.data.general.data_source.remote.GeneralRemoteDataSource
 import app.te.alo_chef.data.general.repository.GeneralRepositoryImpl
 import app.te.alo_chef.data.checkout.data_source.CheckoutDataSource
@@ -72,8 +73,9 @@ class RepositoryModule {
     @Singleton
     fun provideAccountRepository(
         remoteDataSource: AccountRemoteDataSource,
-        appPreferences: AppPreferences
-    ): AccountRepository = AccountRepositoryImpl(remoteDataSource, appPreferences)
+        appPreferences: AppPreferences,
+        cartDataSource: CartDataSource
+    ): AccountRepository = AccountRepositoryImpl(remoteDataSource, appPreferences, cartDataSource)
 
 
     @Provides
@@ -144,7 +146,6 @@ class RepositoryModule {
     @Singleton
     fun providePaymentRepository(
         remoteDataSource: PaymentDataSource,
-        appPreferences: AppPreferences
-    ): PaymentRepository = PaymentRepositoryImpl(remoteDataSource, appPreferences)
+    ): PaymentRepository = PaymentRepositoryImpl(remoteDataSource)
 
 }

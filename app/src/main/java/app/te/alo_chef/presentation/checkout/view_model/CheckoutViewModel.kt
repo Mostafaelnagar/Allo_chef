@@ -78,8 +78,8 @@ class CheckoutViewModel @Inject constructor(
      fun getPaymentData() {
         viewModelScope.launch {
             _paymentResponse.value = Resource.Loading
-            _paymentResponse.value =
-                paymentDataUseCase.getPaymentData(checkoutUiState.orderTotal, Dispatchers.IO)
+//            _paymentResponse.value =
+//                paymentDataUseCase.getPaymentData(checkoutUiState.orderTotal, Dispatchers.IO)
         }
     }
 }

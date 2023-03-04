@@ -161,7 +161,9 @@ dependencies {
     implementation(Libraries.hms_core)
     implementation(Libraries.hms_push)
     implementation(Libraries.hms_remote_config)
-
+    implementation(Libraries.firebase_auth_ktx)
+    implementation(Libraries.firebase_auth)
+    implementation(Libraries.facebook_auth)
     kapt(Libraries.hiltDaggerCompiler)
     // Support
     implementation(Libraries.appCompat)
@@ -181,6 +183,12 @@ dependencies {
     implementation(Libraries.datastore_preferences)
     implementation(Libraries.datastore_core)
     implementation(Libraries.datastore_protobuf)
+
+    // Map
+    implementation(Libraries.map)
+    implementation(Libraries.playServicesLocation)
+    implementation(Libraries.rx)
+
 
     // UI
     implementation(Libraries.materialDesign)

@@ -118,8 +118,8 @@ class CheckoutUiState(val context: Context) : BaseUiState() {
             showValidationError(context.getString(R.string.balance_not_enough))
         } else if (newOrderRequest.locationId == 0)
             showValidationError(context.getString(R.string.pickup_your_location))
-        if (newOrderRequest.paymentMethod == PaymentTypes.ONLINE.paymentType)
-            openPayment()
+//        if (newOrderRequest.paymentMethod == PaymentTypes.ONLINE.paymentType)
+//            openPayment()
         else
             finishOrder()
 

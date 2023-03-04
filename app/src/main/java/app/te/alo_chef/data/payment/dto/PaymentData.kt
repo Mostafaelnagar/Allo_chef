@@ -15,7 +15,7 @@ data class PaymentData(
     @SerializedName("InvoiceURL")
     val invoiceURL: String = "",
 
-    @SerializedName("ResponseURL")
+    @SerializedName("successURL")
     val responseURL: String = "",
 
     @SerializedName("InvoiceId")

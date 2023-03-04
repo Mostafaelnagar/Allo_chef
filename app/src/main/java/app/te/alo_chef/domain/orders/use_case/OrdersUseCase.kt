@@ -6,7 +6,8 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class OrdersUseCase @Inject constructor(private val ordersRepository: OrdersRepository) {
-    suspend operator fun invoke(dispatcher: CoroutineDispatcher) = withContext(dispatcher) {
-        ordersRepository.orders()
-    }
+    suspend operator fun invoke(dispatcher: CoroutineDispatcher, type: String) =
+        withContext(dispatcher) {
+            ordersRepository.orders(type)
+        }
 }

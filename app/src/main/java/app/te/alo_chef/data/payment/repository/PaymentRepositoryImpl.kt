@@ -1,23 +1,21 @@
 package app.te.alo_chef.data.payment.repository
 
-import app.te.alo_chef.data.local.preferences.AppPreferences
 import app.te.alo_chef.data.payment.data_source.PaymentDataSource
-import app.te.alo_chef.data.payment.dto.PaymentData
+import app.te.alo_chef.data.payment.dto.PaymentResponse
+import app.te.alo_chef.domain.payment.entity.PaymentRequest
 import app.te.alo_chef.domain.payment.repository.PaymentRepository
-import app.te.alo_chef.domain.utils.PaymentBaseResponse
+import app.te.alo_chef.domain.utils.BaseResponse
 import app.te.alo_chef.domain.utils.Resource
 import javax.inject.Inject
 
 class PaymentRepositoryImpl @Inject constructor(
-    private val remoteDataSource: PaymentDataSource,
-    private val appPreferences: AppPreferences
+    private val remoteDataSource: PaymentDataSource
 ) : PaymentRepository {
 
     override suspend fun getPaymentData(
-        invoice_value: Float
-    ): Resource<PaymentBaseResponse<PaymentData>> {
-        val fullName = appPreferences.getUserValue().name
-        return remoteDataSource.getPaymentData(fullName, invoice_value)
+        paymentRequest: PaymentRequest
+    ): Resource<BaseResponse<PaymentResponse>> {
+        return remoteDataSource.getPaymentData(paymentRequest)
     }
 
 }

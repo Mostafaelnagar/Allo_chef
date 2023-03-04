@@ -19,7 +19,7 @@ class AccountViewModel @Inject constructor(
     val userLocalUseCase: UserLocalUseCase
 ) : BaseViewModel() {
 
-    private val _logOuResponse = MutableStateFlow<Resource<BaseResponse<*>>>(Resource.Default)
+    private val _logOuResponse = MutableStateFlow(Unit)
 
     private val _userData = MutableStateFlow(AccountUiState())
     val userData = _userData

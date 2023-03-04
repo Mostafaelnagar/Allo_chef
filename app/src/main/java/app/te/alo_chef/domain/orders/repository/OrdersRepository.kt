@@ -5,5 +5,6 @@ import app.te.alo_chef.domain.utils.BaseResponse
 import app.te.alo_chef.domain.utils.Resource
 
 interface OrdersRepository {
-    suspend fun orders() :Resource<BaseResponse<List<MyOrdersData>>>
+    suspend fun orders(type:String) :Resource<BaseResponse<List<MyOrdersData>>>
+    suspend fun orderDetails(orderId: Int): Resource<BaseResponse<MyOrdersData>>
 }

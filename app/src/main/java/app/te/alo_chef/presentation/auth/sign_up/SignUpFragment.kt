@@ -1,5 +1,6 @@
 package app.te.alo_chef.presentation.auth.sign_up
 
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import app.te.alo_chef.R
@@ -16,14 +17,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(), RegisterEventListener {
 
-    private val viewModel: SignUpViewModel by viewModels()
+    private val viewModel: SignUpViewModel by activityViewModels()
 
     override
     fun getLayoutId() = R.layout.fragment_sign_up
 
     override
     fun setBindingVariables() {
-        viewModel.registerUiState = RegisterUiState(requireActivity())
+        viewModel.registerUiState.context = requireActivity()
         binding.uiState = viewModel.registerUiState
         binding.eventListener = this
     }

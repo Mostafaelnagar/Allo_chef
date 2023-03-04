@@ -13,13 +13,9 @@ import app.te.alo_chef.databinding.FragmentSubscriptionsBinding
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.base.BaseFragment
 import app.te.alo_chef.presentation.base.DeepLinks
-import app.te.alo_chef.presentation.base.extensions.handleApiError
-import app.te.alo_chef.presentation.base.extensions.hideKeyboard
-import app.te.alo_chef.presentation.base.extensions.navigateSafe
-import app.te.alo_chef.presentation.base.extensions.openActivityAndClearStack
+import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.Constants
 import app.te.alo_chef.presentation.base.utils.showNoApiErrorAlert
-import app.te.alo_chef.presentation.home.HomeActivity
 import app.te.alo_chef.presentation.subscriptions.adapters.SubscriptionsAdapters
 import app.te.alo_chef.presentation.subscriptions.listener.SubscriptionsListener
 import app.te.alo_chef.presentation.subscriptions.ui_state.SubscriptionItemUiState
@@ -74,11 +70,32 @@ class SubscriptionsFragment : BaseFragment<FragmentSubscriptionsBinding>(), Subs
                     }
                     is Resource.Success -> {
                         hideLoading()
-                        val response = it.value
+                        val response = it.value.data
                         openPaymentPage(
                             isSuccess = response.status,
-                            payment_data = response.data
+                            payment_data = response.paymentData
                         )
+                    }
+                    is Resource.Failure -> {
+                        hideLoading()
+                        handleApiError(it)
+                    }
+                    else -> {}
+                }
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.subscribeResponse.collect {
+                when (it) {
+                    Resource.Loading -> {
+                        hideKeyboard()
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        hideLoading()
+                        viewModel.userResponse = it.value.data
+                        viewModel.getPaymentData()
+
                     }
                     is Resource.Failure -> {
                         hideLoading()
@@ -113,14 +130,15 @@ class SubscriptionsFragment : BaseFragment<FragmentSubscriptionsBinding>(), Subs
     override
     fun getLayoutId() = R.layout.fragment_subscriptions
 
-    override fun subscribeNow(subscribeAmount: Float) {
-        viewModel.getPaymentData(subscribeAmount)
+    override fun subscribeNow(subscriptionData: SubscriptionData) {
+        viewModel.makeSubscribe(subscriptionData)
     }
 
     private fun listenToResult() {
         setFragmentResultListener(Constants.PAYMENT_SUCCESS) { _: String, bundle: Bundle ->
             if (bundle.getBoolean(Constants.PAYMENT_SUCCESS)) {
-                openActivityAndClearStack(HomeActivity::class.java)
+                viewModel.updateLocalUser()
+                backToPreviousScreen()
             } else
                 showNoApiErrorAlert(requireActivity(), getString(R.string.payment_cancelled))
         }
