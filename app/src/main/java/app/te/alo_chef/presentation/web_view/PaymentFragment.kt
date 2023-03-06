@@ -66,6 +66,9 @@ class PaymentFragment : BaseFragment<FragmentWebViewBinding>(), AdvancedWebView.
 
 
     override fun onPageStarted(url: String?, favicon: Bitmap?) {
+        if (url?.contains(decodeUrl(args.responseUrl)) == true) {
+            finishWithResult(true)
+        }
         binding.webview.visibility = View.VISIBLE
     }
 

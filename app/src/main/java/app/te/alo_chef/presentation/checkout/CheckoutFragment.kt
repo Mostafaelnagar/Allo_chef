@@ -136,7 +136,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
         }
     }
 
-    private fun setUpPaymentTypesList(points: Long, wallet: Float) {
+    private fun setUpPaymentTypesList(points: Int, wallet: Float) {
         val paymentList: MutableList<ItemPayment> = mutableListOf()
         paymentList.add(
             ItemPayment(

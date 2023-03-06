@@ -75,8 +75,14 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
                                 viewModel.detailsUiState =
                                     OrderDetailsUiState(it.value.data, this@ProductDetailsFragment)
                                 binding.uiState = viewModel.detailsUiState
-                                initAdapter(viewModel.detailsUiState.mainDetails.meal.mealImagesList)
-                                updateIngredients(viewModel.detailsUiState.mainDetails.meal.ingredients)
+                                initAdapter(
+                                    viewModel.detailsUiState.mainDetails.meal?.mealImagesList
+                                        ?: arrayListOf()
+                                )
+                                updateIngredients(
+                                    viewModel.detailsUiState.mainDetails.meal?.ingredients
+                                        ?: listOf()
+                                )
                                 updateMeals(viewModel.detailsUiState.mainDetails.otherMeals)
                             }
                             is Resource.Failure -> {

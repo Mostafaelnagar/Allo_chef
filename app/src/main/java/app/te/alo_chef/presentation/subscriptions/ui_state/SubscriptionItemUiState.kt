@@ -11,10 +11,10 @@ class SubscriptionItemUiState(
 ) {
 
     fun packagePrice(context: Context): String =
-        subscriptionData.price.plus(" ${context.getString(R.string.coin)}")
+        subscriptionData.price.toString().plus(" ${context.getString(R.string.coin)}")
 
     fun points(context: Context): String =
-        subscriptionData.points.plus(" ${context.getString(R.string.point)}")
+        subscriptionData.points.toString().plus(" ${context.getString(R.string.point)}")
 
     fun days(context: Context): String =
         subscriptionData.days.plus(" ${context.getString(R.string.days)}")

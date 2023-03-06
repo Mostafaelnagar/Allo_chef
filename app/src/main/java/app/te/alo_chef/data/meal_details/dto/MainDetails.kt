@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class MainDetails(
     @SerializedName("meal")
-    var meal: MealsData = MealsData(),
+    var meal: MealsData? = MealsData(),
 
     @SerializedName("other_meals")
     val otherMeals: List<MealsData> = emptyList()

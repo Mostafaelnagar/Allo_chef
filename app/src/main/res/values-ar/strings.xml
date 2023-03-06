@@ -193,6 +193,8 @@
     <string name="yes">نعم</string>
     <string name="location_picked">تم اختيار الموقع بنجاح</string>
     <string name="cart_empty" >عربة التسوق فارغة</string>
+    <string name="subscribe_done">تم الاشتراك بنجاح</string>
+    <string name="added_cart">تم اضافته الى السلة بنجاح</string>
 
 
 </resources>

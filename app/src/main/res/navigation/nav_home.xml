@@ -113,59 +113,7 @@
     <fragment
         android:id="@+id/accountFragment"
         android:name="app.te.alo_chef.presentation.account.AccountFragment"
-        tools:layout="@layout/fragment_account">
-        <action
-            android:id="@+id/action_accountFragment_to_languageFragment"
-            app:destination="@id/languageFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-
-        <action
-            android:id="@+id/action_accountFragment_to_profileFragment"
-            app:destination="@id/profileFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-        <action
-            android:id="@+id/action_accountFragment_to_nav_auth"
-            app:destination="@id/nav_auth"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-        <action
-            android:id="@+id/action_accountFragment_to_walletFragment"
-            app:destination="@id/walletFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-        <action
-            android:id="@+id/action_accountFragment_to_myOrdersFragment"
-            app:destination="@id/myOrdersFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-        <action
-            android:id="@+id/action_accountFragment_to_subscriptionsFragment"
-            app:destination="@id/subscriptionsFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-        <action
-            android:id="@+id/action_accountFragment_to_myLocationsFragment"
-            app:destination="@id/myLocationsFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-
-    </fragment>
+        tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="app.te.alo_chef.presentation.favorites.FavoritesFragment"

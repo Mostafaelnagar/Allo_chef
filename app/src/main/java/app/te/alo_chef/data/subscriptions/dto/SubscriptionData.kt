@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class SubscriptionData(
     @SerializedName("price")
-    var price: String = "",
+    var price: Float = 0f,
 
     @SerializedName("name")
     val name: String = "",
@@ -16,5 +16,5 @@ data class SubscriptionData(
     val id: Int = 0,
 
     @SerializedName("points")
-    val points: String = ""
+    val points: Int = 0
 )

@@ -200,10 +200,12 @@
     <string name="balance_not_enough">Your balance not enough</string>
     <string name="payment_cancelled">Payment cancelled</string>
     <string name="yes">Yes</string>
-    <string name="location_picked">Location PIcked Successfully</string>
+    <string name="location_picked">Location Picked Successfully</string>
     <string name="cart_empty" >Cart Empty</string>
     <string name="facebook_app_id" translatable="false">501860708822235</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>
     <string name="facebook_client_token" translatable="false">d18e50e9bfd5fc7d8fa897ab497ad784</string>
+    <string name="subscribe_done">Subscribe Successfully</string>
+    <string name="added_cart">Added to cart successfully</string>
 
 </resources>

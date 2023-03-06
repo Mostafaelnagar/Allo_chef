@@ -12,7 +12,7 @@ import com.structure.base_mvvm.DefaultLocation
 
 class CheckoutUiState(val context: Context) : BaseUiState() {
     private var cartItemTotal: Float = 0f
-    var totalPoints: Long = 0
+    var totalPoints: Int = 0
     var totalWallet: Float = 0f
     val newOrderRequest = NewOrderRequest()
 

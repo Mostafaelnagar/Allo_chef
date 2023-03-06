@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.databinding.Bindable
 import app.te.alo_chef.BR
 import app.te.alo_chef.R
+import app.te.alo_chef.data.home.data_source.dto.MealsData
 import app.te.alo_chef.data.meal_details.dto.MainDetails
 import app.te.alo_chef.presentation.home.ui_state.MealsUiState
 import app.te.alo_chef.presentation.product_details.listeners.ProductDetailsListener
@@ -12,7 +13,7 @@ class OrderDetailsUiState(
     val mainDetails: MainDetails,
     val productDetailsListener: ProductDetailsListener
 ) :
-    MealsUiState(homeMealsData = mainDetails.meal, productDetailsListener) {
+    MealsUiState(homeMealsData = mainDetails.meal ?: MealsData(), productDetailsListener) {
     @Bindable
     var iconLike: Int =
         if (homeMealsData.isLiked == 0) R.drawable.ic_favorite_border else R.drawable.ic_account_favorite

@@ -40,7 +40,7 @@ class CartViewModel @Inject constructor(
         MutableSharedFlow<DefaultLocation>()
     val deliveryFeeFlow = _deliveryFeeFlow
     private val _walletPointFlow =
-        MutableStateFlow(Pair(0L, 0f))
+        MutableStateFlow(Pair(0, 0f))
     val walletPointFlow = _walletPointFlow
 
     private val _cartItemsTotalFlow =

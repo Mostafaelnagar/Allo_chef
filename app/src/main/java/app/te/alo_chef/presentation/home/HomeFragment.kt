@@ -1,5 +1,6 @@
 package app.te.alo_chef.presentation.home
 
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,9 +13,11 @@ import app.te.alo_chef.databinding.FragmentHomeBinding
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.auth.AuthActivity
 import app.te.alo_chef.presentation.base.BaseFragment
+import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.Constants
 import app.te.alo_chef.presentation.base.utils.getToday
+import app.te.alo_chef.presentation.base.utils.showSuccessAlert
 import app.te.alo_chef.presentation.cart.view_model.CartViewModel
 import app.te.alo_chef.presentation.home.adapters.DaysAdapter
 import app.te.alo_chef.presentation.home.adapters.ProductsAdapter
@@ -28,7 +31,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
     private val cartViewModel: CartViewModel by viewModels()
     private lateinit var daysAdapter: DaysAdapter
     private lateinit var productsAdapter: ProductsAdapter
@@ -146,16 +149,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
 
     override fun addToCart(homeMealsData: MealsData, addToCart: Int) {
         if (viewModel.isLogged.value) {
-            if (addToCart == Constants.ADD_TO_CART_KEY)
+            if (addToCart == Constants.ADD_TO_CART_KEY) {
                 cartViewModel.addToCart(homeMealsData)
-            else
+                showSuccessAlert(requireActivity(), getString(R.string.added_cart))
+            } else
                 openSubscriptions()
         }
 
     }
 
     override fun openSubscriptions() {
-        //TODO openSubscriptions
+        navigateSafe(DeepLinks.SUBSCRIPTIONS_LINK)
     }
 
     override fun openFilter() {

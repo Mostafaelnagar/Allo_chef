@@ -1,8 +1,10 @@
 package app.te.alo_chef.presentation.subscriptions.view_model
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.te.alo_chef.data.payment.dto.PaymentResponse
+import app.te.alo_chef.data.subscriptions.dto.MakeSubscriptionData
 import app.te.alo_chef.data.subscriptions.dto.SubscriptionData
 import app.te.alo_chef.domain.account.use_case.UserLocalUseCase
 import app.te.alo_chef.domain.auth.entity.model.UserResponse
@@ -35,7 +37,7 @@ class SubscriptionsViewModel @Inject constructor(
     val paymentResponse = _paymentResponse
 
     private val _subscribeResponse =
-        MutableStateFlow<Resource<BaseResponse<UserResponse>>>(Resource.Default)
+        MutableStateFlow<Resource<BaseResponse<MakeSubscriptionData>>>(Resource.Default)
     val subscribeResponse = _subscribeResponse
 
     lateinit var subscriptionsAdapters: SubscriptionsAdapters
@@ -77,8 +79,11 @@ class SubscriptionsViewModel @Inject constructor(
 
     fun updateLocalUser() {
         viewModelScope.launch(Dispatchers.IO) {
-            if (this@SubscriptionsViewModel::userResponse.isInitialized)
+            if (this@SubscriptionsViewModel::userResponse.isInitialized) {
+                userResponse.points += subscriptionData.points
+                userResponse.wallet += subscriptionData.price
                 userLocalUseCase.invoke(userResponse)
+            }
         }
     }
 }

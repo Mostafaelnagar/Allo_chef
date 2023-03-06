@@ -58,6 +58,7 @@
                 app:ibv_badgeColor="@color/white"
                 app:ibv_badgeLimitValue="false"
                 app:ibv_badgePosition="center"
+                android:onClick="@{()->event.openCart()}"
                 app:ibv_badgeTextColor="@color/colorPrimaryDark"
                 app:ibv_badgeTextSize="@dimen/_8ssp"
                 app:ibv_badgeTextStyle="bold"
@@ -74,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:src="@drawable/ic_cart"
+                android:onClick="@{()->event.openCart()}"
                 app:layout_constraintBottom_toBottomOf="@id/home_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/home_title" />

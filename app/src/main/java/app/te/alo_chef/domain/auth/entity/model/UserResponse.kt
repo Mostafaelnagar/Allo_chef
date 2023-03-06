@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class UserResponse(
+open class UserResponse(
     @SerializedName("image")
     var image: String = "",
     @SerializedName("lng")
@@ -41,10 +41,10 @@ data class UserResponse(
     val lat: Double = 0.0,
 
     @SerializedName("points")
-    val points: Long = 0,
+    var points: Int = 0,
 
     @SerializedName("wallet")
-    val wallet: Float = 0f,
+    var wallet: Float = 0f,
 
     @SerializedName("subscription_name")
     val subscriptionName: String = "",

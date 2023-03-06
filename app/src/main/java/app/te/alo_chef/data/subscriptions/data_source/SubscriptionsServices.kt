@@ -1,5 +1,6 @@
 package app.te.alo_chef.data.subscriptions.data_source
 
+import app.te.alo_chef.data.subscriptions.dto.MakeSubscriptionData
 import app.te.alo_chef.data.subscriptions.dto.SubscriptionData
 import app.te.alo_chef.domain.auth.entity.model.UserResponse
 import app.te.alo_chef.domain.subscriptions.entity.SubscribeRequest
@@ -16,6 +17,6 @@ interface SubscriptionsServices {
     @POST("user/make-subscription")
     suspend fun subscribe(
         @Body subscribeRequest: SubscribeRequest,
-    ): BaseResponse<UserResponse>
+    ): BaseResponse<MakeSubscriptionData>
 
 }

@@ -16,6 +16,7 @@ import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.Constants
 import app.te.alo_chef.presentation.base.utils.showNoApiErrorAlert
+import app.te.alo_chef.presentation.base.utils.showSuccessAlert
 import app.te.alo_chef.presentation.subscriptions.adapters.SubscriptionsAdapters
 import app.te.alo_chef.presentation.subscriptions.listener.SubscriptionsListener
 import app.te.alo_chef.presentation.subscriptions.ui_state.SubscriptionItemUiState
@@ -94,7 +95,10 @@ class SubscriptionsFragment : BaseFragment<FragmentSubscriptionsBinding>(), Subs
                     is Resource.Success -> {
                         hideLoading()
                         viewModel.userResponse = it.value.data
-                        viewModel.getPaymentData()
+                        openPaymentPage(
+                            it.value.data.payment.paymentData,
+                            it.value.data.payment.status
+                        )
 
                     }
                     is Resource.Failure -> {
@@ -138,7 +142,7 @@ class SubscriptionsFragment : BaseFragment<FragmentSubscriptionsBinding>(), Subs
         setFragmentResultListener(Constants.PAYMENT_SUCCESS) { _: String, bundle: Bundle ->
             if (bundle.getBoolean(Constants.PAYMENT_SUCCESS)) {
                 viewModel.updateLocalUser()
-                backToPreviousScreen()
+                showSuccessAlert(requireActivity(), getString(R.string.subscribe_done))
             } else
                 showNoApiErrorAlert(requireActivity(), getString(R.string.payment_cancelled))
         }

@@ -15,6 +15,7 @@ import app.te.alo_chef.presentation.auth.AuthActivity
 import app.te.alo_chef.presentation.base.BaseFragment
 import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.Constants
+import app.te.alo_chef.presentation.base.utils.showSuccessAlert
 import app.te.alo_chef.presentation.cart.view_model.CartViewModel
 import app.te.alo_chef.presentation.home.adapters.ProductsAdapter
 import app.te.alo_chef.presentation.home.eventListener.HomeEventListener
@@ -115,8 +116,10 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>(), HomeEventLis
     }
 
     override fun addToCart(homeMealsData: MealsData, addToCart: Int) {
-        if (addToCart == Constants.ADD_TO_CART_KEY)
+        if (addToCart == Constants.ADD_TO_CART_KEY) {
+            showSuccessAlert(requireActivity(), getString(R.string.added_cart))
             cartViewModel.addToCart(homeMealsData)
+        }
 
     }
 
@@ -126,5 +129,8 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>(), HomeEventLis
 
     override fun openSearch() {
         navigateSafe(FavoritesFragmentDirections.actionFavoriteFragmentToSearchFragment())
+    }
+    override fun openCart() {
+        findNavController().navigate(R.id.openCart)
     }
 }
