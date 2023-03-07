@@ -104,12 +104,14 @@ class CheckoutUiState(val context: Context) : BaseUiState() {
 
     fun checkoutPreValidation(
         showValidationError: (String) -> Unit,
+        openTime: () -> Unit,
         openPayment: () -> Unit,
         finishOrder: () -> Unit
     ) {
-        if (newOrderRequest.deliveryTime == 0)
+        if (newOrderRequest.deliveryTime == 0) {
             showValidationError(context.getString(R.string.tv_select_time))
-        else if (newOrderRequest.paymentMethod == 0) {
+            openTime()
+        } else if (newOrderRequest.paymentMethod == 0) {
             showValidationError(context.getString(R.string.choose_payment))
         } else if ((newOrderRequest.paymentMethod == PaymentTypes.WALLET.paymentType ||
                     newOrderRequest.paymentMethod == PaymentTypes.POINTS.paymentType)

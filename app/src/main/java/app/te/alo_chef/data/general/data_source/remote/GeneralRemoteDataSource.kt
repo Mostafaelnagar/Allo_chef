@@ -16,4 +16,9 @@ class GeneralRemoteDataSource @Inject constructor(private val apiService: Genera
             apiService.updateFirebaseToken(updateFirebaseTokenRequest)
         }
 
+    suspend fun getGeneralConfig() =
+        safeApiCall {
+            apiService.getGeneralConfig()
+        }
+
 }

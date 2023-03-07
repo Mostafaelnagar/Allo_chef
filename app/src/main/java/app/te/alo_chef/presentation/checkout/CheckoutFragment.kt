@@ -6,6 +6,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import app.te.alo_chef.R
+import app.te.alo_chef.data.general.dto.config.GeneralConfig
 import app.te.alo_chef.data.payment.dto.PaymentData
 import app.te.alo_chef.databinding.FragmentCheckoutBinding
 import app.te.alo_chef.domain.utils.Resource
@@ -44,6 +45,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
         viewModel.getDeliveryDates()
         viewModel.getWalletAndPoints()
         listenToResult()
+        checkoutViewModel.getGeneralConfig()
     }
 
     private fun updateCartItemsTotal() {
@@ -69,9 +71,15 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
             viewModel.walletPointFlow.collect { data ->
                 checkoutViewModel.checkoutUiState.totalPoints = data.first
                 checkoutViewModel.checkoutUiState.totalWallet = data.second
-                setUpPaymentTypesList(data.first, data.second)
             }
         }
+
+        lifecycleScope.launchWhenResumed {
+            checkoutViewModel.savedGeneralConfig.collect { data ->
+                setUpPaymentTypesList(data)
+            }
+        }
+
         lifecycleScope.launchWhenResumed {
             checkoutViewModel.checkPromoResponse.collect {
                 when (it) {
@@ -136,32 +144,50 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
         }
     }
 
-    private fun setUpPaymentTypesList(points: Int, wallet: Float) {
+    private fun setUpPaymentTypesList(data: GeneralConfig) {
         val paymentList: MutableList<ItemPayment> = mutableListOf()
-        paymentList.add(
-            ItemPayment(
-                PaymentTypes.WALLET.paymentType,
-                getString(R.string.tv_wallet),
-                R.drawable.ic_wallet,
-                amount = "$wallet ${getString(R.string.coin)}"
-            )
-        )
-        paymentList.add(
-            ItemPayment(
-                PaymentTypes.POINTS.paymentType,
-                getString(R.string.point),
-                R.drawable.ic_point_payment,
-                amount = "$points ${getString(R.string.point)}"
-            )
-        )
-        paymentList.add(
-            ItemPayment(
-                PaymentTypes.ONLINE.paymentType,
-                getString(R.string.online),
-                R.drawable.ic_online,
-                amount = ""
-            )
-        )
+        data.paymentWays.forEach { paymentItem ->
+            if (paymentItem.id == PaymentTypes.WALLET.paymentType)
+                paymentList.add(
+                    ItemPayment(
+                        PaymentTypes.WALLET.paymentType,
+                        paymentItem.name,
+                        R.drawable.ic_wallet,
+                        amount = "${checkoutViewModel.checkoutUiState.totalWallet} ${getString(R.string.coin)}"
+                    )
+                )
+            if (paymentItem.id == PaymentTypes.POINTS.paymentType)
+                paymentList.add(
+                    ItemPayment(
+                        PaymentTypes.POINTS.paymentType,
+                        paymentItem.name,
+                        R.drawable.ic_point_payment,
+                        amount = "${checkoutViewModel.checkoutUiState.totalWallet * data.setting.pointEqualityInEgp} ${
+                            getString(
+                                R.string.coin
+                            )
+                        }"
+                    )
+                )
+            if (paymentItem.id == PaymentTypes.ONLINE.paymentType)
+                paymentList.add(
+                    ItemPayment(
+                        PaymentTypes.ONLINE.paymentType,
+                        paymentItem.name,
+                        R.drawable.ic_online,
+                        amount = ""
+                    )
+                )
+            if (paymentItem.id == PaymentTypes.CASH.paymentType)
+                paymentList.add(
+                    ItemPayment(
+                        PaymentTypes.CASH.paymentType,
+                        paymentItem.name,
+                        R.drawable.ic_cash,
+                        amount = ""
+                    )
+                )
+        }
         paymentTypesAdapter.differ.submitList(paymentList)
         binding.rcDeliveryPayment.adapter = paymentTypesAdapter
     }
@@ -190,6 +216,8 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
         checkoutViewModel.checkoutUiState.checkoutPreValidation(
             showValidationError = { message ->
                 showNoApiErrorAlert(requireActivity(), message)
+            }, openTime = {
+                openDeliveryTimes()
             },
             openPayment = {
                 checkoutViewModel.getPaymentData()

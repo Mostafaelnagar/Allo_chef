@@ -1,5 +1,6 @@
 package app.te.alo_chef.data.general.data_source.remote
 
+import app.te.alo_chef.data.general.dto.config.GeneralConfig
 import app.te.alo_chef.domain.general.entity.UpdateFirebaseTokenRequest
 import app.te.alo_chef.domain.general.entity.countries.CityModel
 import app.te.alo_chef.domain.utils.BaseResponse
@@ -14,5 +15,8 @@ interface GeneralServices {
 
     @POST("v1/user/update_fcm_token")
     suspend fun updateFirebaseToken(@Body updateFirebaseTokenRequest: UpdateFirebaseTokenRequest): BaseResponse<*>
+
+    @GET("app/setting")
+    suspend fun getGeneralConfig(): BaseResponse<GeneralConfig>
 
 }
