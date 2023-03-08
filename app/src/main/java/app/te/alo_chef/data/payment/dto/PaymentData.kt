@@ -1,10 +1,12 @@
 package app.te.alo_chef.data.payment.dto
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
+@Keep
 data class PaymentData(
     @SerializedName("CustomerReference")
     var customerReference: String = "",

@@ -40,7 +40,7 @@
                 android:drawableEnd="@drawable/ic_skip"
                 android:drawablePadding="@dimen/_4sdp"
                 android:gravity="center"
-                android:onClick="@{()-> eventListener.openHome()}"
+                android:onClick="@{()-> eventListener.back()}"
                 android:text="@string/skip"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/white"

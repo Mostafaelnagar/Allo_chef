@@ -1,6 +1,5 @@
 package app.te.alo_chef.presentation.cart
 
-import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import app.te.alo_chef.R
@@ -50,7 +49,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartListener {
         }
         lifecycleScope.launchWhenResumed {
             viewModel.cartItemsTotalFlow.collect {
-                if (it.isNullOrEmpty()) {
+                if (it.isNullOrEmpty() || it == "0.0") {
                     binding.btnAddCart.hide()
                     checkEmptyLayout(true)
                 } else {
@@ -62,7 +61,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartListener {
     }
 
     private fun mapCartItemsToUiState(mealCarts: List<MealCart>) {
-        Log.e("mapCartItemsToUiState", "mapCartItemsToUiState: " + mealCarts.isNotEmpty())
         val cartItems: MutableList<ItemCartUiState> = mutableListOf()
         mealCarts.map { mealCart ->
             cartItems.add(ItemCartUiState(mealCart, this))
@@ -77,8 +75,10 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartListener {
         binding.layoutTryToLogin.icEmptyIcon.show()
         binding.layoutTryToLogin.icEmptyIcon.setImageResource(R.drawable.empty_cart)
         binding.layoutTryToLogin.tvVipWarning.text = getString(R.string.cart_empty)
-        if (!isLogged)
+        if (!isLogged) {
             binding.layoutTryToLogin.tryLogin.show()
+            binding.btnAddCart.hide()
+        }
     }
 
     override

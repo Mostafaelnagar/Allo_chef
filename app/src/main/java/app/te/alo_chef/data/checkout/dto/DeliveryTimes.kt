@@ -1,7 +1,8 @@
 package app.te.alo_chef.data.checkout.dto
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class DeliveryTimes(
     @SerializedName("from")
     var from: String = "",

@@ -2,6 +2,7 @@ package app.te.alo_chef.presentation.checkout.view_model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.te.alo_chef.data.checkout.dto.CheckoutResponse
 import app.te.alo_chef.data.checkout.dto.DeliveryTimes
 import app.te.alo_chef.data.checkout.dto.promo.PromoData
 import app.te.alo_chef.data.general.dto.config.GeneralConfig
@@ -36,7 +37,7 @@ class CheckoutViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _checkoutResponse =
-        MutableStateFlow<Resource<BaseResponse<UserResponse>>>(Resource.Default)
+        MutableStateFlow<Resource<BaseResponse<CheckoutResponse>>>(Resource.Default)
     val checkoutResponse = _checkoutResponse
 
     private val _paymentResponse =

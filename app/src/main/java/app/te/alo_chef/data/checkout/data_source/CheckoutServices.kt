@@ -1,5 +1,6 @@
 package app.te.alo_chef.data.checkout.data_source
 
+import app.te.alo_chef.data.checkout.dto.CheckoutResponse
 import app.te.alo_chef.data.checkout.dto.DeliveryTimes
 import app.te.alo_chef.data.checkout.dto.promo.PromoData
 import app.te.alo_chef.domain.auth.entity.model.UserResponse
@@ -20,6 +21,6 @@ interface CheckoutServices {
     suspend fun getDeliveryTimes(): BaseResponse<List<DeliveryTimes>>
 
     @POST("user/make-order")
-    suspend fun checkout(@Body newOrderRequest: NewOrderRequest): BaseResponse<UserResponse>
+    suspend fun checkout(@Body newOrderRequest: NewOrderRequest): BaseResponse<CheckoutResponse>
 
 }

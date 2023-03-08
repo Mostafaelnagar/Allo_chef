@@ -1,6 +1,5 @@
 package app.te.alo_chef.presentation.subscriptions.view_model
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.te.alo_chef.data.payment.dto.PaymentResponse

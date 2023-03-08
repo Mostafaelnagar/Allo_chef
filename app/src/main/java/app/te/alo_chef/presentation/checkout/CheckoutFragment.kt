@@ -1,9 +1,11 @@
 package app.te.alo_chef.presentation.checkout
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.te.alo_chef.R
 import app.te.alo_chef.data.general.dto.config.GeneralConfig
@@ -13,12 +15,10 @@ import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.base.BaseFragment
 import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.PaymentTypes
-import app.te.alo_chef.presentation.base.extensions.handleApiError
-import app.te.alo_chef.presentation.base.extensions.hideKeyboard
-import app.te.alo_chef.presentation.base.extensions.navigateSafe
-import app.te.alo_chef.presentation.base.extensions.openActivity
+import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.Constants
 import app.te.alo_chef.presentation.base.utils.showNoApiErrorAlert
+import app.te.alo_chef.presentation.base.utils.showSuccessAlert
 import app.te.alo_chef.presentation.checkout.adapters.CartDeliveryDatesAdapter
 import app.te.alo_chef.presentation.checkout.adapters.PaymentTypesAdapter
 import app.te.alo_chef.presentation.checkout.ui_state.ItemPayment
@@ -27,6 +27,7 @@ import app.te.alo_chef.presentation.checkout.listener.CheckoutListener
 import app.te.alo_chef.presentation.checkout.view_model.CheckoutViewModel
 import app.te.alo_chef.presentation.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 
 
 @AndroidEntryPoint
@@ -131,8 +132,16 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
                     }
                     is Resource.Success -> {
                         hideLoading()
-                        if (checkoutViewModel.checkoutUiState.newOrderRequest.paymentMethod == PaymentTypes.ONLINE.paymentType)
-                            checkoutViewModel.getPaymentData()
+                        val response = it.value.data
+                        if (response.payment != null)
+                            it.value.data.payment?.paymentData?.let { it1 ->
+                                openPaymentPage(
+                                    isSuccess = it.value.data.payment.status,
+                                    payment_data = it1
+                                )
+                            }
+                        else
+                            openMyOrders()
                     }
                     is Resource.Failure -> {
                         hideLoading()
@@ -144,6 +153,16 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
         }
     }
 
+    private fun openMyOrders() {
+        showSuccessAlert(requireActivity(), getString(R.string.order_received))
+        viewModel.emptyCart()
+        lifecycleScope.launchWhenResumed {
+            delay(500)
+            openActivityAndClearStack(HomeActivity::class.java)
+        }
+
+    }
+
     private fun setUpPaymentTypesList(data: GeneralConfig) {
         val paymentList: MutableList<ItemPayment> = mutableListOf()
         data.paymentWays.forEach { paymentItem ->
@@ -153,20 +172,13 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
                         PaymentTypes.WALLET.paymentType,
                         paymentItem.name,
                         R.drawable.ic_wallet,
-                        amount = "${checkoutViewModel.checkoutUiState.totalWallet} ${getString(R.string.coin)}"
-                    )
-                )
-            if (paymentItem.id == PaymentTypes.POINTS.paymentType)
-                paymentList.add(
-                    ItemPayment(
-                        PaymentTypes.POINTS.paymentType,
-                        paymentItem.name,
-                        R.drawable.ic_point_payment,
-                        amount = "${checkoutViewModel.checkoutUiState.totalWallet * data.setting.pointEqualityInEgp} ${
+                        amount = "${checkoutViewModel.checkoutUiState.totalWallet} ${getString(R.string.coin)}",
+                        points = "${checkoutViewModel.checkoutUiState.totalWallet * data.setting.pointEqualityInEgp} ${
                             getString(
                                 R.string.coin
                             )
-                        }"
+                        }",
+                        pointVisibility = View.VISIBLE
                     )
                 )
             if (paymentItem.id == PaymentTypes.ONLINE.paymentType)
@@ -246,7 +258,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
     private fun listenToResult() {
         setFragmentResultListener(Constants.PAYMENT_SUCCESS) { _: String, bundle: Bundle ->
             if (bundle.getBoolean(Constants.PAYMENT_SUCCESS)) {
-                requireActivity().openActivity(HomeActivity::class.java)
+                openMyOrders()
             } else
                 showNoApiErrorAlert(requireActivity(), getString(R.string.payment_cancelled))
         }

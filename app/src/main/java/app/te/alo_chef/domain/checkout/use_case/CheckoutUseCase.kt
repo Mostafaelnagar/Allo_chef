@@ -7,6 +7,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CheckoutUseCase @Inject constructor(private val repository: CheckoutRepository) {
+
     suspend fun checkout(newOrderRequest: NewOrderRequest, dispatcher: CoroutineDispatcher) =
         withContext(dispatcher) {
             repository.checkout(newOrderRequest)
