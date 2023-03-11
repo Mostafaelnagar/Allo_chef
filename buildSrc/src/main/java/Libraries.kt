@@ -105,5 +105,6 @@ object Libraries {
     const val cardSlider = "com.github.IslamKhSh:CardSlider:${Versions.cardSlider}"
     const val appsweep_key = "gs_appsweep_IDv9AgD_JEkqGn8O46tmbwExhDdTZLCJlBYj1kaq"
     const val file_picker = "com.github.atwa:filepicker:${Versions.file_picker}"
+    const val myfatoorah = "com.myfatoorah:myfatoorah:${Versions.myfatoorah}"
 
 }

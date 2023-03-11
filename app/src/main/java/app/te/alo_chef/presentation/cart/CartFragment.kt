@@ -2,6 +2,7 @@ package app.te.alo_chef.presentation.cart
 
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import app.te.alo_chef.R
 import app.te.alo_chef.databinding.FragmentCartBinding
 import app.te.alo_chef.domain.cart.entity.MealCart
@@ -22,7 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class CartFragment : BaseFragment<FragmentCartBinding>(), CartListener {
     private val viewModel: CartViewModel by activityViewModels()
     private val cartAdapter = CartAdapter()
-
+    private val args: CartFragmentArgs by navArgs()
+    private var cartTotal: Float = 0f
     override fun setBindingVariables() {
         binding.event = this
         initCartRecycler()
@@ -35,7 +37,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartListener {
     override fun observeAPICall() {
         lifecycleScope.launchWhenResumed {
             viewModel.isLogged.collect { isLogged ->
-                if (isLogged) {
+                if (isLogged && args.cartCount > 0) {
                     viewModel.getCartItems()
                     viewModel.getCartItemsTotal()
                 } else
@@ -49,10 +51,11 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartListener {
         }
         lifecycleScope.launchWhenResumed {
             viewModel.cartItemsTotalFlow.collect {
-                if (it.isNullOrEmpty() || it == "0.0") {
-                    binding.btnAddCart.hide()
+                if (it == null || it == "0.0")
                     checkEmptyLayout(true)
-                } else {
+                else {
+                    binding.btnAddCart.show()
+                    cartTotal = it.toFloat()
                     binding.btnAddCart.text =
                         getString(R.string.checkout).plus(" ($it ${getString(R.string.coin)})")
                 }
@@ -66,7 +69,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartListener {
             cartItems.add(ItemCartUiState(mealCart, this))
         }
         cartAdapter.differ.submitList(cartItems)
-
     }
 
     private fun checkEmptyLayout(isLogged: Boolean) {
@@ -75,9 +77,9 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartListener {
         binding.layoutTryToLogin.icEmptyIcon.show()
         binding.layoutTryToLogin.icEmptyIcon.setImageResource(R.drawable.empty_cart)
         binding.layoutTryToLogin.tvVipWarning.text = getString(R.string.cart_empty)
+        binding.btnAddCart.hide()
         if (!isLogged) {
             binding.layoutTryToLogin.tryLogin.show()
-            binding.btnAddCart.hide()
         }
     }
 
@@ -93,7 +95,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartListener {
     }
 
     override fun openCheckout() {
-        navigateSafe(CartFragmentDirections.actionCartFragmentToCheckoutFragment(viewModel.cartItemsTotalFlow.value.toFloat()))
+        navigateSafe(CartFragmentDirections.actionCartFragmentToCheckoutFragment(cartTotal))
     }
 
     override fun tryLogin() {

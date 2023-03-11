@@ -18,4 +18,10 @@ class PaymentRepositoryImpl @Inject constructor(
         return remoteDataSource.getPaymentData(paymentRequest)
     }
 
+    override suspend fun paymentCallBack(
+        paymentId:String
+    ): Resource<BaseResponse<*>> {
+        return remoteDataSource.paymentCallBack(paymentId)
+    }
+
 }

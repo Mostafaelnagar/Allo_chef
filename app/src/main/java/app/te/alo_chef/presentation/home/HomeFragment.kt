@@ -1,5 +1,6 @@
 package app.te.alo_chef.presentation.home
 
+import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -7,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import app.te.alo_chef.R
+import app.te.alo_chef.core.notifications.app_notification_model.NotificationsType
 import app.te.alo_chef.data.home.data_source.dto.HomeDaysData
 import app.te.alo_chef.data.home.data_source.dto.MealsData
 import app.te.alo_chef.databinding.FragmentHomeBinding
@@ -26,6 +28,7 @@ import app.te.alo_chef.presentation.home.ui_state.HomeDaysUiItemState
 import app.te.alo_chef.presentation.home.ui_state.MealsUiState
 import app.te.alo_chef.presentation.home.viewModels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -66,6 +69,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
                     is Resource.Success -> {
                         hideLoading()
                         updateMeals(it.value.data)
+                        delay(1000)
+                        detectNotifications()
                     }
                     is Resource.Failure -> {
                         hideLoading()
@@ -167,6 +172,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
     }
 
     override fun openCart() {
-        findNavController().navigate(R.id.openCart)
+        navigateSafe(DeepLinks.openCart(cartViewModel.cartCountFlow.value))
+    }
+
+    private fun detectNotifications() {
+        val data = requireActivity().intent.extras
+        Log.e(
+            "detectNotifications",
+            "detectNotifications:" + arguments?.getInt(NotificationsType.ORDER_DETAILS.notificationsType)
+        )
+        if (data?.getInt(NotificationsType.ORDER_DETAILS.notificationsType) != null)
+            openTrackOrder(
+                data.getInt(NotificationsType.ORDER_DETAILS.notificationsType)
+            )
+
+    }
+
+    private fun openTrackOrder(orderId: Int) {
+        navigateSafe(DeepLinks.openOrderDetails(orderId))
     }
 }

@@ -12,6 +12,7 @@ import app.te.alo_chef.databinding.FragmentVipBinding
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.auth.AuthActivity
 import app.te.alo_chef.presentation.base.BaseFragment
+import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.Constants
 import app.te.alo_chef.presentation.base.utils.showSuccessAlert
@@ -130,6 +131,6 @@ class VipFragment : BaseFragment<FragmentVipBinding>(), HomeEventListener {
     }
 
     override fun openCart() {
-        findNavController().navigate(R.id.openCart)
+        navigateSafe(DeepLinks.openCart(cartViewModel.cartCountFlow.value))
     }
 }

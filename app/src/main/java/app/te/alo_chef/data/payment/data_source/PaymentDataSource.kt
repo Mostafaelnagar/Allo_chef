@@ -16,4 +16,11 @@ class PaymentDataSource @Inject constructor(private val apiService: PaymentServi
             )
         }
 
+    suspend fun paymentCallBack(paymentId: String) =
+        safeApiCall {
+            apiService.paymentCallBack(
+                paymentId
+            )
+        }
+
 }

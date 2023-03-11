@@ -12,5 +12,8 @@ data class Setting(
     @SerializedName("meal_price_percentage")
     val mealPricePercentage: String = "",
     @SerializedName("point_equality_in_egp")
-    val pointEqualityInEgp: Float = 0f
+    val pointEqualityInEgp: Float = 0f,
+    @SerializedName("delivery_cost_in_egp")
+    val deliveryCostInEgp: Float = 0f
+
 )

@@ -11,7 +11,7 @@ import app.te.alo_chef.domain.cart.entity.MealCart
 
 @Database(
     entities = [MealCart::class, GeneralConfig::class],
-    version = 4, exportSchema = false
+    version = 5, exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {

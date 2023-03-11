@@ -58,11 +58,11 @@ object Versions {
     const val rx = "2.2.6"
 
     //Fire base
-    const val firebase = "31.2.2"
+    const val firebase = "31.2.3"
     const val hms_push = "6.5.0.300"
     const val hms_core = "1.6.0.300"
     const val hms_remote_config = "1.6.4.300"
-    const val google_services = "4.3.10"
+    const val google_services = "4.3.15"
     const val google_secret = "2.0.0"
     const val firebase_auth = "20.1.0"
     const val facebook_auth = "[8,9)"
@@ -75,5 +75,6 @@ object Versions {
     const val AdvancedWebView = "v3.2.1"
     const val cardSlider = "1.0.1"
     const val file_picker = "1.0.4"
+    const val myfatoorah = "2.2.17"
 
 }

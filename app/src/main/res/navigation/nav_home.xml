@@ -159,5 +159,16 @@
 
     <include app:graph="@navigation/nav_account" />
     <include app:graph="@navigation/nav_more" />
-
+    <fragment
+        android:id="@+id/trackOrderFragment"
+        android:name="app.te.alo_chef.presentation.my_orders.TrackOrderFragment"
+        android:label="@string/tv_track"
+        tools:layout="@layout/fragment_track_order">
+        <argument
+            android:name="order_id"
+            app:argType="integer" />
+        <deepLink
+            android:id="@+id/deepLink10"
+            app:uri="android-app://track_order.alo_chef/{order_id}" />
+    </fragment>
 </navigation>

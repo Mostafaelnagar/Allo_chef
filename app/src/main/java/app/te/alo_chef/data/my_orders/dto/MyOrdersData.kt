@@ -1,7 +1,8 @@
 package app.te.alo_chef.data.my_orders.dto
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class MyOrdersData(
     @SerializedName("copon_id")
      var coponId: String = "",

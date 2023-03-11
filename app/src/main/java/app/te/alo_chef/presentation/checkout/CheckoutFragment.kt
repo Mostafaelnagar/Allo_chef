@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.te.alo_chef.R
 import app.te.alo_chef.data.general.dto.config.GeneralConfig
@@ -74,13 +73,11 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
                 checkoutViewModel.checkoutUiState.totalWallet = data.second
             }
         }
-
         lifecycleScope.launchWhenResumed {
             checkoutViewModel.savedGeneralConfig.collect { data ->
                 setUpPaymentTypesList(data)
             }
         }
-
         lifecycleScope.launchWhenResumed {
             checkoutViewModel.checkPromoResponse.collect {
                 when (it) {
@@ -173,7 +170,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
                         paymentItem.name,
                         R.drawable.ic_wallet,
                         amount = "${checkoutViewModel.checkoutUiState.totalWallet} ${getString(R.string.coin)}",
-                        points = "${checkoutViewModel.checkoutUiState.totalWallet * data.setting.pointEqualityInEgp} ${
+                        points = "${checkoutViewModel.checkoutUiState.totalPoints * data.setting.pointEqualityInEgp} ${
                             getString(
                                 R.string.coin
                             )
@@ -258,9 +255,12 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
     private fun listenToResult() {
         setFragmentResultListener(Constants.PAYMENT_SUCCESS) { _: String, bundle: Bundle ->
             if (bundle.getBoolean(Constants.PAYMENT_SUCCESS)) {
+                bundle.getString(Constants.PAYMENT_ID)
+                    ?.let { checkoutViewModel.paymentCallBack(it) }
                 openMyOrders()
-            } else
+            } else {
                 showNoApiErrorAlert(requireActivity(), getString(R.string.payment_cancelled))
+            }
         }
     }
 }

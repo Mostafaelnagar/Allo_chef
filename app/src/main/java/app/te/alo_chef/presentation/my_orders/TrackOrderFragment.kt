@@ -9,6 +9,7 @@ import app.te.alo_chef.R
 import app.te.alo_chef.databinding.FragmentTrackOrderBinding
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.base.BaseFragment
+import app.te.alo_chef.presentation.base.extensions.backToPreviousScreen
 import app.te.alo_chef.presentation.base.extensions.handleApiError
 import app.te.alo_chef.presentation.base.extensions.hideKeyboard
 import app.te.alo_chef.presentation.my_orders.ui_state.OrderItemUiState
@@ -23,7 +24,10 @@ class TrackOrderFragment : BaseFragment<FragmentTrackOrderBinding>() {
     private val args: TrackOrderFragmentArgs by navArgs()
 
     override fun setUpViews() {
-        viewModel.getOrderDetails(args.orderId)
+        if (args.orderId == 0)
+            backToPreviousScreen()
+        else
+            viewModel.getOrderDetails(args.orderId)
     }
 
     override fun observeAPICall() {

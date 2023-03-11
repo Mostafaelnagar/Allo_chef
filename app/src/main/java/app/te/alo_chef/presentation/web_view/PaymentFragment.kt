@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.navArgs
@@ -15,8 +14,10 @@ import app.te.alo_chef.presentation.base.extensions.backToPreviousScreen
 import app.te.alo_chef.presentation.base.extensions.decodeUrl
 import app.te.alo_chef.presentation.base.extensions.onBackPressedCustomAction
 import app.te.alo_chef.presentation.base.utils.Constants
+import app.te.alo_chef.presentation.base.utils.getParamsFromUrl
 import dagger.hilt.android.AndroidEntryPoint
 import im.delight.android.webview.AdvancedWebView
+
 
 @AndroidEntryPoint
 class PaymentFragment : BaseFragment<FragmentWebViewBinding>(), AdvancedWebView.Listener {
@@ -36,7 +37,7 @@ class PaymentFragment : BaseFragment<FragmentWebViewBinding>(), AdvancedWebView.
 
     override fun setUpViews() {
         onBackPressedCustomAction(action = {
-            finishWithResult(false)
+            finishWithResult(false, "")
         })
 
     }
@@ -67,14 +68,14 @@ class PaymentFragment : BaseFragment<FragmentWebViewBinding>(), AdvancedWebView.
 
     override fun onPageStarted(url: String?, favicon: Bitmap?) {
         if (url?.contains(decodeUrl(args.responseUrl)) == true) {
-            finishWithResult(true)
+            finishWithResult(true, getParamsFromUrl(url, "paymentId")[0])
         }
         binding.webview.visibility = View.VISIBLE
     }
 
     override fun onPageFinished(url: String) {
         if (url.contains(decodeUrl(args.responseUrl))) {
-            finishWithResult(true)
+            finishWithResult(true, getParamsFromUrl(url, "paymentId")[0])
         }
         binding.webProgress.visibility = View.GONE
     }
@@ -94,13 +95,18 @@ class PaymentFragment : BaseFragment<FragmentWebViewBinding>(), AdvancedWebView.
 
     override fun onExternalPageRequest(url: String?) {}
 
-    private fun finishWithResult(isSuccess: Boolean) {
+    private fun finishWithResult(isSuccess: Boolean, paymentId: String) {
         val bundle = Bundle()
 
         bundle.putBoolean(
             Constants.PAYMENT_SUCCESS,
             isSuccess
         )
+        bundle.putString(
+            Constants.PAYMENT_ID,
+            paymentId
+        )
+
         setFragmentResult(Constants.PAYMENT_SUCCESS, bundle)
 
         backToPreviousScreen()

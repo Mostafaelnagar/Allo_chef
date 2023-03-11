@@ -1,7 +1,6 @@
 package app.te.alo_chef.presentation.favorites
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +12,7 @@ import app.te.alo_chef.databinding.FragmentFavoritesBinding
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.auth.AuthActivity
 import app.te.alo_chef.presentation.base.BaseFragment
+import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.Constants
 import app.te.alo_chef.presentation.base.utils.showSuccessAlert
@@ -130,7 +130,8 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>(), HomeEventLis
     override fun openSearch() {
         navigateSafe(FavoritesFragmentDirections.actionFavoriteFragmentToSearchFragment())
     }
+
     override fun openCart() {
-        findNavController().navigate(R.id.openCart)
+        navigateSafe(DeepLinks.openCart(cartViewModel.cartCountFlow.value))
     }
 }

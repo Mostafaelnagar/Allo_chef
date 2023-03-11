@@ -85,7 +85,7 @@
     <string name="valid_egy_number">Number format is not valid</string>
     <string name="email_not_valid">Email not valid</string>
     <string name="confirm_resend"><u>Resend</u></string>
-    <string name="default_notification_channel_id" translatable="false">lima_app_notification_channel_id</string>
+    <string name="default_notification_channel_id" translatable="false">allo_app_notification_channel_id</string>
     <string name="permission_dialog_content1">Allow permission to receive notification</string>
     <string name="please_enter_4_digit_code">Please enter the 4 digit code send to</string>
     <string name="verify">Verify</string>

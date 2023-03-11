@@ -4,26 +4,19 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.media.AudioAttributes
 import android.os.Build
+import android.os.Bundle
 import androidx.core.app.NotificationCompat
+import androidx.navigation.NavDeepLinkBuilder
 import app.te.alo_chef.R
 import app.te.alo_chef.core.notifications.app_notification_model.LimaRemoteMessages
-import app.te.alo_chef.presentation.base.utils.Constants
+import app.te.alo_chef.core.notifications.app_notification_model.NotificationsType
 import app.te.alo_chef.presentation.home.HomeActivity
-import kotlin.random.Random
 
 
 fun showNotification(context: Context, remoteMessage: LimaRemoteMessages) {
     val channelId = "channelIds"
-    val pendingIntent = PendingIntent.getActivity(
-        context,
-        Random.nextInt(),
-        createNotificationIntent(context),
-        getPendingIntentFlag()
-    )
-
     val notificationBuilder = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(R.mipmap.ic_launcher)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -36,7 +29,7 @@ fun showNotification(context: Context, remoteMessage: LimaRemoteMessages) {
         .setAutoCancel(true)
         .setDefaults(NotificationCompat.DEFAULT_SOUND or NotificationCompat.DEFAULT_VIBRATE)
         .setSound(SoundUtils.getNotificationsSound())
-        .setContentIntent(pendingIntent)
+        .setContentIntent(createNotificationIntent(context, remoteMessage.data))
 
     val notificationManager =
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -68,22 +61,37 @@ fun showNotification(context: Context, remoteMessage: LimaRemoteMessages) {
 
 
 private fun createNotificationIntent(
-    context: Context
-): Intent {
+    context: Context,
+    data: MutableMap<String, String>
+): PendingIntent {
+    if (data[NotificationsType.ORDER_DETAILS.notificationsType]?.isNotEmpty() == true)
+        return createOrderDetailsIntent(
+            context,
+            data[NotificationsType.ORDER_DETAILS.notificationsType]
+        )
     return createDefaultNotificationIntent(context)
+}
+
+fun createOrderDetailsIntent(context: Context, orderId: String?): PendingIntent {
+    val bundle = Bundle()
+    bundle.putInt(NotificationsType.ORDER_DETAILS.notificationsType, orderId?.toInt() ?: 0)
+    return NavDeepLinkBuilder(context)
+        .setComponentName(HomeActivity::class.java)
+        .setGraph(R.navigation.nav_home)
+        .setDestination(R.id.trackOrderFragment)
+        .setArguments(bundle)
+        .createPendingIntent()
 }
 
 private fun createDefaultNotificationIntent(
     context: Context,
-): Intent {
-    return Intent(context, HomeActivity::class.java).apply {
-        try {
-            putExtra(Constants.NOTIFICATION, true)
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
+): PendingIntent {
+    return NavDeepLinkBuilder(context)
+        .setComponentName(HomeActivity::class.java)
+        .setGraph(R.navigation.nav_home)
+        .setDestination(R.id.home_fragment)
+        .createPendingIntent()
+
 }
 
 private fun getPendingIntentFlag(): Int {

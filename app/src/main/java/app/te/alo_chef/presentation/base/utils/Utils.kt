@@ -160,3 +160,12 @@ fun rateYourApp(context: Context) {
         )
     }
 }
+
+fun getParamsFromUrl(url: String, vararg params: String): List<String> {
+    val results: MutableList<String> = mutableListOf()
+    val uri = Uri.parse(url)
+    params.forEach { param ->
+        uri.getQueryParameter(param)?.let { results.add(it) }
+    }
+    return results
+}

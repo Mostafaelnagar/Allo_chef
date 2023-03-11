@@ -52,9 +52,8 @@ open class MealsUiState(val homeMealsData: MealsData, val homeEventListener: Hom
         if (homeMealsData.priceBefore.isNotEmpty()) View.VISIBLE else View.GONE
 
     fun priceAfter(context: Context): String =
-        if (homeMealsData.priceAfter.isNotEmpty()) "${homeMealsData.priceAfter} ${
-            context.getString(R.string.coin)
-        }"
+        if (homeMealsData.priceAfter != 0.0)
+            "${homeMealsData.priceAfter} ${context.getString(R.string.coin)}"
         else
             "0.0"
 
@@ -64,7 +63,7 @@ open class MealsUiState(val homeMealsData: MealsData, val homeEventListener: Hom
         else
             context.getString(R.string.subscribe)
 
-   open fun btnClick() {
+    open fun btnClick() {
         homeEventListener.addToCart(homeMealsData, homeMealsData.add_to_cart)
     }
 

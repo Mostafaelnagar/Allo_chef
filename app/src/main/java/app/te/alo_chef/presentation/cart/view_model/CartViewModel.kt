@@ -44,7 +44,7 @@ class CartViewModel @Inject constructor(
     val walletPointFlow = _walletPointFlow
 
     private val _cartItemsTotalFlow =
-        MutableStateFlow("0.0")
+        MutableSharedFlow<String>()
     val cartItemsTotalFlow = _cartItemsTotalFlow
 
     private val _cartDeliveryDates =
@@ -70,7 +70,7 @@ class CartViewModel @Inject constructor(
     fun getCartItemsTotal() {
         viewModelScope.launch {
             cartItemsTotalUseCase.getCartItemsTotal(Dispatchers.IO).collect {
-                _cartItemsTotalFlow.value = it
+                _cartItemsTotalFlow.emit(it)
             }
         }
     }
@@ -145,6 +145,7 @@ class CartViewModel @Inject constructor(
             }
         }
     }
+
     fun checkUserLogged() {
         Log.e("checkUserLogged", "checkUserLogged: ")
         viewModelScope.launch {

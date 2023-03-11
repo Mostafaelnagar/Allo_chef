@@ -15,7 +15,7 @@ class LogInRequest {
             validation.passwordError.set(null)
             field = value
         }
-    var firebase_token: String = ""
+    var token: String = ""
     var provider_id: String = ""
     var objective: String = ""
     var email: String = ""

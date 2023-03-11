@@ -33,9 +33,14 @@ object DeepLinks {
     const val ORDERS_LINK = "android-app://orders.alo_chef"
     const val LOCATIONS_LINK = "android-app://locations.alo_chef"
     const val SUBSCRIPTIONS_LINK = "android-app://subscriptions.alo_chef"
+    const val CART_LINK = "android-app://cart.alo_chef/"
+    const val TRACK_ORDER_LINK = "android-app://track_order.alo_chef/"
 
     fun openPayment(invoiceURL: String, responseURL: String, title: String): String =
         "android-app://payment.alo_chef/${encodeUrl(invoiceURL)}/${encodeUrl(responseURL)}/${title}"
+
+    fun openCart(cartCount: Int): String = CART_LINK.plus(cartCount)
+    fun openOrderDetails(orderId: Int): String = TRACK_ORDER_LINK.plus(orderId)
 
 
 }

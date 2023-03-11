@@ -21,6 +21,7 @@ import app.te.alo_chef.data.home.data_source.dto.MealsData
 import app.te.alo_chef.data.meal_details.dto.IngredientsItem
 import app.te.alo_chef.data.meal_details.dto.MealImages
 import app.te.alo_chef.presentation.auth.AuthActivity
+import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.utils.Constants
 import app.te.alo_chef.presentation.cart.view_model.CartViewModel
 import app.te.alo_chef.presentation.home.adapters.ProductsAdapter
@@ -185,6 +186,10 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
                 openSubscriptions()
         }
 
+    }
+
+    override fun openCart() {
+        navigateSafe(DeepLinks.openCart(cartViewModel.cartCountFlow.value))
     }
 
     override fun back() {

@@ -10,6 +10,7 @@ import app.te.alo_chef.databinding.FragmentMyOrdersBinding
 import app.te.alo_chef.domain.orders.entity.OrderHistoryType
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.base.BaseFragment
+import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.extensions.handleApiError
 import app.te.alo_chef.presentation.base.extensions.hideKeyboard
 import app.te.alo_chef.presentation.base.extensions.navigateSafe
@@ -84,11 +85,7 @@ class MyOrdersFragment : BaseFragment<FragmentMyOrdersBinding>(), OrdersListener
     fun getLayoutId() = R.layout.fragment_my_orders
 
     override fun openOrderDetails(selectedItemUiState: OrderItemUiState) {
-        navigateSafe(
-            MyOrdersFragmentDirections.actionMyOrdersFragmentToTrackOrderFragment(
-                selectedItemUiState.myOrdersData.id
-            )
-        )
+        navigateSafe(DeepLinks.openOrderDetails(selectedItemUiState.myOrdersData.id))
     }
 
     override fun openOrderHistory() {

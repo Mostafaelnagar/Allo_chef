@@ -22,11 +22,10 @@ class CartRepositoryImpl @Inject constructor(
     override fun getDeliveryDates(): Flow<List<String>> =
         cartDataSource.getDeliveryDates()
 
-
     override suspend fun addToCart(cart: MealCart) {
         val exits = cartDataSource.getIfMealExists(cart.product_id)
         if (exits == 0) {
-            cart.priceAfter = (cart.priceAfter.toFloat() * cart.quantity).toString()
+            cart.priceAfter = cart.priceAfter * cart.quantity
             cartDataSource.addToCart(cart)
         } else
             updateQuantityCart(cart.product_id, cart.quantity)

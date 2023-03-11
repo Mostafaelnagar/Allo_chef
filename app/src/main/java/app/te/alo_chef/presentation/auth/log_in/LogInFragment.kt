@@ -13,6 +13,7 @@ import app.te.alo_chef.presentation.auth.social.SocialHelper
 import app.te.alo_chef.presentation.base.BaseFragment
 import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.Constants
+import app.te.alo_chef.presentation.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -67,9 +68,7 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(), LoginEventListener {
     override fun openHome() {
         lifecycleScope.launch {
             viewModel.userLocalUseCase.invoke().collect { user ->
-                if (user.name.isNotEmpty()) {
-                    back()
-                } else toRegister()
+                openActivityAndClearStack(HomeActivity::class.java)
             }
         }
 

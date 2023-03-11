@@ -1,7 +1,8 @@
 package app.te.alo_chef.data.wallet.dto
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class TransActionsHistoryItem(
     @SerializedName("subscription_id")
     var subscriptionId: String = "",

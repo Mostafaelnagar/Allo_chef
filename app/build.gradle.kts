@@ -222,6 +222,8 @@ dependencies {
 
     //file_picker
     implementation(Libraries.file_picker)
+ //myfatoorah
+    implementation(Libraries.myfatoorah)
 
     // Project Modules
     implementation(project(Config.Modules.prettyPopUp))

@@ -18,7 +18,7 @@ class ItemCartUiState(val mealCart: MealCart, private val cartListener: CartList
         }
 
     fun itemPrice(context: Context): String =
-        mealCart.priceAfter.plus(" ${context.getString(R.string.coin)}")
+        mealCart.priceAfter.toString().plus(" ${context.getString(R.string.coin)}")
 
     fun plus() {
         itemCount = itemCount.plus(1)

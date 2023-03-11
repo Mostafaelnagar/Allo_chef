@@ -47,7 +47,7 @@ class LogInViewModel @Inject constructor(
 
     fun updateFireBaseToken(context: Context) {
         FCMManager.generateFCMToken(context) { token ->
-            request.firebase_token = token
+            request.token = token
         }
     }
 

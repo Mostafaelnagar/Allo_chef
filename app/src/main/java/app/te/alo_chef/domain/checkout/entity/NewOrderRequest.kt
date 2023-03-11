@@ -1,8 +1,9 @@
 package app.te.alo_chef.domain.checkout.entity
 
+import androidx.annotation.Keep
 import app.te.alo_chef.domain.cart.entity.MealCart
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class NewOrderRequest(
     @SerializedName("period_id")
     var deliveryTime: Int = 0,

@@ -13,4 +13,9 @@ interface PaymentServices {
         @Query("type") type: String,
     ): BaseResponse<PaymentResponse>
 
+    @GET("check-payment-status")
+    suspend fun paymentCallBack(
+        @Query("paymentId") paymentId: String,
+    ): BaseResponse<*>
+
 }

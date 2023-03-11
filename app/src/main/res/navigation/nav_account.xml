@@ -52,13 +52,6 @@
         android:label="@string/my_orders"
         tools:layout="@layout/fragment_my_orders">
         <action
-            android:id="@+id/action_myOrdersFragment_to_trackOrderFragment"
-            app:destination="@id/trackOrderFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-        <action
             android:id="@+id/action_myOrdersFragment_to_previousOrdersFragment"
             app:destination="@id/previousOrdersFragment"
             app:enterAnim="@anim/anim_slide_in_right"
@@ -70,28 +63,12 @@
             app:uri="android-app://orders.alo_chef" />
     </fragment>
 
-    <fragment
-        android:id="@+id/trackOrderFragment"
-        android:name="app.te.alo_chef.presentation.my_orders.TrackOrderFragment"
-        android:label="@string/tv_track"
-        tools:layout="@layout/fragment_track_order" >
-        <argument
-            android:name="order_id"
-            app:argType="integer" />
-    </fragment>
+
     <fragment
         android:id="@+id/previousOrdersFragment"
         android:name="app.te.alo_chef.presentation.my_orders.PreviousOrdersFragment"
         android:label="@string/order_history"
-        tools:layout="@layout/fragment_previous_orders">
-        <action
-            android:id="@+id/action_previousOrdersFragment_to_trackOrderFragment"
-            app:destination="@id/trackOrderFragment"
-            app:enterAnim="@anim/anim_slide_in_right"
-            app:exitAnim="@anim/anim_slide_out_left"
-            app:popEnterAnim="@anim/anim_slide_in_left"
-            app:popExitAnim="@anim/anim_slide_out_right" />
-    </fragment>
+        tools:layout="@layout/fragment_previous_orders"/>
 
 
     <fragment

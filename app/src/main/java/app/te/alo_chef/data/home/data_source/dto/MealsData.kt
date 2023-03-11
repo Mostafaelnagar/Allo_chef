@@ -35,7 +35,7 @@ data class MealsData(
 
     @SerializedName("price_after")
     @Expose
-    val priceAfter: String = "",
+    val priceAfter: Double = 0.0,
 
     @SerializedName("image")
     @Expose

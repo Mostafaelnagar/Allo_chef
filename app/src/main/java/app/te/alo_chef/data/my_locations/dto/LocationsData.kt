@@ -1,7 +1,8 @@
 package app.te.alo_chef.data.my_locations.dto
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class LocationsData(
     @SerializedName("main")
     var main: String = "",

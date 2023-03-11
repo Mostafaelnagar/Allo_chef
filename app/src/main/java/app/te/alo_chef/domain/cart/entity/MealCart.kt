@@ -1,9 +1,10 @@
 package app.te.alo_chef.domain.cart.entity
 
+import androidx.annotation.Keep
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-
+@Keep
 @Entity(tableName = "MealCart")
 data class MealCart(
     @SerializedName("image")
@@ -13,7 +14,7 @@ data class MealCart(
     var quantity: Int = 0,
 
     @SerializedName("price_after")
-    var priceAfter: String = "",
+    var priceAfter: Double = 0.0,
 
     @SerializedName("points")
     var points: Int = 0,

@@ -10,4 +10,8 @@ interface PaymentRepository {
     suspend fun getPaymentData(
         paymentRequest: PaymentRequest
     ): Resource<BaseResponse<PaymentResponse>>
+
+    suspend fun paymentCallBack(
+        paymentId: String
+    ): Resource<BaseResponse<*>>
 }

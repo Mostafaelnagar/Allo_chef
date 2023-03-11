@@ -3,9 +3,9 @@ object Config {
         const val appId = "app.te.alo_chef"
         const val compileSdkVersion = 33
         const val minSdkVersion = 23
-        const val versionCode = 8
-        const val versionCodeTest = 16
-        const val versionName = "15-09-2022 (1.7)"
+        const val versionCode = 1
+        const val versionCodeTest = 1
+        const val versionName = "11-03-2023 (1.0.0)"
         const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
         const val cmakePath = "jni/CMakeLists.txt"
     }

@@ -1,8 +1,9 @@
 package app.te.alo_chef.domain.my_locations.entity
 
+import androidx.annotation.Keep
 import androidx.databinding.ObservableField
 import com.google.gson.annotations.SerializedName
-
+@Keep
 class AddLocationRequest {
 
     @SerializedName("lat")
