@@ -67,7 +67,7 @@ class AddLocationFragment : BaseFragment<FragmentAddPlaceBinding>(), AddLocation
                 }
             }
         }
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+        lifecycleScope.launchWhenResumed {
             viewModel.addLocationResponse.collect {
                 when (it) {
                     Resource.Loading -> {

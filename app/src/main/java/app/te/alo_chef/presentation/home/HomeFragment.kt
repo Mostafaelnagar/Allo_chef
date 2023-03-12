@@ -159,8 +159,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
                 showSuccessAlert(requireActivity(), getString(R.string.added_cart))
             } else
                 openSubscriptions()
-        }
+        } else
+            opnLogin()
 
+    }
+
+    private fun opnLogin() {
+        openIntentActivity(AuthActivity::class.java, R.id.logInFragment)
     }
 
     override fun openSubscriptions() {

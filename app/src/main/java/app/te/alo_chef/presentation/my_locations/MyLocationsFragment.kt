@@ -8,10 +8,7 @@ import app.te.alo_chef.databinding.FragmentMyLocationBinding
 import app.te.alo_chef.domain.my_locations.entity.AddLocationRequest
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.base.BaseFragment
-import app.te.alo_chef.presentation.base.extensions.handleApiError
-import app.te.alo_chef.presentation.base.extensions.hideKeyboard
-import app.te.alo_chef.presentation.base.extensions.navigateSafe
-import app.te.alo_chef.presentation.base.extensions.show
+import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.my_locations.adapters.MyLocationsAdapters
 import app.te.alo_chef.presentation.my_locations.listeners.LocationsListener
 import app.te.alo_chef.presentation.my_locations.view_models.LocationsViewModel

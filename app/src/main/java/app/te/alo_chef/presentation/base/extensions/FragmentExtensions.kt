@@ -153,14 +153,6 @@ fun Fragment.backToPreviousScreen() {
     findNavController().navigateUp()
 }
 
-fun makeActionSound(context: Context) {
-    val defaultSoundUri: Uri = Uri.parse(
-        ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.packageName + "/" + R.raw.like
-    )
-    val r = RingtoneManager.getRingtone(context, defaultSoundUri)
-    r.play()
-}
-
 
 fun checkNotificationsPermissions(activity: Activity, operation: () -> Unit) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

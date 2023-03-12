@@ -15,7 +15,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/slider_container"
+        android:id="@+id/location_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_4sdp"
@@ -44,6 +44,7 @@
             android:checked="@{item.selected}"
             android:minWidth="0dp"
             android:minHeight="0dp"
+            android:clickable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

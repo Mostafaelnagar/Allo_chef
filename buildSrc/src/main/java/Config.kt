@@ -4,7 +4,7 @@ object Config {
         const val compileSdkVersion = 33
         const val minSdkVersion = 23
         const val versionCode = 1
-        const val versionCodeTest = 1
+        const val versionCodeTest = 2
         const val versionName = "11-03-2023 (1.0.0)"
         const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
         const val cmakePath = "jni/CMakeLists.txt"

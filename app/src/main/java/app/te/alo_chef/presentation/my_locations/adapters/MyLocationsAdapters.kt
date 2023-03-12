@@ -33,7 +33,7 @@ class MyLocationsAdapters(val locationsListener: LocationsListener) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = differ.currentList[position]
-        holder.itemLayoutBinding.radio.setOnClickListener {
+        holder.itemLayoutBinding.locationContainer.setOnClickListener {
             locationsListener.saveAsDefault(data)
             resubmitLocations(data)
         }
