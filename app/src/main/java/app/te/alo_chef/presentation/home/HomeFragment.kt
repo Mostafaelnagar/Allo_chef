@@ -1,12 +1,8 @@
 package app.te.alo_chef.presentation.home
 
-import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import app.te.alo_chef.R
 import app.te.alo_chef.core.notifications.app_notification_model.NotificationsType
 import app.te.alo_chef.data.home.data_source.dto.HomeDaysData
@@ -29,7 +25,6 @@ import app.te.alo_chef.presentation.home.ui_state.MealsUiState
 import app.te.alo_chef.presentation.home.viewModels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -59,7 +54,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
 
     override
     fun setupObservers() {
-        lifecycleScope.launchWhenResumed {
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.filterResponse.collect {
                 when (it) {
                     Resource.Loading -> {
@@ -80,39 +75,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
                 }
             }
         }
-        lifecycleScope.launchWhenResumed {
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             cartViewModel.cartCountFlow.collect {
                 binding.cartCount = it
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-
-                launch {
-                    viewModel.homeResponse.collect {
-                        when (it) {
-                            Resource.Loading -> {
-                                hideKeyboard()
-                                showLoading()
-                            }
-                            is Resource.Success -> {
-                                hideLoading()
-                                viewModel.dayDate = it.value.data.day_date
-                                updateDays(it.value.data.homeDaysDataList)
-                                updateMeals(it.value.data.mealsDataList)
-                            }
-                            is Resource.Failure -> {
-                                hideLoading()
-                                handleApiError(it)
-                            }
-                            else -> {}
-                        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.homeResponse.collect {
+                when (it) {
+                    Resource.Loading -> {
+                        hideKeyboard()
+                        showLoading()
                     }
+                    is Resource.Success -> {
+                        hideLoading()
+                        viewModel.dayDate = it.value.data.day_date
+                        updateDays(it.value.data.homeDaysDataList)
+                        updateMeals(it.value.data.mealsDataList)
+                    }
+                    is Resource.Failure -> {
+                        hideLoading()
+                        handleApiError(it)
+                    }
+                    else -> {}
                 }
             }
-
         }
+
     }
 
     private fun updateMeals(mealsDataList: List<MealsData>) {
@@ -169,7 +159,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
     }
 
     override fun openSubscriptions() {
-        navigateSafe(DeepLinks.SUBSCRIPTIONS_LINK)
+        if (viewModel.isLogged.value) {
+            navigateSafe(DeepLinks.SUBSCRIPTIONS_LINK)
+        } else
+            opnLogin()
     }
 
     override fun openFilter() {
@@ -182,10 +175,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
 
     private fun detectNotifications() {
         val data = requireActivity().intent.extras
-        Log.e(
-            "detectNotifications",
-            "detectNotifications:" + arguments?.getInt(NotificationsType.ORDER_DETAILS.notificationsType)
-        )
         if (data?.getInt(NotificationsType.ORDER_DETAILS.notificationsType) != null)
             openTrackOrder(
                 data.getInt(NotificationsType.ORDER_DETAILS.notificationsType)

@@ -184,8 +184,13 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
                 cartViewModel.addToCart(homeMealsData)
             else
                 openSubscriptions()
-        }
+        } else
+            opnLogin()
 
+    }
+
+    private fun opnLogin() {
+        openIntentActivity(AuthActivity::class.java, R.id.logInFragment)
     }
 
     override fun openCart() {

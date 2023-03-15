@@ -142,6 +142,7 @@
                         android:layout_marginTop="@dimen/_6sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:background="@drawable/badge_white"
+                        android:visibility="invisible"
                         android:src="@drawable/ic_more_share"
                         app:layout_constraintEnd_toStartOf="@id/ic_favorite"
                         app:layout_constraintTop_toBottomOf="@id/tv_home_title" />
