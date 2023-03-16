@@ -148,6 +148,7 @@ class RepositoryModule {
     @Singleton
     fun providePaymentRepository(
         remoteDataSource: PaymentDataSource,
-    ): PaymentRepository = PaymentRepositoryImpl(remoteDataSource)
+        appPreferences: AppPreferences
+    ): PaymentRepository = PaymentRepositoryImpl(remoteDataSource,appPreferences)
 
 }

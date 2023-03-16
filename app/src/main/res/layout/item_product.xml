@@ -133,6 +133,7 @@
                 android:textAlignment="viewStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/colordark"
+                android:visibility="@{uiState.priceAfterVisibility()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_home_old_price"
                 tools:text="200 EGP" />

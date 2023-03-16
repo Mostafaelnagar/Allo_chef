@@ -141,7 +141,8 @@ class SubscriptionsFragment : BaseFragment<FragmentSubscriptionsBinding>(), Subs
     private fun listenToResult() {
         setFragmentResultListener(Constants.PAYMENT_SUCCESS) { _: String, bundle: Bundle ->
             if (bundle.getBoolean(Constants.PAYMENT_SUCCESS)) {
-                viewModel.updateLocalUser()
+                bundle.getString(Constants.PAYMENT_ID)
+                    ?.let { viewModel.paymentCallBack(it) }
                 showSuccessAlert(requireActivity(), getString(R.string.subscribe_done))
             } else
                 showNoApiErrorAlert(requireActivity(), getString(R.string.payment_cancelled))

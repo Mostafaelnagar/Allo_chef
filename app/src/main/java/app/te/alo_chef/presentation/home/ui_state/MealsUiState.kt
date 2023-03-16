@@ -49,7 +49,10 @@ open class MealsUiState(val homeMealsData: MealsData, val homeEventListener: Hom
             ""
 
     fun priceBeforeVisibility(): Int =
-        if (homeMealsData.priceBefore.isNotEmpty()) View.VISIBLE else View.GONE
+        if (homeMealsData.priceBefore != "0") View.VISIBLE else View.GONE
+
+    fun priceAfterVisibility(): Int =
+        if (homeMealsData.priceAfter != 0.0) View.VISIBLE else View.GONE
 
     fun priceAfter(context: Context): String =
         if (homeMealsData.priceAfter != 0.0)

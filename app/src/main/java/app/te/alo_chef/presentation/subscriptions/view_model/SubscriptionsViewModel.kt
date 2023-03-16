@@ -9,6 +9,7 @@ import app.te.alo_chef.domain.account.use_case.UserLocalUseCase
 import app.te.alo_chef.domain.auth.entity.model.UserResponse
 import app.te.alo_chef.domain.payment.entity.PaymentRequest
 import app.te.alo_chef.domain.payment.entity.SendPaymentType
+import app.te.alo_chef.domain.payment.use_case.CheckPaymentCallBackUseCase
 import app.te.alo_chef.domain.payment.use_case.PaymentDataUseCase
 import app.te.alo_chef.domain.subscriptions.entity.SubscribeRequest
 import app.te.alo_chef.domain.subscriptions.use_case.SubscribeUseCase
@@ -27,7 +28,8 @@ class SubscriptionsViewModel @Inject constructor(
     private val subscriptionsUseCase: SubscriptionsUseCase,
     private val subscribeUseCase: SubscribeUseCase,
     private val paymentDataUseCase: PaymentDataUseCase,
-    private val userLocalUseCase: UserLocalUseCase
+    private val userLocalUseCase: UserLocalUseCase,
+    private val checkPaymentCallBackUseCase: CheckPaymentCallBackUseCase,
 ) : ViewModel() {
     lateinit var subscriptionData: SubscriptionData
     lateinit var userResponse: UserResponse
@@ -83,6 +85,14 @@ class SubscriptionsViewModel @Inject constructor(
                 userResponse.wallet += subscriptionData.price
                 userLocalUseCase.invoke(userResponse)
             }
+        }
+    }
+
+    fun paymentCallBack(paymentId: String) {
+        viewModelScope.launch {
+//            _paymentResponse.value = Resource.Loading
+//            _paymentResponse.value =
+            checkPaymentCallBackUseCase.paymentCallBack(paymentId, Dispatchers.IO)
         }
     }
 }

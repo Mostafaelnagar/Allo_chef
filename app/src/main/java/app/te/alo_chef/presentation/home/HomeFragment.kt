@@ -54,7 +54,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
 
     override
     fun setupObservers() {
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+        lifecycleScope.launchWhenResumed {
             viewModel.filterResponse.collect {
                 when (it) {
                     Resource.Loading -> {
@@ -75,13 +75,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
                 }
             }
         }
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+        lifecycleScope.launchWhenResumed {
             cartViewModel.cartCountFlow.collect {
                 binding.cartCount = it
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+        lifecycleScope.launchWhenResumed {
             viewModel.homeResponse.collect {
                 when (it) {
                     Resource.Loading -> {
