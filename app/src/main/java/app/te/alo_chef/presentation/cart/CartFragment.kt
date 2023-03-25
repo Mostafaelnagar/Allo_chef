@@ -87,7 +87,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(), CartListener {
     fun getLayoutId() = R.layout.fragment_cart
 
     override fun updateProductQuantity(productId: Int, quantity: Int) {
-        viewModel.updateProductQuantity(quantity = quantity, productId = productId)
+            viewModel.updateProductQuantity(quantity = quantity, productId = productId)
     }
 
     override fun deleteItem(roomId: Int) {

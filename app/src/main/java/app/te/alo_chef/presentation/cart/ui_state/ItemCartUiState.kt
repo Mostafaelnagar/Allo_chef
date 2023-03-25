@@ -26,9 +26,11 @@ class ItemCartUiState(val mealCart: MealCart, private val cartListener: CartList
     }
 
     fun minus() {
-        if (itemCount > 1)
+        if (itemCount > 1) {
             itemCount = itemCount.minus(1)
-        cartListener.updateProductQuantity(productId = mealCart.product_id, -1)
+            cartListener.updateProductQuantity(productId = mealCart.product_id, -1)
+        } else
+            deleteItem()
     }
 
     fun deleteItem() {

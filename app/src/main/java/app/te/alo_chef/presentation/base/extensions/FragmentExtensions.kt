@@ -60,11 +60,9 @@ fun Fragment.handleApiError(
         FailureStatus.NOT_ACTIVE -> {
             notActive?.invoke()
             failure.message?.let {
-                showNoApiErrorAlertWithAction(
+                showNoApiErrorAlert(
                     requireActivity(),
                     it,
-                    getString(R.string.active),
-                    notActiveAction
                 )
             }
         }
@@ -146,7 +144,7 @@ fun Fragment.navigateSafe(directions: NavDirections, navOptions: NavOptions? = n
 }
 
 fun Fragment.navigateSafe(deepLink: String) {
-    findNavController().navigate( Uri.parse(deepLink), navOptions = DeepLinks.setNavOptions())
+    findNavController().navigate(Uri.parse(deepLink), navOptions = DeepLinks.setNavOptions())
 }
 
 fun Fragment.backToPreviousScreen() {

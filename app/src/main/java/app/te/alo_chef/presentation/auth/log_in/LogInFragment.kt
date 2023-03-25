@@ -56,12 +56,23 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(), LoginEventListener {
                         hideLoading()
                         handleApiError(
                             it,
-                            retryAction = { viewModel.onLogInClicked() })
+                            retryAction = { viewModel.onLogInClicked() },
+                            notActive = { openConfirmCode() })
                     }
                     else -> {}
                 }
             }
         }
+    }
+
+    private fun openConfirmCode() {
+        navigateSafe(
+            LogInFragmentDirections.actionLogInFragmentToConfirmCodeFragment(
+                getString(R.string.confirm),
+                viewModel.request.phone,
+                Constants.VERIFY
+            )
+        )
     }
 
 

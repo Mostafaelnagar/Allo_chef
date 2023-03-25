@@ -2,9 +2,7 @@ package app.te.alo_chef.presentation.auth.confirmCode
 
 import android.os.CountDownTimer
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import app.te.alo_chef.R
 import app.te.alo_chef.databinding.FragmentConfirmCodeBinding
 import app.te.alo_chef.domain.utils.Resource
@@ -13,7 +11,6 @@ import app.te.alo_chef.presentation.base.extensions.*
 import app.te.alo_chef.presentation.base.utils.showSuccessAlert
 import app.te.alo_chef.presentation.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -34,80 +31,66 @@ class ConfirmCodeFragment : BaseFragment<FragmentConfirmCodeBinding>(), ConfirmC
 
     override
     fun setupObservers() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                /**
-                 * Listen for verify response
-                 */
-                launch {
-                    viewModel.verifyResponse.collect {
-                        when (it) {
-                            Resource.Loading -> {
-                                hideKeyboard()
-                                showLoading()
-                            }
-                            is Resource.Success -> {
-                                hideLoading()
-                                openHome()
-                            }
-                            is Resource.Failure -> {
-                                hideLoading()
-                                handleApiError(it, retryAction = { viewModel.verifyAccount() })
-                            }
-                            Resource.Default -> {
-                            }
-                        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.verifyResponse.collect {
+                when (it) {
+                    Resource.Loading -> {
+                        hideKeyboard()
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        hideLoading()
+                        openHome()
+                    }
+                    is Resource.Failure -> {
+                        hideLoading()
+                        handleApiError(it, retryAction = { viewModel.verifyAccount() })
+                    }
+                    Resource.Default -> {
                     }
                 }
-                /**
-                 * Listen for Forget password response
-                 */
-                launch {
-                    viewModel.verifyForgetResponse.collect {
-                        when (it) {
-                            Resource.Loading -> {
-                                hideKeyboard()
-                                showLoading()
-                            }
-                            is Resource.Success -> {
-                                hideLoading()
-                                changePassword()
-                            }
-                            is Resource.Failure -> {
-                                hideLoading()
-                                handleApiError(it, retryAction = { viewModel.verifyAccount() })
-                            }
-                            Resource.Default -> {
-                            }
-                        }
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.verifyForgetResponse.collect {
+                when (it) {
+                    Resource.Loading -> {
+                        hideKeyboard()
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        hideLoading()
+                        changePassword()
+                    }
+                    is Resource.Failure -> {
+                        hideLoading()
+                        handleApiError(it, retryAction = { viewModel.verifyAccount() })
+                    }
+                    Resource.Default -> {
                     }
                 }
-                /**
-                 * Listen for Resend code response
-                 */
-                launch {
-                    viewModel.resendResponse.collect {
-                        when (it) {
-                            Resource.Loading -> {
-                                hideKeyboard()
-                                showLoading()
-                            }
-                            is Resource.Success -> {
-                                hideLoading()
-                                showSuccessAlert(requireActivity(), it.value.message)
-                                binding.tvResend.isEnabled = false
-                                startTimer()
-                            }
-                            is Resource.Failure -> {
-                                hideLoading()
-                                handleApiError(it, retryAction = { viewModel.verifyAccount() })
-                            }
-                            Resource.Default -> {
-                            }
-                        }
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.resendResponse.collect {
+                when (it) {
+                    Resource.Loading -> {
+                        hideKeyboard()
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        hideLoading()
+                        showSuccessAlert(requireActivity(), it.value.message)
+                        binding.tvResend.isEnabled = false
+                        startTimer()
+                    }
+                    is Resource.Failure -> {
+                        hideLoading()
+                        handleApiError(it, retryAction = { viewModel.verifyAccount() })
+                    }
+                    Resource.Default -> {
                     }
                 }
-
             }
         }
     }
@@ -150,7 +133,7 @@ class ConfirmCodeFragment : BaseFragment<FragmentConfirmCodeBinding>(), ConfirmC
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
                     )
                 val min = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
-                val time = "" + String.format(Locale.ENGLISH, "%02d : %02d ", sec, min)
+                val time = "" + String.format(Locale.ENGLISH, "%02d : %02d ", min, sec)
                 binding.tvForgetTimer.text = time
             }
 

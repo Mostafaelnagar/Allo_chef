@@ -23,6 +23,7 @@ import app.te.alo_chef.data.meal_details.dto.MealImages
 import app.te.alo_chef.presentation.auth.AuthActivity
 import app.te.alo_chef.presentation.base.DeepLinks
 import app.te.alo_chef.presentation.base.utils.Constants
+import app.te.alo_chef.presentation.base.utils.showSuccessAlert
 import app.te.alo_chef.presentation.cart.view_model.CartViewModel
 import app.te.alo_chef.presentation.home.adapters.ProductsAdapter
 import app.te.alo_chef.presentation.home.ui_state.MealsUiState
@@ -180,9 +181,10 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding>(),
 
     override fun addToCart(homeMealsData: MealsData, addToCart: Int) {
         if (homeViewModel.isLogged.value) {
-            if (addToCart == Constants.ADD_TO_CART_KEY)
+            if (addToCart == Constants.ADD_TO_CART_KEY) {
                 cartViewModel.addToCart(homeMealsData)
-            else
+                showSuccessAlert(requireActivity(), getString(R.string.added_cart))
+            }else
                 openSubscriptions()
         } else
             opnLogin()
