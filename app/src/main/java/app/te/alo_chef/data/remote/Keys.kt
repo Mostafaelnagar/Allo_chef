@@ -3,6 +3,10 @@ package app.te.alo_chef.data.remote
 object Keys {
   init {
     System.loadLibrary("native-lib")
+    /**
+     * Google account =>ihab.allochef@gmail.com
+     * Google password => allo_chef_2022
+     */
   }
 
   external fun debugBaseUrl(): String
