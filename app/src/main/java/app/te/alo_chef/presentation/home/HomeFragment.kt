@@ -166,7 +166,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
     }
 
     override fun openFilter() {
-        navigateSafe(HomeFragmentDirections.actionHomeFragmentToMealsFilterDialog())
+        if (viewModel.dayDate.isNotEmpty())
+            navigateSafe(HomeFragmentDirections.actionHomeFragmentToMealsFilterDialog())
     }
 
     override fun openCart() {

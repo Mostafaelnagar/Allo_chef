@@ -185,7 +185,9 @@ fun getToday(): String {
     calendar[Calendar.YEAR] = year
     calendar[Calendar.MONTH] = month - 1
     calendar[Calendar.DAY_OF_MONTH] = day
-    return year.toString() + "-" + month + "-" + (day + 2)
+    calendar.add(Calendar.DAY_OF_MONTH,2)
+    return year.toString() + "-" + month + "-" + calendar[Calendar.DAY_OF_MONTH]
+
 }
 
 fun getLongDate(date: String): Long {
