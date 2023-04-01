@@ -6,5 +6,6 @@ interface AccountEventListener {
     fun openMyLocations()
     fun openProfile()
     fun openSubscribe()
+    fun changeLanguage()
     fun logout()
 }

@@ -2,6 +2,7 @@ package app.te.alo_chef.presentation.account
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import app.te.alo_chef.R
 import app.te.alo_chef.databinding.FragmentAccountBinding
 import app.te.alo_chef.presentation.auth.AuthActivity
@@ -96,6 +97,10 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(), AccountEventList
             navigateSafe(DeepLinks.SUBSCRIPTIONS_LINK)
         else
             openLogInScreen()
+    }
+
+    override fun changeLanguage() {
+        setLanguage(if (currentLanguage.language == "ar") "en" else "ar")
     }
 
     override fun logout() {
