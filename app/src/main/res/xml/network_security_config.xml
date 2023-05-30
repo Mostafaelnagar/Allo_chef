@@ -6,11 +6,11 @@
         </trust-anchors>
 
     </base-config>
-    <domain-config>
-        <domain includeSubdomains="true">limazola.com</domain>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">el3amed.com</domain>
         <pin-set>
-            <pin digest="SHA-256">zo2JpS6GHw63BnoyjTnSj40omg30Sru7kdz/HTDd4yw=</pin>
-            <pin digest="SHA-256">hOF1upiO+xevnDEQ13g3aY3M3Uqa44RN5rVlwvU2WC8=</pin>
+            <pin digest="SHA-256">fZ/ApJj2QDOf/ZaDQh6pRDHMbDZCNFbmiTMcHb15z94=</pin>
+            <pin digest="SHA-256">8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8=</pin>
         </pin-set>
     </domain-config>
 </network-security-config>

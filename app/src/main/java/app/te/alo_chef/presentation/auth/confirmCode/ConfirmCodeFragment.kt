@@ -27,6 +27,7 @@ class ConfirmCodeFragment : BaseFragment<FragmentConfirmCodeBinding>(), ConfirmC
     fun setBindingVariables() {
         binding.request = viewModel.forgetRequest
         binding.eventListener = this
+        startTimer()
     }
 
     override
@@ -118,11 +119,6 @@ class ConfirmCodeFragment : BaseFragment<FragmentConfirmCodeBinding>(), ConfirmC
 
     override fun back() {
         backToPreviousScreen()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        startTimer()
     }
 
     private fun startTimer() {

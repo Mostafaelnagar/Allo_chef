@@ -85,14 +85,17 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
                         hideKeyboard()
                         showLoading()
                     }
+
                     is Resource.Success -> {
                         hideLoading()
                         checkoutViewModel.checkoutUiState.updateDiscount(it.value.data)
                     }
+
                     is Resource.Failure -> {
                         hideLoading()
                         handleApiError(it)
                     }
+
                     else -> {}
                 }
             }
@@ -104,6 +107,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
                         hideKeyboard()
                         showLoading()
                     }
+
                     is Resource.Success -> {
                         hideLoading()
                         val response = it.value
@@ -112,10 +116,12 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
                             payment_data = response.data
                         )
                     }
+
                     is Resource.Failure -> {
                         hideLoading()
                         handleApiError(it)
                     }
+
                     else -> {}
                 }
             }
@@ -127,6 +133,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
                         hideKeyboard()
                         showLoading()
                     }
+
                     is Resource.Success -> {
                         hideLoading()
                         val response = it.value.data
@@ -140,10 +147,12 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>(), CheckoutListen
                         else
                             openMyOrders()
                     }
+
                     is Resource.Failure -> {
                         hideLoading()
                         handleApiError(it)
                     }
+
                     else -> {}
                 }
             }

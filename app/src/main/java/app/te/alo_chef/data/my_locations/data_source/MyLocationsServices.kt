@@ -14,7 +14,7 @@ interface MyLocationsServices {
     @POST("user/add-user-location")
     suspend fun addNewLocation(@Body addLocationRequest: AddLocationRequest): BaseResponse<*>
 
-    @POST("user/add-user-location")
+    @POST("user/update-user-location")
     suspend fun updateLocation(@Body addLocationRequest: AddLocationRequest): BaseResponse<*>
 
     @POST("user/delete-location")

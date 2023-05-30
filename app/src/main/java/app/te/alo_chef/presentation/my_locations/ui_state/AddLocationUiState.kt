@@ -9,9 +9,8 @@ import app.te.alo_chef.domain.general.entity.countries.CityModel
 import app.te.alo_chef.domain.general.entity.countries.RegionsItem
 import app.te.alo_chef.domain.my_locations.entity.AddLocationRequest
 import app.te.alo_chef.presentation.base.BaseUiState
-import javax.inject.Inject
 
-class AddLocationUiState @Inject constructor(private val context: Context) : BaseUiState() {
+class AddLocationUiState(private val context: Context) : BaseUiState() {
     @Bindable
     var request = AddLocationRequest()
         set(value) {
@@ -94,18 +93,9 @@ class AddLocationUiState @Inject constructor(private val context: Context) : Bas
             regions[position].id.toString()
     }
 
-    fun prepareRequestForEdit(item: LocationsData) {
+    fun prepareRequestForEdit(item: AddLocationRequest) {
+        request=item
         cityName = item.cityName
         regionName = item.regionName
-        request.apply {
-            title = item.title
-            street = item.street
-            floor = item.floor
-            region_id = item.region_id
-            city_id = item.city_id
-            location_id = item.id.toString()
-            lat = item.lat
-            lng = item.lng
-        }
     }
 }

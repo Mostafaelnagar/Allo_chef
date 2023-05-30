@@ -2,8 +2,11 @@ package app.te.alo_chef.presentation.my_locations
 
 import android.view.MenuItem
 import androidx.appcompat.widget.PopupMenu
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.navArgs
 import app.te.alo_chef.R
 import app.te.alo_chef.databinding.FragmentAddPlaceBinding
 import app.te.alo_chef.domain.utils.Resource
@@ -17,26 +20,27 @@ import app.te.alo_chef.presentation.maps.MapExtractedData
 import app.te.alo_chef.presentation.maps.PermissionManager
 import app.te.alo_chef.presentation.maps.requestAppPermissions
 import app.te.alo_chef.presentation.my_locations.listeners.AddLocationListener
+import app.te.alo_chef.presentation.my_locations.ui_state.AddLocationUiState
 import app.te.alo_chef.presentation.my_locations.view_models.LocationsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddLocationFragment : BaseFragment<FragmentAddPlaceBinding>(), AddLocationListener {
 
-    private val viewModel: LocationsViewModel by activityViewModels()
+    private val viewModel: LocationsViewModel by viewModels()
+    private val args: AddLocationFragmentArgs by navArgs()
 
     @Inject
     lateinit var permissionManager: PermissionManager
 
     override fun setBindingVariables() {
         binding.event = this
+        viewModel.addLocationUiState = AddLocationUiState(requireContext())
+        viewModel.addLocationUiState.prepareRequestForEdit(args.request)
         binding.uiState = viewModel.addLocationUiState
         viewModel.getCities()
-    }
-
-    override fun setUpViews() {
-
     }
 
     private val permissionsResult = requestAppPermissions { allIsGranted, _ ->
@@ -48,24 +52,32 @@ class AddLocationFragment : BaseFragment<FragmentAddPlaceBinding>(), AddLocation
     }
 
     override fun observeAPICall() {
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            viewModel.citiesResponse.collect {
-                when (it) {
-                    Resource.Loading -> {
-                        hideKeyboard()
-                        showLoading()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                launch {
+                    viewModel.citiesResponse.collect {
+                        when (it) {
+                            Resource.Loading -> {
+                                hideKeyboard()
+                                showLoading()
+                            }
+
+                            is Resource.Success -> {
+                                hideLoading()
+                                viewModel.addLocationUiState.cities = it.value.data
+                            }
+
+                            is Resource.Failure -> {
+                                hideLoading()
+                                handleApiError(it)
+                            }
+
+                            else -> {}
+                        }
                     }
-                    is Resource.Success -> {
-                        hideLoading()
-                        viewModel.addLocationUiState.cities = it.value.data
-                    }
-                    is Resource.Failure -> {
-                        hideLoading()
-                        handleApiError(it)
-                    }
-                    else -> {}
                 }
             }
+
         }
         lifecycleScope.launchWhenResumed {
             viewModel.addLocationResponse.collect {
@@ -74,16 +86,18 @@ class AddLocationFragment : BaseFragment<FragmentAddPlaceBinding>(), AddLocation
                         hideKeyboard()
                         showLoading()
                     }
+
                     is Resource.Success -> {
                         hideLoading()
                         showSuccessAlert(requireActivity(), it.value.message)
                         backToPreviousScreen()
-                        viewModel.getMyLocations()
                     }
+
                     is Resource.Failure -> {
                         hideLoading()
                         handleApiError(it)
                     }
+
                     else -> {}
                 }
             }
@@ -91,9 +105,7 @@ class AddLocationFragment : BaseFragment<FragmentAddPlaceBinding>(), AddLocation
 
     }
 
-
-    override
-    fun getLayoutId() = R.layout.fragment_add_place
+    override fun getLayoutId() = R.layout.fragment_add_place
     override fun addNewLocation() {
         viewModel.addNewLocation()
     }

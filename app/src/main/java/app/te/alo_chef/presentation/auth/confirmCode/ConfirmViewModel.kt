@@ -36,8 +36,11 @@ class ConfirmViewModel @Inject constructor(
     val resendResponse = _resendResponse
 
     init {
-        savedStateHandle.get<String>("email")?.let { email ->
+        savedStateHandle.get<String>("phone")?.let { email ->
             forgetRequest.phone = email
+        }
+        savedStateHandle.get<Int>("type")?.let { type ->
+            forgetRequest.type = type
         }
 
     }

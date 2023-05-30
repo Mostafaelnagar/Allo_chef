@@ -1,10 +1,14 @@
 package app.te.alo_chef.domain.my_locations.entity
 
+import android.os.Parcelable
 import androidx.annotation.Keep
 import androidx.databinding.ObservableField
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+
 @Keep
-class AddLocationRequest {
+@Parcelize
+class AddLocationRequest : Parcelable {
 
     @SerializedName("lat")
     var lat: String = "0.0"
@@ -48,6 +52,13 @@ class AddLocationRequest {
 
     @SerializedName("location_id")
     var location_id: String? = null
+
+    @Transient
+    var cityName: String = ""
+
+    @Transient
+    var regionName: String = ""
+
 
     @Transient
     var latError = ObservableField<String>()

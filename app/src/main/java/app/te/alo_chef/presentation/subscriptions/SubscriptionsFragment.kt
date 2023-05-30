@@ -1,6 +1,7 @@
 package app.te.alo_chef.presentation.subscriptions
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -47,14 +48,17 @@ class SubscriptionsFragment : BaseFragment<FragmentSubscriptionsBinding>(), Subs
                                 hideKeyboard()
                                 showLoading()
                             }
+
                             is Resource.Success -> {
                                 hideLoading()
                                 updateSubscriptionsAdapter(it.value.data)
                             }
+
                             is Resource.Failure -> {
                                 hideLoading()
                                 handleApiError(it)
                             }
+
                             else -> {}
                         }
                     }
@@ -69,18 +73,20 @@ class SubscriptionsFragment : BaseFragment<FragmentSubscriptionsBinding>(), Subs
                         hideKeyboard()
                         showLoading()
                     }
+
                     is Resource.Success -> {
                         hideLoading()
-                        val response = it.value.data
                         openPaymentPage(
-                            isSuccess = response.status,
-                            payment_data = response.paymentData
+                            it.value.data.paymentData,
+                            it.value.data.status
                         )
                     }
+
                     is Resource.Failure -> {
                         hideLoading()
                         handleApiError(it)
                     }
+
                     else -> {}
                 }
             }
@@ -92,19 +98,22 @@ class SubscriptionsFragment : BaseFragment<FragmentSubscriptionsBinding>(), Subs
                         hideKeyboard()
                         showLoading()
                     }
+
                     is Resource.Success -> {
                         hideLoading()
                         viewModel.userResponse = it.value.data
                         openPaymentPage(
-                            it.value.data.payment.paymentData,
-                            it.value.data.payment.status
+                            payment_data = it.value.data.payment.paymentData,
+                            isSuccess = it.value.data.payment.status
                         )
 
                     }
+
                     is Resource.Failure -> {
                         hideLoading()
                         handleApiError(it)
                     }
+
                     else -> {}
                 }
             }

@@ -107,8 +107,8 @@
     <string name="login_header_number">Welcome Back</string>
     <string name="login_header">Sign in to continue</string>
     <string name="login_social">Login With Social Media</string>
-    <string name="forget_body">Please enter your email address. You will recive a link to create a new password via email.</string>
-    <string name="confirm_header_text">A confirmation code will be sent to your email. Enter the activation code</string>
+    <string name="forget_body">Please enter your phone. to get verification code</string>
+    <string name="confirm_header_text">A confirmation code will be sent to your Mobile. Enter the activation code</string>
     <string name="tv_confirm_code_text">Did n’t you received any code?</string>
     <string name="register_login">Sign up</string>
     <string name="sign_up_header">It’s great to see you</string>

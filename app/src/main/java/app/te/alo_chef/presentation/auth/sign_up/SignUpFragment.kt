@@ -65,7 +65,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(), RegisterEventListe
         navigateSafe(
             SignUpFragmentDirections.actionSignUpFragmentToConfirmCodeFragment(
                 getString(R.string.confirm),
-                viewModel.registerUiState.request.email,
+                viewModel.registerUiState.request.phone,
                 Constants.VERIFY
             )
         )

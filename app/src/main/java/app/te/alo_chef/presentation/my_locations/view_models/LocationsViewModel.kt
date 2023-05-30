@@ -1,5 +1,6 @@
 package app.te.alo_chef.presentation.my_locations.view_models
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.te.alo_chef.data.my_locations.dto.LocationsData
@@ -10,6 +11,7 @@ import app.te.alo_chef.domain.my_locations.entity.AddLocationRequest
 import app.te.alo_chef.domain.my_locations.use_case.AddLocationUseCase
 import app.te.alo_chef.domain.my_locations.use_case.DeleteLocationUseCase
 import app.te.alo_chef.domain.my_locations.use_case.MyLocationsUseCase
+import app.te.alo_chef.domain.my_locations.use_case.UpdateLocationUseCase
 import app.te.alo_chef.domain.utils.BaseResponse
 import app.te.alo_chef.domain.utils.Resource
 import app.te.alo_chef.presentation.my_locations.adapters.MyLocationsAdapters
@@ -24,13 +26,13 @@ import javax.inject.Inject
 class LocationsViewModel @Inject constructor(
     private val myLocationsUseCase: MyLocationsUseCase,
     private val addLocationUseCase: AddLocationUseCase,
-    private val editLocationUseCase: AddLocationUseCase,
+    private val editLocationUseCase: UpdateLocationUseCase,
     private val deleteLocationUseCase: DeleteLocationUseCase,
     private val userLocalUseCase: UserLocalUseCase,
     private val citiesUseCase: CitiesUseCase,
-    var addLocationUiState: AddLocationUiState
-) : ViewModel() {
 
+    ) : ViewModel() {
+    lateinit var addLocationUiState: AddLocationUiState
     lateinit var locationsAdapters: MyLocationsAdapters
 
     private val _locationsResponse =
@@ -44,6 +46,7 @@ class LocationsViewModel @Inject constructor(
     private val _addLocationResponse =
         MutableStateFlow<Resource<BaseResponse<*>>>(Resource.Default)
     val addLocationResponse = _addLocationResponse
+
     private val _deleteLocationResponse =
         MutableStateFlow<Resource<BaseResponse<*>>>(Resource.Default)
     val deleteLocationResponse = _deleteLocationResponse
@@ -69,6 +72,7 @@ class LocationsViewModel @Inject constructor(
     }
 
     fun addNewLocation() {
+        Log.e("addNewLocation", "addNewLocation: "+addLocationUiState.request.location_id)
         if (addLocationUiState.validate())
             viewModelScope.launch {
                 _addLocationResponse.value = Resource.Loading

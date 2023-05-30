@@ -4,9 +4,7 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class PaymentResponse(
-//    @SerializedName("original")
-//    val original: Original
+data class PaymentMain(
     @SerializedName("Message")
     val message: String,
     @SerializedName("IsSuccess")

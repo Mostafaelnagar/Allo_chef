@@ -101,7 +101,7 @@
             android:name="title"
             app:argType="string" />
         <argument
-            android:name="email"
+            android:name="phone"
             app:argType="string" />
 
         <argument

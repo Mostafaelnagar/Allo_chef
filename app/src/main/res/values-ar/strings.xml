@@ -98,8 +98,8 @@
     <string name="login_header_number">أهلا و سهلا</string>
     <string name="login_header">تسجيل الدخول للمتابعة</string>
     <string name="login_social">تسجيل الدخول باستخدام وسائل التواصل الاجتماعي</string>
-    <string name="forget_body">من فضلك إدخل عنوان بريدك الإلكتروني او رقم الجوال للحصول على رمز التحقق</string>
-    <string name="confirm_header_text">سيتم إرسال كود التأكيد على  بريدك الالكترونى قم بإدخال كود التفعيل</string>
+    <string name="forget_body">من فضلك إدخل  رقم الجوال للحصول على رمز التحقق</string>
+    <string name="confirm_header_text">سيتم إرسال كود التأكيد على هاتفك قم بإدخال كود التفعيل</string>
     <string name="tv_confirm_code_text">ألم تصلك أي كود؟</string>
     <string name="register_login">سجل الان</string>
     <string name="sign_up_header">إنه لمن دواعي سروري رؤيتك</string>
