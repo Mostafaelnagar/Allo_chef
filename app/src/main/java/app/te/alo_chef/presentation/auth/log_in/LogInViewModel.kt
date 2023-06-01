@@ -32,7 +32,6 @@ class LogInViewModel @Inject constructor(
 
 
     fun onLogInClicked() {
-        request.token="test"
         logInUseCase(request)
             .catch { exception ->
                 Log.e(
