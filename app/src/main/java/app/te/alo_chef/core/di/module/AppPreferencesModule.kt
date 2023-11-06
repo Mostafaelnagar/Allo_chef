@@ -3,6 +3,8 @@ package app.te.alo_chef.core.di.module
 import android.content.Context
 import app.te.alo_chef.core.notifications.handler.NotificationHandler
 import app.te.alo_chef.data.local.preferences.AppPreferences
+import app.te.alo_chef.domain.utils.validation.ValidatePhone
+import app.te.alo_chef.presentation.auth.sign_up.RegisterUiState
 import app.te.alo_chef.presentation.checkout.ui_state.CheckoutUiState
 import app.te.alo_chef.presentation.my_locations.ui_state.AddLocationUiState
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -36,6 +38,11 @@ object AppPreferencesModule {
     @Singleton
     fun provideCheckoutState(@ApplicationContext context: Context) =
         CheckoutUiState(context)
+
+    @Provides
+    @Singleton
+    fun provideRegisterState(@ApplicationContext context: Context) =
+        RegisterUiState(validatePhone = ValidatePhone(context))
 
     @Provides
     @Singleton

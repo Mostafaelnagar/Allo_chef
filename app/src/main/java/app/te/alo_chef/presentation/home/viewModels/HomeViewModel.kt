@@ -42,8 +42,8 @@ class HomeViewModel @Inject constructor(
 
     fun getHomeData(date: String) {
         viewModelScope.launch {
-            _homeResponse.value = Resource.Loading
-            _homeResponse.value = homeUseCase.homeService(date, Dispatchers.IO)
+//            _homeResponse.value = Resource.Loading
+//            _homeResponse.value = homeUseCase.homeService(date, Dispatchers.IO)
         }
     }
 

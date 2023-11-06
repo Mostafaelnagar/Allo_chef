@@ -34,10 +34,6 @@ class LogInViewModel @Inject constructor(
     fun onLogInClicked() {
         logInUseCase(request)
             .catch { exception ->
-                Log.e(
-                    "onLogInClicked",
-                    "onLogInClicked: ${exception.printStackTrace()}"
-                )
             }
             .onEach { result ->
                 _logInResponse.value = result

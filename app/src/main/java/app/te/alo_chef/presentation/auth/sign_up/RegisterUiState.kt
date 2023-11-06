@@ -6,9 +6,13 @@ import androidx.databinding.Bindable
 import app.te.alo_chef.R
 import app.te.alo_chef.domain.auth.entity.request.RegisterRequest
 import app.te.alo_chef.domain.utils.isValidEmail
+import app.te.alo_chef.domain.utils.validation.ValidatePhone
 import app.te.alo_chef.presentation.base.BaseUiState
+import javax.inject.Inject
 
-class RegisterUiState : BaseUiState() {
+class RegisterUiState @Inject constructor(
+    private val validatePhone: ValidatePhone
+) : BaseUiState() {
     lateinit var context: Context
 
     @Bindable
@@ -33,8 +37,10 @@ class RegisterUiState : BaseUiState() {
             request.validation.nameError.set(context.getString(R.string.empty_warning))
             isValid = false
         }
-        if (request.phone.isEmpty()) {
-            request.validation.phoneError.set(context.getString(R.string.empty_warning))
+        val phoneResult = validatePhone.invoke(request.phone)
+
+        if (!phoneResult.successful) {
+            request.validation.phoneError.set(phoneResult.errorMessage)
             isValid = false
         }
 

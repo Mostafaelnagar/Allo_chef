@@ -195,6 +195,7 @@
     <string name="cart_empty" >عربة التسوق فارغة</string>
     <string name="subscribe_done">تم الاشتراك بنجاح</string>
     <string name="added_cart">تم اضافته الى السلة بنجاح</string>
+    <string name="phone_not_valid">رقم الهاتف غير صحيح</string>
 
 
 </resources>

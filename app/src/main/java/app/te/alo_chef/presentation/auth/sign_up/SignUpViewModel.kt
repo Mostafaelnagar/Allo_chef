@@ -16,10 +16,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val registerUseCase: RegisterUseCase
+    private val registerUseCase: RegisterUseCase,
+    val registerUiState: RegisterUiState
 ) :
     BaseViewModel() {
-    val registerUiState = RegisterUiState()
     private val _registerResponse = MutableStateFlow<Resource<BaseResponse<*>>>(Resource.Default)
     val registerResponse = _registerResponse
 
