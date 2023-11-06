@@ -19,17 +19,16 @@ class SplashViewModel @Inject constructor(
     lateinit var eventListener: SplashEventListener
 
     init {
-//        getGeneralConfig()
-
+        getGeneralConfig()
         viewModelScope.launch {
             delay(3000)
-//            generalUseCases.checkFirstTimeUseCase().collect { isFirst ->
-//                if (isFirst) {
-//                    eventListener.openOnBoarding()
-//                } else {
+            generalUseCases.checkFirstTimeUseCase().collect { isFirst ->
+                if (isFirst) {
+                    eventListener.openOnBoarding()
+                } else {
                     eventListener.openHome()
-//                }
-//            }
+                }
+            }
         }
     }
 
