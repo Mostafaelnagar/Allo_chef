@@ -208,5 +208,6 @@
     <string name="subscribe_done">Subscribe Successfully</string>
     <string name="added_cart">Added to cart successfully</string>
     <string name="phone_not_valid">رقم الهاتف غير صحيح</string>
+    <string name="no_meals">No meals available at this day</string>
 
 </resources>

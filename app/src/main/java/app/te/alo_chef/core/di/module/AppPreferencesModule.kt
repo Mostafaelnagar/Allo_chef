@@ -46,6 +46,11 @@ object AppPreferencesModule {
 
     @Provides
     @Singleton
+    fun provideValidatePhone(@ApplicationContext context: Context) =
+        ValidatePhone(context = context)
+
+    @Provides
+    @Singleton
     fun provideFusedLocationProviderClient(@ApplicationContext context: Context): FusedLocationProviderClient {
         return LocationServices.getFusedLocationProviderClient(context)
     }

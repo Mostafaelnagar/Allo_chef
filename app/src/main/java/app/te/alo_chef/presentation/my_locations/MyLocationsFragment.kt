@@ -139,7 +139,6 @@ class MyLocationsFragment : BaseFragment<FragmentMyLocationBinding>(), Locations
 
     override fun onResume() {
         super.onResume()
-        showMessage("RESUME")
         viewModel.getMyLocations()
     }
 }

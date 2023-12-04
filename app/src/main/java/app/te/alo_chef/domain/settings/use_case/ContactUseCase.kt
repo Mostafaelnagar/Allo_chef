@@ -28,10 +28,12 @@ class ContactUseCase @Inject constructor(
             request.validation.nameError.set(Constants.EMPTY)
             isValid = false
         }
-        if (request.email.isEmpty()) {
+        if (request.email.isEmpty() && !request.email.isValidEmail()) {
             request.validation.emailError.set(Constants.EMPTY)
             isValid = false
         }
+
+
         if (request.message.isEmpty()) {
             request.validation.messageError.set(Constants.EMPTY)
             isValid = false

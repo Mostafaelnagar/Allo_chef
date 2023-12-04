@@ -1,5 +1,6 @@
 package app.te.alo_chef.presentation.home
 
+import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -61,16 +62,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
                         hideKeyboard()
                         showLoading()
                     }
+
                     is Resource.Success -> {
                         hideLoading()
                         updateMeals(it.value.data)
                         delay(1000)
                         detectNotifications()
                     }
+
                     is Resource.Failure -> {
                         hideLoading()
                         handleApiError(it)
                     }
+
                     else -> {}
                 }
             }
@@ -88,16 +92,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
                         hideKeyboard()
                         showLoading()
                     }
+
                     is Resource.Success -> {
                         hideLoading()
                         viewModel.dayDate = it.value.data.day_date
                         updateDays(it.value.data.homeDaysDataList)
                         updateMeals(it.value.data.mealsDataList)
                     }
+
                     is Resource.Failure -> {
                         hideLoading()
                         handleApiError(it)
                     }
+
                     else -> {}
                 }
             }
@@ -106,12 +113,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeEventListener {
     }
 
     private fun updateMeals(mealsDataList: List<MealsData>) {
-        productsAdapter.differ.submitList(mealsDataList.map { meal ->
-            MealsUiState(
-                meal,
-                this@HomeFragment
-            )
-        })
+        if (mealsDataList.isNotEmpty()) {
+            binding.emptyView.hide()
+            productsAdapter.differ.submitList(mealsDataList.map { meal ->
+                MealsUiState(
+                    meal,
+                    this@HomeFragment
+                )
+            })
+        } else
+            binding.emptyView.show()
     }
 
     private fun updateDays(homeDaysDataList: List<HomeDaysData>) {

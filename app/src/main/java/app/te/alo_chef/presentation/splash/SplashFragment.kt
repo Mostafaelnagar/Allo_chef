@@ -22,9 +22,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), SplashEventListene
     fun getLayoutId() = R.layout.fragment_splash
 
     override fun openHome() {
-//        openActivityAndClearStack(HomeActivity::class.java)
-        navigateSafe(SplashFragmentDirections.actionSplashFragmentToLogInFragment())
-
+        openActivityAndClearStack(HomeActivity::class.java)
     }
 
     override fun openOnBoarding() {

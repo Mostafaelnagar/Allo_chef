@@ -48,9 +48,6 @@ class UpdateProfileValidationException {
     var emailError: ObservableField<String> = ObservableField<String>()
 
     @Transient
-    var cityError: ObservableField<String> = ObservableField<String>()
-
-    @Transient
     var phoneError: ObservableField<String> = ObservableField<String>()
 
     var passwordError: ObservableField<String> = ObservableField<String>()

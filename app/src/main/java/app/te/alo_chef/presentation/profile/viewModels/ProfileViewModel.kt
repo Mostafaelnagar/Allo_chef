@@ -10,7 +10,10 @@ import app.te.alo_chef.domain.profile.entity.UpdateProfileRequest
 import app.te.alo_chef.domain.profile.use_case.UpdateProfileUseCase
 import app.te.alo_chef.domain.utils.BaseResponse
 import app.te.alo_chef.domain.utils.Resource
+import app.te.alo_chef.domain.utils.isValidEmail
+import app.te.alo_chef.domain.utils.validation.ValidatePhone
 import app.te.alo_chef.presentation.base.BaseViewModel
+import app.te.alo_chef.presentation.base.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -21,6 +24,7 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val userLocalUseCase: UserLocalUseCase,
     private val updateProfileUseCase: UpdateProfileUseCase,
+    private val validatePhone: ValidatePhone
 ) : BaseViewModel() {
     @Bindable
     var request = UpdateProfileRequest()
@@ -38,9 +42,31 @@ class ProfileViewModel @Inject constructor(
 
     fun updateProfile() {
         viewModelScope.launch {
-            _updateProfileResponse.value = Resource.Loading
-            _updateProfileResponse.value = updateProfileUseCase.invoke(request, Dispatchers.IO)
+            if (checkValidation()) {
+                _updateProfileResponse.value = Resource.Loading
+                _updateProfileResponse.value = updateProfileUseCase.invoke(request, Dispatchers.IO)
+            }
         }
+    }
+
+    private fun checkValidation(): Boolean {
+        var isValid = true
+        if (request.name.isEmpty()) {
+            request.validation.nameError.set(Constants.EMPTY)
+            isValid = false
+        }
+        if (request.email.isEmpty() && !request.email.isValidEmail()) {
+            request.validation.emailError.set(Constants.EMPTY)
+            isValid = false
+        }
+        val phoneResult = validatePhone.invoke(request.phone)
+
+        if (!phoneResult.successful) {
+            request.validation.phoneError.set(phoneResult.errorMessage)
+            isValid = false
+        }
+
+        return isValid
     }
 
     private fun updateRequest() {
